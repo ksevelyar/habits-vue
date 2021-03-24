@@ -3,11 +3,7 @@ module.exports = {
   env: {
     node: true
   },
-  extends: [
-    'eslint:recommended',
-    'plugin:vue/vue3-recommended',
-    '@vue/standard'
-  ],
+  extends: ['eslint:recommended', 'plugin:vue/vue3-recommended', '@vue/standard', '@vue/prettier'],
   parserOptions: {
     ecmaVersion: 2020,
     parser: 'babel-eslint'
@@ -17,14 +13,18 @@ module.exports = {
     'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
     'vue/component-name-in-template-casing': ['error', 'PascalCase'],
     semi: ['error', 'never'],
-    'no-unused-vars': ['error', { ignoreRestSiblings: true }]
+    'no-unused-vars': ['error', { ignoreRestSiblings: true }],
+    'prettier/prettier': [
+      'warn',
+      {
+        semi: false,
+        printWidth: 100
+      }
+    ]
   },
   overrides: [
     {
-      files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
-      ],
+      files: ['**/__tests__/*.{j,t}s?(x)', '**/tests/unit/**/*.spec.{j,t}s?(x)'],
       env: {
         jest: true
       }
