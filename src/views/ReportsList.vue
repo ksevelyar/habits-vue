@@ -6,6 +6,8 @@
     :to="{ name: 'Report', params: { date: report.date }}"
   )
     ReportCard(:date="report.date" :weight="report.weight")
+  
+  router-link.reports-list__link.reports-list__add(:to="{ name: 'AddReport'}") Add Report
 </template>
 
 <script>
@@ -32,5 +34,10 @@ export default {
 }
 .reports-list__link:hover {
   color: #955b8e;
+}
+
+.reports-list__add {
+  display: block;
+  text-align: center;
 }
 </style>
