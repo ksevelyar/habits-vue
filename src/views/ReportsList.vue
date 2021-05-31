@@ -12,7 +12,6 @@
 
 <script>
 import ReportCard from '@/components/ReportCard.vue'
-import apiClient from '@/api/client.js'
 
 export default {
   components: { ReportCard },
@@ -25,9 +24,7 @@ export default {
       ]
     }
   },
-  created() {
-    apiClient.getGithubProfile('ksevelyar')
-  }
+  created() {}
 }
 </script>
 

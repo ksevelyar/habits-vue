@@ -8,10 +8,12 @@
     label.add-report__label Weight
       input.add-report__input(v-model="report.weight" placeholder="kg")
 
-  .add-report__save Save
+  .add-report__save(@click="save") Save
 </template>
 
 <script>
+import reportClient from '@/api/report.js'
+
 export default {
   data() {
     return {
@@ -19,6 +21,13 @@ export default {
         date: new Date(),
         weight: 100
       }
+    }
+  },
+  methods: {
+    async save() {
+      const report = await reportClient.createReport({ report: this.report })
+
+      console.log(report)
     }
   }
 }
@@ -36,5 +45,6 @@ export default {
 
 .add-report__save {
   text-align: center;
+  cursor: pointer;
 }
 </style>

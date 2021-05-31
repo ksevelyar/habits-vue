@@ -1,8 +1,18 @@
-export default {
-  async getGithubProfile(profile) {
-    const response = await fetch(`https://api.github.com/users/${profile}`)
-    const json = await response.json()
+const base = 'http://localhost:4000'
 
-    console.log(json)
+export default {
+  async fetch(path, options = {}) {
+    try {
+      const response = await fetch(`${base}/${path}`, {
+        ...options,
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      return response.json()
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 }
