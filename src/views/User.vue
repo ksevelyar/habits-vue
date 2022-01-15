@@ -1,6 +1,5 @@
 <template lang="pug">
-h1.user
-  | {{ user }}
+h1.user {{ user }}
 </template>
 
 <script>
