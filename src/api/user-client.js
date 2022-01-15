@@ -1,7 +1,9 @@
+const back = process.env.VUE_APP_BACK
+
 export default {
   async get () {
     try {
-      const response = await fetch(process.env.VUE_APP_BACK, {
+      const response = await fetch(`${back}/user`, {
         method: 'GET',
         header: {
           'Content-Type': 'application/json',
