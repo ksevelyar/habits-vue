@@ -9,7 +9,7 @@ export default {
           'Content-Type': 'application/json',
           'Access-Control-Allow-Origin': '*'
         },
-        mode: 'cors'
+        credentials: 'include'
       })
       return response.json()
     } catch (error) {

@@ -12,7 +12,7 @@ export default {
   },
   methods: {
     async fetchUser () {
-      console.log(await userClient.get())
+      this.user = await userClient.get()
     }
   }
 }
