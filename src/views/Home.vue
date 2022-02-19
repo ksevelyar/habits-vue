@@ -13,17 +13,15 @@ export default {
 }
 </script>
 
-<style>
-.home {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-}
+<style lang="sss">
+.home
+  display: flex
+  align-items: center
+  justify-content: center
+  min-height: 100vh
 
-.home__auth-link {
-  color: gray;
-  font-size: 30px;
-  text-decoration: none;
-}
+.home__auth-link
+  color: gray
+  font-size: 30px
+  text-decoration: none
 </style>
