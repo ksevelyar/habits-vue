@@ -14,7 +14,7 @@ export default {
 }
 </script>
 
-<style lang="sss">
+<style>
 .user
   display: flex
   align-items: center

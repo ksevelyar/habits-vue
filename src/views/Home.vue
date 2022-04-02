@@ -7,13 +7,13 @@
 export default {
   methods: {
     authPath () {
-      return `${process.env.VUE_APP_BACK}/auth/github/`
+      return `${import.meta.env.VITE_BACK}/auth/github/`
     }
   }
 }
 </script>
 
-<style lang="sss">
+<style>
 .home
   display: flex
   align-items: center

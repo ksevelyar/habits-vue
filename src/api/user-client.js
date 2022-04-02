@@ -1,4 +1,4 @@
-const back = process.env.VUE_APP_BACK
+const back = import.meta.env.VITE_BACK
 
 export default {
   async get () {
