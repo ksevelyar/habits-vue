@@ -13,6 +13,8 @@ module.exports = {
     sourceType: 'module'
   },
   rules: {
+    'indent': ['error', 2],
+    'quotes': [ 'error', 'single', { 'avoidEscape': true } ],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/component-name-in-template-casing': ['error', 'PascalCase']
@@ -20,8 +22,8 @@ module.exports = {
   overrides: [
     {
       files: [
-        '**/__tests__/*.{j,t}s?(x)',
-        '**/tests/unit/**/*.spec.{j,t}s?(x)'
+        '**/__tests__/*.js',
+        '**/tests/unit/**/*.spec.js'
       ],
       env: {
         jest: true
