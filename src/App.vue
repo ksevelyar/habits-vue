@@ -5,7 +5,7 @@
 <style>
 @font-face
   font-family: "Overpass"
-  src: url(~@/assets/overpass-regular.woff2) format("woff2")
+  src: url(@/assets/overpass-regular.woff2) format("woff2")
 
 body
   margin: 0

@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style lang="sss">
+<style>
 .report
   display: flex
   flex-direction: column

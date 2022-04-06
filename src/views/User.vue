@@ -1,11 +1,10 @@
 <template lang="pug">
 .user
-  suspense
-    UserCard
+  UserCard
 </template>
 
 <script>
-import UserCard from '@/components/UserCard'
+import UserCard from '@/components/UserCard.vue'
 
 export default {
   components: {
