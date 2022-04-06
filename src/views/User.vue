@@ -1,6 +1,7 @@
 <template lang="pug">
 .user
-  UserCard
+  Suspense
+    UserCard
 </template>
 
 <script>
