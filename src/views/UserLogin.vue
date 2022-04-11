@@ -13,7 +13,7 @@ export default {
 }
 </script>
 
-<style lang="sss">
+<style>
 .home
   display: flex
   align-items: center
