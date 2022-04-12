@@ -25,7 +25,7 @@ const report = reactive({
 })
 </script>
 
-<style>
+<style lang="sss">
 .report
   display: flex
   flex-direction: column

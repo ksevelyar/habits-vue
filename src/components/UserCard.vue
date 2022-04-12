@@ -16,7 +16,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="sss">
 .user-card__image
   width: 200px
   height: 200px
