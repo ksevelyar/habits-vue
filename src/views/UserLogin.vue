@@ -21,7 +21,7 @@ export default {
   min-height: 100vh
 
 .home__auth-link
-  color: gray
+  color: #808080
   font-size: 30px
   text-decoration: none
 </style>

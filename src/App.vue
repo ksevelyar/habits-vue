@@ -3,9 +3,9 @@
 </template>
 
 <style>
-@font-face
+@font-face 
   font-family: "Overpass"
-  src: url(@/assets/overpass-regular.woff2) format("woff2")
+  src: url('@/assets/overpass-regular.woff2') format("woff2")
 
 body
   margin: 0
@@ -16,9 +16,9 @@ body
   background: #fbfafa
 
 a
-  color: grey
+  color: #808080
   text-decoration: none
 
 a:hover
-  color: black
+  color: #808080
 </style>
