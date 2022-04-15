@@ -2,8 +2,9 @@
   <router-view />
 </template>
 
-<style lang="sss">
-@font-face font-family: "Overpass"
+<style>
+@font-face 
+  font-family: "Overpass"
   src: url('@/assets/overpass-regular.woff2') format("woff2")
 
 body
