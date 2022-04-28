@@ -6,5 +6,5 @@ test('renders form', async () => {
   const form = mount(UserReport)
   const date = form.get('.report__date')
 
-  expect(date.element.value).toBe((new Date).toLocaleDateString())
+  expect(date.element.value).toBe((new Date).toLocaleDateString('en-US'))
 })

@@ -4,16 +4,15 @@
   img.user-card__image(:src="user.avatar_url")
 </template>
 
-<script>
+<script setup>
+import { storeToRefs } from 'pinia'
+import { useUserStore } from '@/stores/user'
 import userClient from '@/api/user-client'
 
-export default {
-  async setup () {
-    const user = await userClient.get()
+const store = useUserStore()
+const { user } = storeToRefs(store)
 
-    return { user }
-  }
-}
+await store.fetchUser()
 </script>
 
 <style>

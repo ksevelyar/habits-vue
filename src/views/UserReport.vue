@@ -1,7 +1,7 @@
 <template lang="pug">
 .report
   input.report__input.report__date(
-    v-model.number="report.date"
+    :value="report.date"
     type="text"
     placeholder="date"
   )
@@ -26,7 +26,9 @@
     placeholder="dumbbels sets"
   )
   input.report__input.report__pullups(
-    v-model.number="report.pullups" type="number" placeholder="pullups"
+    v-model.number="report.pullups"
+    type="number"
+    placeholder="pullups"
   )
   input.report__input.report__protein(
     v-model.number="report.protein"
@@ -49,7 +51,7 @@
 import { reactive } from 'vue'
 
 const report = reactive({
-  date: (new Date).toLocaleDateString(),
+  date: (new Date).toLocaleDateString('en-US'),
   weight: null,
   steps: null,
   stepper: null,
