@@ -2,53 +2,57 @@
 .report
   input.report__input.report__date(
     :value="report.date"
-    type="text"
+    @input="updateReport('date', $event)"
     placeholder="date"
   )
   input.report__input.report__weight(
-    v-model.number="report.weight"
-    type="number"
+    :value="report.weight"
+    @input="updateReport('weight', $event)"
     placeholder="weight"
   )
   input.report__input.report__steps(
-    v-model.number="report.steps"
-    type="number"
+    :value="report.steps"
+    @input="updateReport('steps', $event)"
     placeholder="steps"
   )
   input.report__input.report__stepper(
-    v-model.number="report.stepper"
-    type="number"
+    :value="report.stepper"
+    @input="updateReport('stepper', $event)"
     placeholder="stepper"
   )
   input.report__input.report__dumbbell_sets(
-    v-model.number="report.dumbbell_sets"
-    type="number"
+    :value="report.dumbbell_sets"
+    @input="updateReport('dumbbell_sets', $event)"
     placeholder="dumbbels sets"
   )
   input.report__input.report__pullups(
-    v-model.number="report.pullups"
-    type="number"
+    :value="report.pullups"
+    @input="updateReport('pullups', $event)"
     placeholder="pullups"
   )
   input.report__input.report__protein(
-    v-model.number="report.protein"
-    type="number"
+    :value="report.protein"
+    @input="updateReport('protein', $event)"
     placeholder="protein"
   )
   input.report__input.report__fat(
-    v-model.number="report.fat"
-    type="number"
+    :value="report.fat"
+    @input="updateReport('fat', $event)"
     placeholder="fat"
   )
   input.report__input.report__carbs(
-    v-model.number="report.carbs"
-    type="number"
+    :value="report.carbs"
+    @input="updateReport('carbs', $event)"
     placeholder="carbs"
   )
 </template>
 
 <script setup>
 import { reactive } from 'vue'
+
+function updateReport(field, event) {
+  this.report[field] = event.target.value
+}
 
 const report = reactive({
   date: (new Date).toLocaleDateString('en-US'),
@@ -78,4 +82,10 @@ const report = reactive({
   max-width: 40ch
   height: 6vh
   padding: 0px 1ch
+  appearance: none
+  outline: none
+  border: 1px solid #c2c9d6
+
+.report__input:focus-within
+  border: 1px solid #000
 </style>
