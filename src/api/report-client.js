@@ -14,9 +14,10 @@ export default {
     }
   },
 
-  async upsert(id) {
+  async upsert(report) {
     try {
-      const response = await fetch(`${back}/report/${id}`, {
+      const response = await fetch(`${back}/reports`, {
+        body: JSON.stringify({report}),
         method: 'POST',
         header: { 'Content-Type': 'application/json' },
         credentials: 'include'

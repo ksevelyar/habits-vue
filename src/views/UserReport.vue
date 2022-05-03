@@ -49,9 +49,12 @@
 
 <script setup>
 import { reactive } from 'vue'
+import reportClient from '@/api/report-client'
 
 function updateReport(field, event) {
   this.report[field] = event.target.value
+
+  reportClient.upsert(this.report)
 }
 
 const kebabCase = 'fr-CA'
