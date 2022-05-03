@@ -54,8 +54,9 @@ function updateReport(field, event) {
   this.report[field] = event.target.value
 }
 
+const kebabCase = 'fr-CA'
 const report = reactive({
-  date: (new Date).toLocaleDateString('en-US'),
+  date: (new Date).toLocaleDateString(kebabCase),
   weight: null,
   steps: null,
   stepper: null,
