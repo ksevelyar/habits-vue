@@ -1,9 +1,9 @@
 const back = import.meta.env.VITE_BACK
 
 export default {
-  async get () {
+  async get (id) {
     try {
-      const response = await fetch(`${back}/user`, {
+      const response = await fetch(`${back}/report/${id}`, {
         method: 'GET',
         header: { 'Content-Type': 'application/json' },
         credentials: 'include'
