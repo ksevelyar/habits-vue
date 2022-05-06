@@ -115,7 +115,7 @@ const report = reactive({
   color: #575757
   box-sizing: border-box
   font-size: 30px
-  width: 80vw
+  width: 88vw
   max-width: 30ch
   height: 6vh
   padding: 0px 1ch
