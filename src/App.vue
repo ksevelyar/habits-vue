@@ -3,17 +3,20 @@
 </template>
 
 <style>
-@font-face 
-  font-family: "Overpass"
-  src: url('@/assets/overpass-regular.woff2') format("woff2")
+@font-face
+  font-family: "Fira Code"
+  src: url('@/assets/fira-code.woff2') format("woff2")
 
 body
   margin: 0
-  font-family: "Overpass"
+  font-size: 16px
+
+*
+  font-family: "Fira Code"
 
 .app
   min-height: 100vh
-  background: #fbfafa
+  background: #cecece
 
 a
   color: #808080
