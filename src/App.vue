@@ -4,15 +4,15 @@
 
 <style>
 @font-face
-  font-family: "Fira Code"
-  src: url('@/assets/fira-code.woff2') format("woff2")
+  font-family: "Source Code Pro"
+  src: url('@/assets/source-code-pro.woff2') format("woff2")
 
 body
   margin: 0
   font-size: 16px
 
 *
-  font-family: "Fira Code"
+  font-family: "Source Code Pro"
 
 .app
   min-height: 100vh
