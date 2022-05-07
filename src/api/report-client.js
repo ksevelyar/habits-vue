@@ -5,8 +5,8 @@ export default {
     try {
       const response = await fetch(`${back}/report/${id}`, {
         method: 'GET',
-        header: { 'Content-Type': 'application/json' },
-        credentials: 'include'
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
       })
       return response.json()
     } catch (error) {
@@ -17,10 +17,10 @@ export default {
   async upsert(report) {
     try {
       const response = await fetch(`${back}/reports`, {
-        body: JSON.stringify({report}),
         method: 'POST',
-        header: { 'Content-Type': 'application/json' },
-        credentials: 'include'
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(report),
       })
       return response.json()
     } catch (error) {

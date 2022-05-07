@@ -5,8 +5,8 @@ export default {
     try {
       const response = await fetch(`${back}/user`, {
         method: 'GET',
-        header: { 'Content-Type': 'application/json' },
-        credentials: 'include'
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' }
       })
       return response.json()
     } catch (error) {

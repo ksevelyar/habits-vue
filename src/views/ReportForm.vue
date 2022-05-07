@@ -72,7 +72,7 @@ import reportClient from '@/api/report-client'
 function updateReport(field, event) {
   this.report[field] = event.target.value
 
-  reportClient.upsert(this.report)
+  reportClient.upsert({report: this.report})
 }
 
 const kebabCase = 'fr-CA'
