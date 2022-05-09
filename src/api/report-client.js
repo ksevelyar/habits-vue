@@ -22,7 +22,7 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(report),
       })
-      return response.json()
+      return (await response.json()).data
     } catch (error) {
       return Promise.reject(error)
     }
