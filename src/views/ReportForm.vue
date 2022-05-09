@@ -2,7 +2,7 @@
 .report-form
   .report-form__input-group
     label.report-form__label date
-    input.report-form__input.report-form__date(
+    input.report-form__input(
       :value="report.date"
       @input="saveReport('date', $event)"
       placeholder="xxxx-xx-xx"
@@ -10,7 +10,7 @@
 
   .report-form__input-group
     label.report-form__label weight
-    input.report-form__input.report-form__weight(
+    input.report-form__input(
       :value="report.weight"
       @input="saveReport('weight', $event)"
       placeholder="xx.x"
@@ -18,7 +18,7 @@
 
   .report-form__input-group
     label.report-form__label steps
-    input.report-form__input.report-form__steps(
+    input.report-form__input(
       :value="report.steps"
       @input="saveReport('steps', $event)"
       placeholder="xxxxx"
@@ -26,7 +26,7 @@
 
   .report-form__input-group
     label.report-form__label stepper
-    input.report-form__input.report-form__stepper(
+    input.report-form__input(
       :value="report.stepper"
       @input="saveReport('stepper', $event)"
       placeholder="xxxx"
@@ -34,7 +34,7 @@
 
   .report-form__input-group
     label.report-form__label dumbbells
-    input.report-form__input.report-form__dumbbell_sets(
+    input.report-form__input(
       :value="report.dumbbell_sets"
       @input="saveReport('dumbbell_sets', $event)"
       placeholder="x"
@@ -42,15 +42,15 @@
 
   .report-form__input-group
     label.report-form__label kettlebell
-    input.report-form__input.report-form__dumbbell_sets(
-      :value="report.dumbbell_sets"
+    input.report-form__input(
+      :value="report.kettlebell_sets"
       @input="saveReport('kettlebell_sets', $event)"
       placeholder="x"
     )
 
   .report-form__input-group
     label.report-form__label pullups
-    input.report-form__input.report-form__pullups(
+    input.report-form__input(
       :value="report.pullups"
       @input="saveReport('pullups', $event)"
       placeholder="xx"
@@ -58,7 +58,7 @@
 
   .report-form__input-group
     label.report-form__label protein
-    input.report-form__input.report-form__protein(
+    input.report-form__input(
       :value="report.protein_meals"
       @input="saveReport('protein_meals', $event)"
       placeholder="x"
@@ -66,18 +66,23 @@
 
   .report-form__input-group
     label.report-form__label fiber
-    input.report-form__input.report-form__carbs(
+    input.report-form__input(
       :value="report.fiber_meals"
       @input="saveReport('fiber_meals', $event)"
       placeholder="x"
     )
 
-  .report-form__updated-at(v-show="report.updated_at") {{ report.updated_at }}
+  .report-form__updated-at(v-show="report.updated_at") {{ parseUTC(report.updated_at) }}
 </template>
 
 <script setup>
 import { reactive, onMounted } from 'vue'
 import reportClient from '@/api/report-client'
+
+function parseUTC(datetime) {
+  const localDateTime = (new Date(datetime + 'Z')).toLocaleString('ru-RU')
+  return localDateTime.split(' ')[1]
+}
 
 function reloadReport(backendReport) {
   if (backendReport) { Object.assign(report, backendReport) }
@@ -150,4 +155,8 @@ onMounted(async () => { await getCurrentReport() })
 .report-form__input:focus-within
   border: 1px solid #999
   background: #dfdfdf
+
+.report-form__updated-at
+  color: #999
+  font-size: 30px
 </style>
