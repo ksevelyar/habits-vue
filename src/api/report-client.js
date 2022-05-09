@@ -1,14 +1,14 @@
 const back = import.meta.env.VITE_BACK
 
 export default {
-  async get(id) {
+  async current() {
     try {
-      const response = await fetch(`${back}/report/${id}`, {
+      const response = await fetch(`${back}/report`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
-      return response.json()
+      return (await response.json()).data
     } catch (error) {
       return Promise.reject(error)
     }

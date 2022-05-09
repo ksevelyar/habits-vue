@@ -51,23 +51,29 @@
   .report-form__input-group
     label.report-form__label protein
     input.report-form__input.report-form__protein(
-      :value="report.protein"
-      @input="updateReport('protein', $event)"
+      :value="report.protein_meals"
+      @input="updateReport('protein_meals', $event)"
       placeholder="x"
     )
 
   .report-form__input-group
     label.report-form__label fiber
     input.report-form__input.report-form__carbs(
-      :value="report.fiber"
-      @input="updateReport('fiber', $event)"
+      :value="report.fiber_meals"
+      @input="updateReport('fiber_meals', $event)"
       placeholder="x"
     )
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
 import reportClient from '@/api/report-client'
+
+async function getCurrentReport() {
+  const backendReport = await reportClient.current()
+
+  if (backendReport) { Object.assign(report, backendReport) }
+}
 
 function updateReport(field, event) {
   this.report[field] = event.target.value
@@ -83,9 +89,11 @@ const report = reactive({
   stepper: null,
   dumbbell_sets: null,
   pullups: null,
-  protein: null,
-  fiber: null,
+  protein_meals: null,
+  fiber_meals: null,
 })
+
+onMounted(async () => { await getCurrentReport() })
 </script>
 
 <style>
