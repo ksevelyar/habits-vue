@@ -2,7 +2,7 @@
 .report-form
   .report-form__input-group
     label.report-form__label date
-    input.report-form__input(
+    input.report-form__input.report-form__date(
       :value="report.date"
       @input="saveReport('date', $event)"
       placeholder="xxxx-xx-xx"
