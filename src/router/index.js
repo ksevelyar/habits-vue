@@ -3,10 +3,16 @@ import UserLogin from '@/views/UserLogin.vue'
 
 const ReportForm = () => import('@/views/ReportForm.vue')
 const UserProfile = () => import('@/views/UserProfile.vue')
+const ReportsList = () => import('@/views/ReportsList.vue')
 
 const routes = [
   {
     path: '/',
+    name: 'ReportsList',
+    component: ReportsList
+  },
+  {
+    path: '/auth',
     name: 'UserLogin',
     component: UserLogin
   },
