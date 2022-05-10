@@ -1,11 +1,32 @@
 <template lang="pug">
-ol.reports-list
-  li.reports-list__item(v-for="report in reports" :key="report.id") {{ report.date }} {{ report.id }}
+table.reports-list
+  tbody
+    tr.reports-list__row
+      td.reports-list__head date
+      td.reports-list__head w
+      td.reports-list__head steps
+      td.reports-list__head stepper
+      td.reports-list__head db
+      td.reports-list__head kb
+      td.reports-list__head pu
+      td.reports-list__head p
+      td.reports-list__head f
+    tr.reports-list__row(v-for="report in reports" :key="report.id")
+      ReportsListItem(:value="report.date")
+      ReportsListItem(:value="report.weight")
+      ReportsListItem(:value="report.steps")
+      ReportsListItem(:value="report.stepper")
+      ReportsListItem(:value="report.dumbbell_sets")
+      ReportsListItem(:value="report.kettlebell_sets")
+      ReportsListItem(:value="report.pullups")
+      ReportsListItem(:value="report.protein_meals")
+      ReportsListItem(:value="report.fiber_meals")
 </template>
 
 <script setup>
 import { ref, onMounted } from 'vue'
 import reportClient from '@/api/report-client'
+import ReportsListItem from '@/components/ReportsListItem.vue'
 
 const reports = ref([])
 
@@ -27,6 +48,8 @@ onMounted(async () => { await getReportsList() })
   align-items: center
   height: 100vh
 
-.reports-list__item
-  width: 20ch
+.reports-list__head
+  color: #afb1b3
+  font-size: 30px
+  padding: 0 1ch
 </style>
