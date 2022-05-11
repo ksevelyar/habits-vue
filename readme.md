@@ -4,6 +4,12 @@
 
 This app consists of two screens, today's report form and [list of reports for last 2 weeks](https://raw.githubusercontent.com/ksevelyar/fitlog-vue/main/screens/report-list.png).
 
+## Todo
+
+* [ ] debounce inputs
+* [ ] hjkl bindings
+* [ ] activity chart
+
 ## Run
 
 * `npm run dev`
