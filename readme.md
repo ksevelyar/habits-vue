@@ -1,5 +1,4 @@
-# [Fitlog](https://github.com/rusty-cluster/styleguide/blob/main/js/vue)
-[![CI](https://github.com/ksevelyar/fitlog-vue/actions/workflows/ci.yml/badge.svg)](https://github.com/ksevelyar/fitlog-vue/actions/workflows/ci.yml)
+# [Fitlog](https://github.com/rusty-cluster/styleguide/blob/main/js/vue) [![CI](https://github.com/ksevelyar/fitlog-vue/actions/workflows/ci.yml/badge.svg)](https://github.com/ksevelyar/fitlog-vue/actions/workflows/ci.yml)
 
 ![today's report form](https://raw.githubusercontent.com/ksevelyar/fitlog-vue/main/screens/report-form.png)
 
