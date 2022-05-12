@@ -1,103 +1,79 @@
 <template lang="pug">
 .report-form
-  .report-form__input-group
-    label.report-form__label date
-    input.report-form__input.report-form__date(
-      :value="report.date"
-      @input="saveReport('date', $event)"
-      placeholder="xxxx-xx-xx"
-    )
+  ReportInput(
+    :value="report.date"
+    :field="'date'"
+    :placeholder="'xxxx-xx-xx'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label weight
-    input.report-form__input(
-      :value="report.weight"
-      @input="saveReport('weight', $event)"
-      placeholder="xx.x"
-    )
+  ReportInput(
+    :value="report.weight"
+    :field="'weight'"
+    :placeholder="'xx.x'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label steps
-    input.report-form__input(
-      :value="report.steps"
-      @input="saveReport('steps', $event)"
-      placeholder="xxxxx"
-    )
+  ReportInput(
+    :value="report.steps"
+    :field="'steps'"
+    :placeholder="'xxxxx'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label stepper
-    input.report-form__input(
-      :value="report.stepper"
-      @input="saveReport('stepper', $event)"
-      placeholder="xxxx"
-    )
+  ReportInput(
+    :value="report.stepper"
+    :field="'stepper'"
+    :placeholder="'xxxx'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label dumbbells
-    input.report-form__input(
-      :value="report.dumbbell_sets"
-      @input="saveReport('dumbbell_sets', $event)"
-      placeholder="x"
-    )
+  ReportInput(
+    :value="report.dumbbell_sets"
+    :label="'dumbbells'"
+    :field="'dumbbell_sets'"
+    :placeholder="'x'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label kettlebell
-    input.report-form__input(
-      :value="report.kettlebell_sets"
-      @input="saveReport('kettlebell_sets', $event)"
-      placeholder="x"
-    )
+  ReportInput(
+    :value="report.kettlebell_sets"
+    :label="'kettlebell'"
+    :field="'kettlebell_sets'"
+    :placeholder="'x'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label pullups
-    input.report-form__input(
-      :value="report.pullups"
-      @input="saveReport('pullups', $event)"
-      placeholder="xx"
-    )
+  ReportInput(
+    :value="report.pullups"
+    :field="'pullups'"
+    :placeholder="'xx'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label protein
-    input.report-form__input(
-      :value="report.protein_meals"
-      @input="saveReport('protein_meals', $event)"
-      placeholder="x"
-    )
+  ReportInput(
+    :value="report.protein_meals"
+    :label="'protein'"
+    :field="'protein_meals'"
+    :placeholder="'x'"
+    @input="saveReport"
+  )
 
-  .report-form__input-group
-    label.report-form__label fiber
-    input.report-form__input(
-      :value="report.fiber_meals"
-      @input="saveReport('fiber_meals', $event)"
-      placeholder="x"
-    )
+  ReportInput(
+    :value="report.fiber_meals"
+    :label="'fiber'"
+    :field="'fiber_meals'"
+    :placeholder="'x'"
+    @input="saveReport"
+  )
 
-  .report-form__updated-at(v-show="report.updated_at") {{ parseUTC(report.updated_at) }}
+  .report-form__updated-at {{ errorOrUpdatedAt }}
 </template>
 
 <script setup>
-import { reactive, onMounted } from 'vue'
+import { reactive, ref, computed, onMounted } from 'vue'
 import reportClient from '@/api/report-client'
-
-function parseUTC(datetime) {
-  const localDateTime = (new Date(datetime + 'Z')).toLocaleString('ru-RU')
-  return localDateTime.split(' ')[1]
-}
-
-function reloadReport(backendReport) {
-  if (backendReport) { Object.assign(report, backendReport) }
-}
-
-async function getCurrentReport() {
-  reloadReport(await reportClient.current())
-}
-
-async function saveReport(field, event) {
-  this.report[field] = event.target.value
-
-  const backendReport = await reportClient.upsert({report: this.report})
-  reloadReport(backendReport)
-}
+import ReportInput from '@/components/ReportInput.vue'
 
 const kebabCase = 'fr-CA'
 const report = reactive({
@@ -112,6 +88,38 @@ const report = reactive({
   updated_at: ''
 })
 
+const error = ref('')
+const errorOrUpdatedAt = computed(() => {
+  if (error.value) { return error.value }
+  if (report.updated_at) { return parseUTC(report.updated_at) }
+
+  return ' '
+})
+
+function parseUTC(datetime) {
+  const localDateTime = (new Date(datetime + 'Z')).toLocaleString('ru-RU')
+  return localDateTime.split(' ')[1]
+}
+
+function reloadReport(backendReport) {
+  if (backendReport) { Object.assign(report, backendReport) }
+}
+
+async function getCurrentReport() {
+  try {
+    reloadReport(await reportClient.current())
+  } catch {
+    error.value = "🐗 can't fetch report"
+  }
+}
+
+async function saveReport(field, value) {
+  report[field] = value
+
+  const backendReport = await reportClient.upsert({report})
+  reloadReport(backendReport)
+}
+
 onMounted(async () => { await getCurrentReport() })
 </script>
 
@@ -122,39 +130,6 @@ onMounted(async () => { await getCurrentReport() })
   justify-content: center
   align-items: center
   height: 100vh
-
-.report-form__input-group
-  position: relative
-
-.report-form__label
-  color: #afb1b3
-  pointer-events: none
-  font-size: 30px
-  height: 6vh
-  position: absolute
-  right: 1ch
-  line-height: 6vh
-
-.report-form__input::placeholder
-  color: #afb1b3
-
-.report-form__input
-  color: #575757
-  box-sizing: border-box
-  font-size: 30px
-  width: 88vw
-  max-width: 24ch
-  height: 6vh
-  padding: 0px 1ch
-  appearance: none
-  outline: none
-  border: 1px solid #c2c9d6
-  background: #d7d7d7
-  margin-bottom: 10px
-
-.report-form__input:focus-within
-  border: 1px solid #999
-  background: #dfdfdf
 
 .report-form__updated-at
   color: #999
