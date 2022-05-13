@@ -9,8 +9,3 @@
 * reps of pull-ups
 * protein meals
 * fruits and vegetables
-
-## Todo
-
-* [ ] debounce inputs
-* [ ] hjkl bindings

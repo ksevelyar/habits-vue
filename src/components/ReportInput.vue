@@ -12,9 +12,6 @@
 
 
 <script setup>
-import { ref } from 'vue'
-import reportClient from '@/api/report-client'
-
 const emit = defineEmits(['input'])
 
 const props = defineProps({
@@ -31,9 +28,13 @@ function bemName() {
   return `report-input__${props.field}`
 }
 
+let debounceTimer = null
 async function emitInput(event) {
-  // TODO: debounce
-  emit('input', props.field, event.target.value)
+  const debounceDelay = 300
+
+  if (debounceTimer) { clearTimeout(debounceTimer) }
+
+  debounceTimer = setTimeout(() => emit('input', props.field, event.target.value), debounceDelay)
 }
 </script>
 
