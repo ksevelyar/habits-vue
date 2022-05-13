@@ -4,7 +4,7 @@
 
 
 
-This app consists of two screens, [today's report form and](doc/report-form.md) and [list of reports](doc/reports-list.md).
+This app consists of two screens, [today's report form](doc/report-form.md) and [list of reports](doc/reports-list.md).
 
 ## Run
 
