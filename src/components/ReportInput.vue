@@ -6,6 +6,7 @@
     :class.once="bemName()"
     @input="emitInput"
     :placeholder.once="placeholder"
+    :readonly="readonly"
   )
 </template>
 
@@ -21,6 +22,7 @@ const props = defineProps({
   placeholder: {type: String, default: 'x'},
   field: {type: String, default: 'field'},
   value: {type: [String, Number], default: null},
+  readonly: {type: Boolean, default: false},
 })
 
 function labelOrField() { return props.label || props.field }

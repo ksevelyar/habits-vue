@@ -3,8 +3,7 @@
   ReportInput(
     :value="report.date"
     :field="'date'"
-    :placeholder="'xxxx-xx-xx'"
-    @input="saveReport"
+    :readonly="true"
   )
 
   ReportInput(
@@ -46,6 +45,7 @@
 
   ReportInput(
     :value="report.pullups"
+    :label="'pull-ups'"
     :field="'pullups'"
     :placeholder="'xx'"
     @input="saveReport"
