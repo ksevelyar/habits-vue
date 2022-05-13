@@ -29,7 +29,7 @@ function bemName() {
 }
 
 let debounceTimer = null
-async function emitInput(event) {
+function emitInput(event) {
   const debounceDelay = 300
 
   if (debounceTimer) { clearTimeout(debounceTimer) }
