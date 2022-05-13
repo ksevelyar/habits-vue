@@ -3,7 +3,7 @@
   label.report-input__label {{ labelOrField() }}
   input.report-input__input(
     :value="value"
-    :class="bemName()"
+    :class.once="bemName()"
     @input="emitInput"
     :placeholder.once="placeholder"
   )
