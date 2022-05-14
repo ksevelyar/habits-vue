@@ -1,5 +1,5 @@
 <template lang="pug">
-td.reports-list__item(:class="{ 'reports-list__item--empty': !value }") {{ value || 'x' }}
+td.reports-list__item(:class="{ 'reports-list__item--empty': !value }") {{ value || '|' }}
 </template>
 
 <script setup>
