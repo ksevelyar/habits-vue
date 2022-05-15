@@ -12,7 +12,7 @@ table.reports-list
       td.reports-list__head p
       td.reports-list__head f
     tr.reports-list__row(v-for="report in reports" :key="report.id")
-      ReportsListItem(:value="report.date")
+      ReportsListItem(:value="contractDate(report.date)")
       ReportsListItem(:value="report.weight")
       ReportsListItem(:value="report.steps")
       ReportsListItem(:value="report.stepper")
@@ -33,6 +33,11 @@ const reports = ref([])
 async function getReportsList() {
   const backendReports = await reportClient.list()
   reports.value = backendReports
+}
+
+function contractDate(date) {
+  const [_year, month, day] = date.split('-');
+  return `${month}-${day}`
 }
 
 onMounted(async () => { await getReportsList() })
