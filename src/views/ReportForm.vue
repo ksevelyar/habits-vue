@@ -120,7 +120,7 @@ async function saveReport(field, value) {
   reloadReport(backendReport)
 }
 
-onMounted(async () => { await getCurrentReport() })
+onMounted(getCurrentReport)
 </script>
 
 <style>
