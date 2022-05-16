@@ -101,13 +101,10 @@ function parseUTC(datetime) {
   return localDateTime.split(' ')[1]
 }
 
-function reloadReport(backendReport) {
-  if (backendReport) { Object.assign(report, backendReport) }
-}
-
 async function getCurrentReport() {
   try {
-    reloadReport(await reportClient.current())
+    const backendReport = await reportClient.current()
+    if (backendReport) { Object.assign(report, backendReport) }
   } catch {
     error.value = "🐗 can't fetch report"
   }
@@ -116,8 +113,12 @@ async function getCurrentReport() {
 async function saveReport(field, value) {
   report[field] = value
 
-  const backendReport = await reportClient.upsert({report})
-  reloadReport(backendReport)
+  try {
+    const backendReport = await reportClient.upsert({report})
+    report.updated_at = backendReport.updated_at
+  } catch {
+    error.value = "🐗 can't update report"
+  }
 }
 
 onMounted(getCurrentReport)
