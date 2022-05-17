@@ -1,8 +1,8 @@
 import { mount } from '@vue/test-utils'
 import ReportForm from '@/views/ReportForm.vue'
-import { expect, test } from 'vitest';
+import { expect, test } from 'vitest'
 
-test('renders form', async () => {
+test('renders form', () => {
   const form = mount(ReportForm)
   const date = form.get('.report-input__date')
 

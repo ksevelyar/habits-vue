@@ -19,7 +19,9 @@ module.exports = {
     'vue/script-setup-uses-vars': 'error',
 
     'indent': ['error', 2],
-    'quotes': [ 'error', 'single', { 'avoidEscape': true } ],
+    'quotes': ['error', 'single', { 'avoidEscape': true }],
+    'semi': [1, 'never'],
+    'object-curly-spacing': ['error', 'always'],
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/component-name-in-template-casing': ['error', 'PascalCase']

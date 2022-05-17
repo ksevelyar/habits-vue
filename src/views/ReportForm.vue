@@ -114,7 +114,7 @@ async function saveReport(field, value) {
   report[field] = value
 
   try {
-    const backendReport = await reportClient.upsert({report})
+    const backendReport = await reportClient.upsert({ report })
     report.updated_at = backendReport.updated_at
   } catch {
     error.value = "🐗 can't update report"

@@ -36,7 +36,7 @@ async function getReportsList() {
 }
 
 function contractDate(date) {
-  const [_year, month, day] = date.split('-');
+  const [_year, month, day] = date.split('-')
   return `${month}-${day}`
 }
 

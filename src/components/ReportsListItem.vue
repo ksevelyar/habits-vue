@@ -4,7 +4,7 @@ td.reports-list__item(:class="{ 'reports-list__item--empty': !value }") {{ value
 
 <script setup>
 const props = defineProps({
-  value: {type: [String, Number], default: null},
+  value: { type: [String, Number], default: null },
 })
 </script>
 

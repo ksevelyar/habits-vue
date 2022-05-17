@@ -15,11 +15,11 @@
 const emit = defineEmits(['input'])
 
 const props = defineProps({
-  label: {type: String, default: null},
-  placeholder: {type: String, default: 'x'},
-  field: {type: String, default: 'field'},
-  value: {type: [String, Number], default: null},
-  readonly: {type: Boolean, default: false},
+  label: { type: String, default: null },
+  placeholder: { type: String, default: 'x' },
+  field: { type: String, default: 'field' },
+  value: { type: [String, Number], default: null },
+  readonly: { type: Boolean, default: false },
 })
 
 function labelOrField() { return props.label || props.field }
