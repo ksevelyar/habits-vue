@@ -105,6 +105,7 @@ async function getCurrentReport() {
   try {
     const backendReport = await reportClient.current()
     if (backendReport) { Object.assign(report, backendReport) }
+    error.value = null
   } catch {
     error.value = "🐗 can't fetch report"
   }
@@ -116,6 +117,7 @@ async function saveReport(field, value) {
   try {
     const backendReport = await reportClient.upsert({ report })
     report.updated_at = backendReport.updated_at
+    error.value = null
   } catch {
     error.value = "🐗 can't update report"
   }
