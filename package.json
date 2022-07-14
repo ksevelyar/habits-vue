@@ -31,6 +31,6 @@
     "stylelint-config-sugarss-recommended": "^3.0.0",
     "sugarss": "^4.0.1",
     "vite": "^3.0.0",
-    "vitest": "^0.9.3"
+    "vitest": "^0.18.0"
   }
 }
