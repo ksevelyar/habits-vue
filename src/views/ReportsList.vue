@@ -4,8 +4,9 @@ table.reports-list
     tr.reports-list__row
       td.reports-list__head date
       td.reports-list__head w
+      td.reports-list__head sl
       td.reports-list__head steps
-      td.reports-list__head stepper
+      td.reports-list__head sr
       td.reports-list__head db
       td.reports-list__head kb
       td.reports-list__head pu
@@ -14,6 +15,7 @@ table.reports-list
     tr.reports-list__row(v-for="report in reports" :key="report.id")
       ReportsListItem(:value="contractDate(report.date)")
       ReportsListItem(:value="report.weight")
+      ReportsListItem(:value="report.sleep")
       ReportsListItem(:value="report.steps")
       ReportsListItem(:value="report.stepper")
       ReportsListItem(:value="report.dumbbell_sets")
