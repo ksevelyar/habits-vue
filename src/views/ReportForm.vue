@@ -7,6 +7,13 @@
   )
 
   ReportInput(
+    :value="report.sleep"
+    :field="'sleep'"
+    :placeholder="'x'"
+    @input="saveReport"
+  )
+
+  ReportInput(
     :value="report.weight"
     :field="'weight'"
     :placeholder="'xx.x'"
@@ -78,6 +85,7 @@ import ReportInput from '@/components/ReportInput.vue'
 const kebabCase = 'fr-CA'
 const report = reactive({
   date: (new Date).toLocaleDateString(kebabCase),
+  sleep: null,
   weight: null,
   steps: null,
   stepper: null,
