@@ -1,7 +1,7 @@
 import { rest } from 'msw'
 
 export default [
-  rest.get('http://localhost:4000/reports', (_req, res, ctx) => {
+  rest.get('http://localhost:5000/reports', (_req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
