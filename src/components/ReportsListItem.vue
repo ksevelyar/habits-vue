@@ -10,7 +10,7 @@ const props = defineProps({
 
 <style>
 .reports-list__item
-  color: #575757
+  color: var(--color-4)
   font-size: 30px
   padding: 0 1ch
 

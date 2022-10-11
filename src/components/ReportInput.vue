@@ -52,7 +52,7 @@ function emitInput(event) {
   line-height: 6vh
 
 .report-input__input
-  color: #575757
+  color: var(--color-4)
   box-sizing: border-box
   font-size: 30px
   width: 88vw
@@ -61,14 +61,14 @@ function emitInput(event) {
   padding: 0px 1ch
   appearance: none
   outline: none
-  border: 1px solid #c2c9d6
-  background: #d7d7d7
+  border: 1px solid var(--color-3)
+  background: var(--color-6)
   margin-bottom: 10px
 
 .report-input__input::placeholder
-  color: #afb1b3
+  color: var(--color-3)
 
 .report-input__input:focus-within
-  border: 1px solid #999
-  background: #dfdfdf
+  border: 1px solid var(--color-2)
+  background: var(--color-7)
 </style>

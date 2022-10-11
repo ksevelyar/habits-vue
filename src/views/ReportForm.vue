@@ -143,6 +143,6 @@ onMounted(getCurrentReport)
   height: 100vh
 
 .report-form__updated-at
-  color: #999
+  color: var(--color-2)
   font-size: 30px
 </style>

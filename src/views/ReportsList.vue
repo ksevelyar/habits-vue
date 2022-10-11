@@ -56,7 +56,7 @@ onMounted(async () => { await getReportsList() })
   height: 100vh
 
 .reports-list__head
-  color: #afb1b3
+  color: var(--color-3)
   font-size: 30px
   padding: 0 1ch
 </style>

@@ -4,6 +4,7 @@ import UserLogin from '@/views/UserLogin.vue'
 const ReportForm = () => import('@/views/ReportForm.vue')
 const UserProfile = () => import('@/views/UserProfile.vue')
 const ReportsList = () => import('@/views/ReportsList.vue')
+const DevPalette = () => import('@/views/DevPalette.vue')
 
 const routes = [
   {
@@ -25,6 +26,11 @@ const routes = [
     path: '/report',
     name: 'ReportForm',
     component: ReportForm
+  },
+  {
+    path: '/dev/palette',
+    name: 'DevPalette',
+    component: DevPalette
   }
 ]
 
