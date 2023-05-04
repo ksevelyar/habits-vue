@@ -8,7 +8,6 @@ export default [
         'data': [
           {
             'date': '2022-08-25',
-            'dumbbell_sets': null,
             'fiber_meals': 5,
             'id': 1567,
             'kettlebell_sets': null,
@@ -22,7 +21,6 @@ export default [
           },
           {
             'date': '2022-08-24',
-            'dumbbell_sets': 6,
             'fiber_meals': 5,
             'id': 1550,
             'kettlebell_sets': null,
@@ -36,7 +34,6 @@ export default [
           },
           {
             'date': '2022-08-23',
-            'dumbbell_sets': null,
             'fiber_meals': 5,
             'id': 1541,
             'kettlebell_sets': null,
@@ -50,7 +47,6 @@ export default [
           },
           {
             'date': '2022-08-22',
-            'dumbbell_sets': 1,
             'fiber_meals': 5,
             'id': 1512,
             'kettlebell_sets': 4,
@@ -64,7 +60,6 @@ export default [
           },
           {
             'date': '2022-08-21',
-            'dumbbell_sets': null,
             'fiber_meals': 5,
             'id': 1502,
             'kettlebell_sets': null,
@@ -78,7 +73,6 @@ export default [
           },
           {
             'date': '2022-08-20',
-            'dumbbell_sets': null,
             'fiber_meals': 5,
             'id': 1486,
             'kettlebell_sets': null,
@@ -92,7 +86,6 @@ export default [
           },
           {
             'date': '2022-08-19',
-            'dumbbell_sets': null,
             'fiber_meals': 4,
             'id': 1469,
             'kettlebell_sets': 3,
@@ -106,7 +99,6 @@ export default [
           },
           {
             'date': '2022-08-18',
-            'dumbbell_sets': null,
             'fiber_meals': 4,
             'id': 1447,
             'kettlebell_sets': null,
@@ -120,7 +112,6 @@ export default [
           },
           {
             'date': '2022-08-17',
-            'dumbbell_sets': 6,
             'fiber_meals': 3,
             'id': 1427,
             'kettlebell_sets': 1,
@@ -134,7 +125,6 @@ export default [
           },
           {
             'date': '2022-08-16',
-            'dumbbell_sets': null,
             'fiber_meals': 5,
             'id': 1411,
             'kettlebell_sets': null,
@@ -148,7 +138,6 @@ export default [
           },
           {
             'date': '2022-08-15',
-            'dumbbell_sets': null,
             'fiber_meals': 4,
             'id': 1391,
             'kettlebell_sets': 3,
@@ -162,7 +151,6 @@ export default [
           },
           {
             'date': '2022-08-14',
-            'dumbbell_sets': null,
             'fiber_meals': 3,
             'id': 1383,
             'kettlebell_sets': null,
@@ -176,7 +164,6 @@ export default [
           },
           {
             'date': '2022-08-13',
-            'dumbbell_sets': null,
             'fiber_meals': 3,
             'id': 1373,
             'kettlebell_sets': null,
@@ -190,7 +177,6 @@ export default [
           },
           {
             'date': '2022-08-12',
-            'dumbbell_sets': null,
             'fiber_meals': 5,
             'id': 1350,
             'kettlebell_sets': 2,

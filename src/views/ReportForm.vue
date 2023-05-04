@@ -35,14 +35,6 @@
   )
 
   ReportInput(
-    :value="report.dumbbell_sets"
-    :label="'dumbbells'"
-    :field="'dumbbell_sets'"
-    :placeholder="'x'"
-    @input="saveReport"
-  )
-
-  ReportInput(
     :value="report.kettlebell_sets"
     :label="'kettlebell'"
     :field="'kettlebell_sets'"
@@ -89,7 +81,6 @@ const report = reactive({
   weight: null,
   steps: null,
   stepper: null,
-  dumbbell_sets: null,
   pullups: null,
   protein_meals: null,
   fiber_meals: null,

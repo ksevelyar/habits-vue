@@ -7,7 +7,6 @@ table.reports-list
       td.reports-list__head sl
       td.reports-list__head steps
       td.reports-list__head sr
-      td.reports-list__head db
       td.reports-list__head kb
       td.reports-list__head pu
       td.reports-list__head p
@@ -18,7 +17,6 @@ table.reports-list
       ReportsListItem(:value="report.sleep")
       ReportsListItem(:value="report.steps")
       ReportsListItem(:value="report.stepper")
-      ReportsListItem(:value="report.dumbbell_sets")
       ReportsListItem(:value="report.kettlebell_sets")
       ReportsListItem(:value="report.pullups")
       ReportsListItem(:value="report.protein_meals")

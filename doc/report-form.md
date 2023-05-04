@@ -4,7 +4,6 @@
 * weight in kg
 * steps
 * spepper steps
-* dumbbells sets
 * kettlebell sets
 * reps of pull-ups
 * protein meals

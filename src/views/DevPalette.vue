@@ -19,7 +19,7 @@
 
 .dev-palette__color
   height: 10vh
-  width: 48vh
+  width: 40ch
 
 .dev-palette__color-1
   background: var(--color-1)
