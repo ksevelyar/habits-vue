@@ -1,4 +1,4 @@
-![today's report form](https://raw.githubusercontent.com/ksevelyar/fitlog-vue/main/doc/screens/report-form.png)
+![today's report form](https://raw.githubusercontent.com/ksevelyar/habits-vue/main/doc/screens/report-form.png)
 
 * today's date, read only
 * weight in kg

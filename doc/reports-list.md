@@ -1,1 +1,1 @@
-![reports list](https://raw.githubusercontent.com/ksevelyar/fitlog-vue/main/doc/screens/reports-list.png)
+![reports list](https://raw.githubusercontent.com/ksevelyar/habits-vue/main/doc/screens/reports-list.png)
