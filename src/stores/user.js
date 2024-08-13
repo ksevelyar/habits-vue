@@ -1,21 +1,34 @@
 import { defineStore } from 'pinia'
+import { reactive } from 'vue'
 import userClient from '@/api/user-client'
 
-export const useUserStore = defineStore({
-  id: 'user',
-  state: () => ({
-    user: null,
-    error: null
-  }),
-  actions: {
-    async fetchUser() {
-      this.user = null
+export const useUserStore = defineStore('user', () => {
+  const user = reactive({
+    name: null,
+    email: null
+  })
 
-      try {
-        this.user = await userClient.get()
-      } catch (error) {
-        this.error = error
-      }
+  async function register(userData) {
+    try {
+      user.value = await userClient.register(userData)
+    } catch(error) {
+      user.value = {}
+      return Promise.reject(error)
     }
+  }
+
+  async function login(userData) {
+    try {
+      user.value = await userClient.login(userData)
+    } catch(error) {
+      user.value = {}
+      return Promise.reject(error)
+    }
+  }
+
+  return {
+    user,
+    register,
+    login
   }
 })

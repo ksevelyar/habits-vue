@@ -1,27 +1,62 @@
 <template lang="pug">
-.home
-  a.home__auth-link(:href.once="authPath()") Auth with GitHub
+form.user-login(@submit.prevent='loginUser')
+  input.user-login__email(
+    v-model.trim='userForm.email'
+    placeholder="email"
+    type="email"
+    required
+  )
+
+  input.user-login__password(
+    v-model.trim='userForm.password'
+    placeholder="password"
+    type="password"
+    required
+  )
+
+  button.user-login__submit(type="submit") Authenticate
 </template>
 
-<script>
-export default {
-  methods: {
-    authPath () {
-      return `${import.meta.env.VITE_BACK}/auth/github/`
-    }
+<script setup>
+import { reactive } from 'vue'
+import { useUserStore } from '@/stores/user'
+import router from '@/router'
+
+const user = useUserStore()
+
+const userForm = reactive({
+  email: 'ksevelyar@gmail.com',
+  password: 'password@123456',
+})
+
+const loginUser = async () => {
+  try {
+    await user.login({ user: userForm })
+    router.push({ path: '/' })
+  } catch(error) {
+    console.log(error)
   }
 }
 </script>
 
 <style>
-.home
+.user-login
   display: flex
   align-items: center
   justify-content: center
+  flex-direction: column
+  gap: 10px
+
   min-height: 100vh
 
-.home__auth-link
-  color: var(--color-1)
-  font-size: 30px
-  text-decoration: none
+.user-login__email
+  box-sizing: border-box
+  width: 200px
+
+.user-login__password
+  box-sizing: border-box
+  width: 200px
+
+.user-login__submit
+  width: 200px
 </style>
