@@ -1,7 +1,7 @@
 const back = import.meta.env.VITE_BACK
 
 export default {
-  async get () {
+  async login() {
     try {
       const response = await fetch(`${back}/user`, {
         method: 'GET',
@@ -14,20 +14,15 @@ export default {
     }
   },
 
-  async login(user) {
+  async get() {
     try {
-      const response = await fetch(`${back}/sessions`, {
-        method: 'POST',
+      const response = await fetch(`${back}/user`, {
+        method: 'GET',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user),
+        headers: { 'Content-Type': 'application/json' }
       })
-
-      const data = (await response.json()).data
-
-      if (response.status != 201) { throw data }
-      return data
-    } catch(error) {
+      return response.json()
+    } catch (error) {
       return Promise.reject(error)
     }
   }
