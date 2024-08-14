@@ -1,10 +1,8 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import UserLogin from '@/views/UserLogin.vue'
 
-//const ReportForm = () => import('@/views/ReportForm.vue')
-const UserProfile = () => import('@/views/UserProfile.vue')
-//const ReportsList = () => import('@/views/ReportsList.vue')
 const DevPalette = () => import('@/views/DevPalette.vue')
+const UserRegistration = () => import('@/views/UserRegistration.vue')
 
 const routes = [
   {
@@ -13,9 +11,9 @@ const routes = [
     component: UserLogin
   },
   {
-    path: '/:handle',
-    name: 'UserProfile',
-    component: UserProfile
+    path: '/registration',
+    name: 'UserRegistration',
+    component: UserRegistration
   },
   {
     path: '/dev/palette',
