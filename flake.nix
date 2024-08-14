@@ -16,7 +16,7 @@
         ];
 
         shellHook = ''
-          echo "node `${pkgs.nodejs}/bin/node --version`"
+          export VITE_BACK=http://habits.lcl:5000
         '';
       };
     });
