@@ -1,6 +1,12 @@
-<template>
-  <router-view />
+<template lang="pug">
+  UserHeader
+
+  router-view
 </template>
+
+<script setup>
+import UserHeader from '@/components/UserHeader.vue'
+</script>
 
 <style>
 :root
@@ -17,15 +23,20 @@
   src: url('@/assets/source-code-pro.woff2') format("woff2")
 
 body
+  background: var(--color-5)
   margin: 0
   font-size: 16px
+  display: flex
+  align-items: center
+  display: flex
+  justify-content: center
 
 *
   font-family: "Source Code Pro"
 
 .app
   min-height: 100vh
-  background: var(--color-5)
+  width: 80ch
 
 a
   color: var(--color-1)
