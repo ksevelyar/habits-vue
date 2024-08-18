@@ -1,11 +1,11 @@
 <template lang='pug'>
 .user-header
   router-link.user-header__item(:to="{ name: 'UserDashboard' }") Dashboard
-  router-link.user-header__item(:to="{ name: 'HabitsList' }") Habits
+  router-link.user-header__item(:to="{ name: 'ChainList' }") Chains
   router-link.user-header__item(:to="{ name: 'UserDashboard' }") Metrics
 </template>
 
-<style>
+<style lang="sss">
 .user-header
   display: flex
   align-items: center

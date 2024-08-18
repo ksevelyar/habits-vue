@@ -46,15 +46,14 @@ const registerUser = async () => {
 }
 </script>
 
-<style>
+<style lang="sss">
 .user-registration
   display: flex
   align-items: center
   justify-content: center
   flex-direction: column
   gap: 10px
-
-  min-height: 100vh
+  flex-grow: 1
 
 .user-registration__email
   box-sizing: border-box

@@ -8,7 +8,7 @@
 import UserHeader from '@/components/UserHeader.vue'
 </script>
 
-<style>
+<style lang="sss">
 :root
   --color-1: #808080
   --color-2: #999
@@ -37,6 +37,11 @@ body
 .app
   min-height: 100vh
   width: 80ch
+  display: flex
+  flex-direction: column
+
+input, textarea, select
+  box-sizing: border-box
 
 a
   color: var(--color-1)
