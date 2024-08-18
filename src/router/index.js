@@ -6,8 +6,9 @@ const UserLogin = () => import('@/views/UserLogin.vue')
 const UserRegistration = () => import('@/views/UserRegistration.vue')
 const UserDashboard = () => import('@/views/UserDashboard.vue')
 
-const NewHabit = () => import('@/views/NewHabit.vue')
-const HabitsList = () => import('@/views/HabitsList.vue')
+const ChainNew = () => import('@/views/ChainNew.vue')
+const ChainEdit = () => import('@/views/ChainEdit.vue')
+const ChainList = () => import('@/views/ChainList.vue')
 
 const routes = [
   {
@@ -25,16 +26,20 @@ const routes = [
     name: 'UserDashboard',
     component: UserDashboard
   },
-
   {
-    path: '/habits/new',
-    name: 'NewHabit',
-    component: NewHabit
+    path: '/chains/new',
+    name: 'ChainNew',
+    component: ChainNew
   },
   {
-    path: '/habits',
-    name: 'HabitsList',
-    component: HabitsList
+    path: '/chains/:id/edit',
+    name: 'ChainEdit',
+    component: ChainEdit
+  },
+  {
+    path: '/chains',
+    name: 'ChainList',
+    component: ChainList
   },
   {
     path: '/dev/palette',

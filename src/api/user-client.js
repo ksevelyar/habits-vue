@@ -1,7 +1,7 @@
 const back = import.meta.env.VITE_BACK
 
 export default {
-  async get () {
+  async get() {
     try {
       const response = await fetch(`${back}/user`, {
         method: 'GET',
@@ -27,7 +27,7 @@ export default {
 
       if (response.status != 201) { throw data }
       return data
-    } catch(error) {
+    } catch (error) {
       return Promise.reject(error)
     }
   },
@@ -45,7 +45,7 @@ export default {
 
       if (response.status != 201) { throw data }
       return data
-    } catch(error) {
+    } catch (error) {
       return Promise.reject(error)
     }
   }

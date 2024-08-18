@@ -10,7 +10,7 @@
     .dev-palette__color.dev-palette__color-7
 </template>
 
-<style>
+<style lang="sss">
 .dev-palette
   display: flex
   justify-content: center

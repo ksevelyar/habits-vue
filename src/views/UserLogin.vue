@@ -39,15 +39,13 @@ const loginUser = async () => {
 }
 </script>
 
-<style>
+<style lang="sss">
 .user-login
   display: flex
   align-items: center
   justify-content: center
   flex-direction: column
   gap: 10px
-
-  min-height: 100vh
 
 .user-login__email
   box-sizing: border-box
