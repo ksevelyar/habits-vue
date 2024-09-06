@@ -10,7 +10,7 @@ export const useUserStore = defineStore('user', () => {
 
   async function register(userData) {
     try {
-      Object.assign(user, await userClient.login(userData))
+      Object.assign(user, await userClient.register(userData))
     } catch (error) {
       user.value = {}
       return Promise.reject(error)

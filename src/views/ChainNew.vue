@@ -41,7 +41,7 @@ const chain = reactive({
 const create = async () => {
   try {
     const createdChain = await chainStore.create({ chain: chain })
-    router.push({ path: `/chain/${createdChain.id}` })
+    router.push({ path: `/chains/${createdChain.id}/edit` })
   } catch(error) {
     console.log(error)
   }
