@@ -10,6 +10,8 @@ const ChainNew = () => import('@/views/ChainNew.vue')
 const ChainEdit = () => import('@/views/ChainEdit.vue')
 const ChainList = () => import('@/views/ChainList.vue')
 
+const MetricsForm = () => import('@/views/MetricsForm.vue')
+
 const routes = [
   {
     path: '/login',
@@ -40,6 +42,11 @@ const routes = [
     path: '/chains',
     name: 'ChainList',
     component: ChainList
+  },
+  {
+    path: '/metrics',
+    name: 'MetricsForm',
+    component: MetricsForm
   },
   {
     path: '/dev/palette',

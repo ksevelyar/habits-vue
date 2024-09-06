@@ -6,13 +6,11 @@ module.exports = {
     'vue/setup-compiler-macros': true
   },
   extends: [
-    'eslint:recommended',
     'plugin:vue/vue3-recommended',
+    'eslint:recommended',
   ],
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module'
-  },
+  parser: 'vue-eslint-parser',
+  plugins: ['vue'],
   rules: {
     // handle <script setup>
     'no-unused-vars': 'off',

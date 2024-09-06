@@ -1,7 +1,7 @@
 <template lang="pug">
-  UserHeader
+UserHeader
 
-  router-view
+router-view
 </template>
 
 <script setup>
