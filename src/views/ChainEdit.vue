@@ -21,7 +21,7 @@ form.chain-new(@submit.prevent='update')
     placeholder="description"
   )
 
-  button.chain-new__submit(type="submit") Add
+  button.chain-new__submit(type="submit") Save
 </template>
 
 <script setup>

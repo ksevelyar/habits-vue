@@ -1,6 +1,6 @@
 <template lang="pug">
 form.metrics-form
-  label {{ metric.chain }}
+  label.metrics-form__label {{ metric.chain }}
   input.metrics-form__value(
     placeholder="value"
     v-model="metricData.value"
@@ -31,3 +31,30 @@ const update = async () => {
   }
 }
 </script>
+
+<style lang="sss">
+.metrics-form
+  display: flex
+  align-items: center
+  justify-content: center
+  gap: 10px
+
+.metrics-form__name
+  width: 200px
+
+.metrics-form__type
+  width: 200px
+
+.metrics-form__description
+  width: 200px
+
+.metrics-form__submit
+  width: 200px
+
+.metrics-form__active
+  width: 200px
+
+
+.metrics-form__label
+  min-width: 90px
+</style>
