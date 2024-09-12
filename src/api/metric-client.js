@@ -15,6 +15,19 @@ export default {
     }
   },
 
+  async history() {
+    try {
+      const response = await fetch(`${back}/metrics_history`, {
+        method: 'GET',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' }
+      })
+      return response.json()
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  },
+
   async show(id) {
     try {
       const response = await fetch(`${back}/metrics/${id}`, {

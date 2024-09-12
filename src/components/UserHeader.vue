@@ -2,7 +2,7 @@
 .user-header
   router-link.user-header__item(:to="{ name: 'UserDashboard' }") Dashboard
   router-link.user-header__item(:to="{ name: 'ChainList' }") Chains
-  router-link.user-header__item(:to="{ name: 'MetricsForm' }") Metrics
+  router-link.user-header__item(:to="{ name: 'MetricsList' }") Metrics
 </template>
 
 <style lang="sss">

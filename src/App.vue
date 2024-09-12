@@ -39,6 +39,7 @@ body
   width: 80ch
   display: flex
   flex-direction: column
+  gap: 10px
 
 input, textarea, select
   box-sizing: border-box
