@@ -3,7 +3,7 @@ form.metrics-form
   label.metrics-form__label {{ metric.chain }}
   input.metrics-form__value(
     placeholder="value"
-    v-model="metricData.value"
+    v-model="metric.value"
     @input="update"
   )
 </template>
@@ -12,20 +12,11 @@ form.metrics-form
 import { reactive } from 'vue'
 import metricClient from '@/api/metric-client'
 
-const props = defineProps({
-  metric: {
-    type: Object,
-    default: () => {},
-    date: ''
-  },
-  date: { type: String, default: '' }
-})
-
-const metricData = { ...props.metric, date: props.date }
+const metric = defineModel()
 
 const update = async () => {
   try {
-    await metricClient.upsert({ metric: metricData })
+    await metricClient.upsert({ metric })
   } catch(error) {
     console.log(error)
   }
@@ -53,7 +44,6 @@ const update = async () => {
 
 .metrics-form__active
   width: 200px
-
 
 .metrics-form__label
   min-width: 90px
