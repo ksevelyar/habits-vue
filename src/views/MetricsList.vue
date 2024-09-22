@@ -36,8 +36,6 @@ const getHistory = async () => {
 
 const historyValue = (metrics, chain) => metrics[chain.id]?.value
 
-const loadMetric = metric => console.log(metric)
-
 const [date,] = new Date().toISOString().split('T')
 getForm(date)
 getHistory()
