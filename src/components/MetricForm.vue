@@ -16,7 +16,7 @@ const metric = defineModel()
 
 const update = async () => {
   try {
-    await metricClient.upsert({ metric })
+    await metricClient.upsert({ metric: metric.value })
   } catch(error) {
     console.log(error)
   }
