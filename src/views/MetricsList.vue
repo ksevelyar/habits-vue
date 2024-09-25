@@ -11,7 +11,7 @@ table.metrics-history
 
 .metrics-form
   .metrics-form__date {{ formDate }}
-  MetricInput(v-for="(metric, ind) in metrics" v-model="metrics[ind]" :date="formDate" @input="getHistory()")
+  MetricInput(v-for="(metric, ind) in metrics" v-model="metrics[ind]" :date="formDate" @updated="getHistory()")
 </template>
 
 <script setup>

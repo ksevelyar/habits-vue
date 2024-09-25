@@ -13,10 +13,12 @@ import { reactive } from 'vue'
 import metricClient from '@/api/metric-client'
 
 const metric = defineModel()
+const emit = defineEmits(['updated'])
 
 const update = async () => {
   try {
     await metricClient.upsert({ metric: metric.value })
+    emit('updated')
   } catch(error) {
     console.log(error)
   }
