@@ -1,17 +1,24 @@
 <template lang="pug">
-table.metrics-history
+table.metrics-history(v-for="metricsHistory in sprints")
+    tr
+      td.metrics-history__head.metrics-history__cell
+      td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metric.chain }}
+
+    tr
+      td.metrics-history__head.metrics-history__cell total
+      td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metricsHistory.total[metric.chain_id] }}
+
+    tr.metrics-history__report(v-for="(metrics, date) in metricsHistory.week" @click="getForm(date)")
+      td.metrics-history__cell {{ date }}
+      td.metrics-history__cell(v-for="chain in chains")
+        | {{ historyValue(metrics, chain) }}
+
+table.metrics-form
   tr
-    td.metrics-history__head.metrics-history__cell date
-    td.metrics-history__head.metrics-history__cell(v-for="chain in chainsHistory") {{ chain.name }}
+    td.metrics-history__head.metrics-history__cell {{ formDate }}
+    td.metrics-history__head.metrics-history__cell(v-for="(metric, ind) in metrics") 
+      MetricInput(v-model="metrics[ind]" :date="formDate" @updated="getHistory()")
 
-  tr.metrics-history__report(v-for="(metrics, date) in metricsHistory" @click="getForm(date)")
-    td.metrics-history__cell {{ date }}
-    td.metrics-history__cell(v-for="chain in chainsHistory")
-      | {{ historyValue(metrics, chain) }}
-
-.metrics-form
-  .metrics-form__date {{ formDate }}
-  MetricInput(v-for="(metric, ind) in metrics" v-model="metrics[ind]" :date="formDate" @updated="getHistory()")
 </template>
 
 <script setup>
@@ -21,8 +28,8 @@ import router from '@/router'
 import MetricInput from '@/components/MetricInput.vue'
 
 const metrics = ref([])
-const metricsHistory = ref([])
-const chainsHistory = ref([])
+const sprints = ref([])
+const chains = ref([])
 const formDate = ref(new Date().toISOString().split('T')[0])
 
 const getForm = async (date) => {
@@ -31,10 +38,10 @@ const getForm = async (date) => {
 }
 
 const getHistory = async () => {
-  const {metrics, chains} = (await metricClient.history())
+  const history = (await metricClient.history())
 
-  metricsHistory.value = metrics
-  chainsHistory.value = chains
+  sprints.value = history.sprints
+  chains.value = history.chains
 }
 
 const historyValue = (metrics, chain) => metrics[chain.id]?.value || '|'
@@ -50,14 +57,12 @@ getHistory()
 
 .metrics-history__report
   cursor: pointer
+  padding-bottom: 50px
 
-.metrics-form
-  margin-top: 100px
-  display: flex
-  flex-direction: column
-  align-items: center
+.metrics-history
+  margin-bottom: 50px
 
 .metrics-history__cell
   padding: 4px
-
+  width: 80px
 </style>
