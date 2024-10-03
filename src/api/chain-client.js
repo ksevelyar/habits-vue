@@ -61,5 +61,18 @@ export default {
     } catch (error) {
       return Promise.reject(error)
     }
+  },
+
+  async order(chainID1, chainID2) {
+    try {
+      await fetch(`${back}/chains/order`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ chain_id_1: chainID1, chain_id_2: chainID2 }),
+      })
+    } catch (error) {
+      return Promise.reject(error)
+    }
   }
 }
