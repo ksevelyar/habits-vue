@@ -1,13 +1,13 @@
 <template lang="pug">
   .chain-list
     .chain-list__item(
-      v-for="(chain, index) in chains"
+      v-for="chain in orderedChains"
       :key="chain.id"
 
       draggable="true"
-      @dragstart="dragStart(index)"
+      @dragstart="dragStart(chain.id)"
       @dragover.prevent
-      @drop="drop(index)"
+      @drop="drop(chain.id)"
     )
       router-link(:to="{ name: 'ChainEdit', params: {id: chain.id }}") {{ chain.name }}
 
@@ -15,7 +15,7 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, computed } from 'vue'
 
 import chainClient from '@/api/chain-client'
 
@@ -27,18 +27,24 @@ const getList = async () => {
 
 getList()
 
-
-let draggedIndex = null
-
-const dragStart = (index) => {
-  draggedIndex = index
+let draggedOrder = null
+const dragStart = (order) => {
+  draggedOrder = order
 }
 
-const drop = (index) => {
-  const draggedItem = chains.value[draggedIndex]
-  chains.value.splice(draggedIndex, 1) // Remove the item from its original position
-  chains.value.splice(index, 0, draggedItem) // Insert the item at the new position
+const drop = (droppedOrder) => {
+  const draggedChain = chains.value.find(chain => chain.id === draggedOrder)
+  const droppedChain = chains.value.find(chain => chain.id === droppedOrder)
+
+  const tempOrder = draggedChain.order
+  draggedChain.order = droppedChain.order
+  droppedChain.order = tempOrder
+  chainClient.order(draggedChain.id, droppedChain.id)
 }
+
+const orderedChains = computed(() => {
+  return [...chains.value].sort((a, b) => a.order - b.order)
+})
 </script>
 
 <style lang="sss">

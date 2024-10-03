@@ -9,7 +9,7 @@ input.metric-input__value(
 import { reactive } from 'vue'
 import metricClient from '@/api/metric-client'
 
-const metric = defineModel()
+const metric = defineModel({type: Object})
 const emit = defineEmits(['updated'])
 
 const update = async () => {
@@ -30,7 +30,7 @@ const update = async () => {
 
 .metric-input__value
   width: 6ch
-  background: #E3E3E3
+  background: #e3e3e3
   border-radius: 4px
   border: 1px solid rgb(193, 193, 193)
   outline: none
