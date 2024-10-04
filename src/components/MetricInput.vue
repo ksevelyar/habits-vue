@@ -29,12 +29,13 @@ const update = async () => {
   margin: 10px
 
 .metric-input__value
-  width: 6ch
-  background: #e3e3e3
-  border-radius: 4px
-  border: 1px solid rgb(193, 193, 193)
+  width: 100%
+  border-radius: 0
+  border: 0
   outline: none
   font-size: 1em
+  padding: 0
+  background: none
 
 .metric-input__label
   min-width: 90px

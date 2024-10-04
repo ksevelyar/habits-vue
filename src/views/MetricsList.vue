@@ -15,8 +15,8 @@ table.metrics-history(v-for="metricsHistory in sprints")
 
 table.metrics-form
   tr
-    td.metrics-history__head.metrics-history__cell {{ formDate }}
-    td.metrics-history__head.metrics-history__cell(v-for="(metric, ind) in metrics") 
+    td.metrics-history__cell {{ formDate }}
+    td.metrics-history__input.metrics-history__cell(v-for="(metric, ind) in metrics")
       MetricInput(v-model="metrics[ind]" :date="formDate" @updated="getHistory()")
 
 </template>
@@ -55,6 +55,11 @@ getHistory()
   text-align: left
   color: var(--color-1)
 
+.metrics-history__input
+  background: #e3e3e3
+  border-radius: 4px
+  border: 1px solid rgb(193, 193, 193)
+
 .metrics-history__report
   cursor: pointer
   padding-bottom: 50px
@@ -63,6 +68,6 @@ getHistory()
   margin-bottom: 50px
 
 .metrics-history__cell
-  padding: 4px
+  padding: 2px 4px
   width: 80px
 </style>
