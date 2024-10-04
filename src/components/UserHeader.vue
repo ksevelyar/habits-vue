@@ -13,5 +13,6 @@
   box-sizing: border-box
   position: sticky
   top: 0
-  height: 10vh
+  height: 80px
+  padding: 0 10px
 </style>

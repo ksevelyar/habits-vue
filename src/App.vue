@@ -36,7 +36,7 @@ body
 
 .app
   min-height: 100vh
-  width: 80ch
+  min-width: 80ch
   display: flex
   flex-direction: column
   gap: 10px
