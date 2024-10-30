@@ -3,7 +3,7 @@ const back = import.meta.env.VITE_BACK
 export default {
   async get() {
     try {
-      const response = await fetch(`${back}/user`, {
+      const response = await fetch(`${back}/sessions`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' }

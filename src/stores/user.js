@@ -8,11 +8,18 @@ export const useUserStore = defineStore('user', () => {
     email: null
   })
 
+  async function get() {
+    try {
+      Object.assign(user, await userClient.get())
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  }
+
   async function register(userData) {
     try {
       Object.assign(user, await userClient.register(userData))
     } catch (error) {
-      user.value = {}
       return Promise.reject(error)
     }
   }
@@ -27,6 +34,7 @@ export const useUserStore = defineStore('user', () => {
 
   return {
     user,
+    get,
     register,
     login
   }

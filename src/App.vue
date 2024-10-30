@@ -6,6 +6,20 @@ router-view
 
 <script setup>
 import UserHeader from '@/components/UserHeader.vue'
+
+import { useUserStore } from '@/stores/user'
+const user = useUserStore()
+import router from '@/router'
+
+const fetchUser = async () => {
+  try {
+    await user.get()
+  } catch(error) {
+    router.push({ path: '/login' })
+  }
+}
+
+fetchUser()
 </script>
 
 <style lang="sss">
