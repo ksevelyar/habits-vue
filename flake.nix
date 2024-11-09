@@ -19,5 +19,24 @@
           export VITE_BACK=http://habits.lcl:5000
         '';
       };
+
+      packages.default = pkgs.buildNpmPackage {
+        name = "habits-vue";
+
+        buildInputs = with pkgs; [
+          nodejs_20
+        ];
+
+        src = self;
+
+        npmDepsHash = "sha256-Nvb6TkkCiOA68G27mq549hKlEz4mWBuzVia8dpMKmwI=";
+
+        npmBuild = "npm run build";
+
+        installPhase = ''
+          mkdir $out
+          cp -r dist/* $out/
+        '';
+      };
     });
 }
