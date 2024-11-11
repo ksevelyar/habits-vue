@@ -31,6 +31,7 @@
 
         npmDepsHash = "sha256-Nvb6TkkCiOA68G27mq549hKlEz4mWBuzVia8dpMKmwI=";
 
+        VITE_BACK = "https://api.habits.rusty-cluster.net";
         npmBuild = "npm run build";
 
         installPhase = ''
