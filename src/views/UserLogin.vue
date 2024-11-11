@@ -25,8 +25,8 @@ import router from '@/router'
 const user = useUserStore()
 
 const userForm = reactive({
-  email: 'ksevelyar@gmail.com',
-  password: 'password@123456',
+  email: '',
+  password: '',
 })
 
 const loginUser = async () => {
