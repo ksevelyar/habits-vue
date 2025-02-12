@@ -1,7 +1,7 @@
 <template lang="pug">
 input.metric-input__value(
   v-model="metric.value"
-  @input="update"
+  @input="debounceUpdate"
 )
 </template>
 
@@ -11,6 +11,14 @@ import metricClient from '@/api/metric-client'
 
 const metric = defineModel({type: Object})
 const emit = defineEmits(['updated'])
+
+let debounceTimer = null
+const debounceUpdate = () => {
+  clearTimeout(debounceTimer)
+
+  const debounceDelay = 300
+  debounceTimer = setTimeout(update, debounceDelay)
+}
 
 const update = async () => {
   try {
