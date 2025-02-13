@@ -5,6 +5,10 @@ form.chain-new(@submit.prevent='update')
     input(type="checkbox" v-model="chain.active")
     label(for="checkbox") {{ chain.active }}
 
+  select.chain-new__aggregate(v-model="chain.aggregate")
+    option sum
+    option avg
+
   select.chain-new__type(v-model="chain.type")
     option integer
     option float
@@ -14,6 +18,11 @@ form.chain-new(@submit.prevent='update')
     v-model.trim="chain.name"
     placeholder="name"
     required
+  )
+
+  input.chain-order(
+    v-model.trim="chain.order"
+    placeholder="name"
   )
 
   textarea.chain-new__description(
@@ -38,6 +47,7 @@ const chain = reactive({
   type: null,
   email: null,
   password: null,
+  order: null,
 })
 
 const update = async () => {
@@ -72,6 +82,9 @@ get()
   flex-grow: 1
 
 .chain-new__name
+  width: 200px
+
+.chain-new__aggregate
   width: 200px
 
 .chain-new__type
