@@ -69,5 +69,5 @@ getHistory()
 
 .metrics-history__cell
   padding: 2px 4px
-  width: 80px
+  width: 50px
 </style>

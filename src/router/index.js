@@ -10,6 +10,10 @@ const ChainNew = () => import('@/views/ChainNew.vue')
 const ChainEdit = () => import('@/views/ChainEdit.vue')
 const ChainList = () => import('@/views/ChainList.vue')
 
+const TaskNew = () => import('@/views/TaskNew.vue')
+const TaskEdit = () => import('@/views/TaskEdit.vue')
+const TaskList = () => import('@/views/TaskList.vue')
+
 const MetricsList = () => import('@/views/MetricsList.vue')
 
 const routes = [
@@ -42,6 +46,21 @@ const routes = [
     path: '/chains',
     name: 'ChainList',
     component: ChainList
+  },
+  {
+    path: '/tasks/new',
+    name: 'TaskNew',
+    component: TaskNew
+  },
+  {
+    path: '/tasks/:id/edit',
+    name: 'TaskEdit',
+    component: TaskEdit
+  },
+  {
+    path: '/tasks',
+    name: 'TaskList',
+    component: TaskList
   },
   {
     path: '/metrics',
