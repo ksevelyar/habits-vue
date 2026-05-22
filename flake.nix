@@ -1,6 +1,6 @@
 {
   description = "habits-vue";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
 
   outputs = {
     self,
@@ -12,11 +12,11 @@
     in {
       devShell = pkgs.mkShell {
         buildInputs = [
-          pkgs.nodejs_20
+          pkgs.nodejs_24
         ];
 
         shellHook = ''
-          export VITE_BACK=http://habits.lcl:5000
+          export VITE_BACK=http://habits.lcl:3003
         '';
       };
 

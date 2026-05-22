@@ -31,7 +31,7 @@ const userForm = reactive({
 
 const loginUser = async () => {
   try {
-    await user.login({ user: userForm })
+    await user.login(userForm)
     router.push({ path: '/' })
   } catch(error) {
     console.log(error)

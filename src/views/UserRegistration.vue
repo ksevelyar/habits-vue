@@ -7,12 +7,6 @@ form.user-registration(@submit.prevent='registerUser')
     required
   )
 
-  input.user-registration__handle(
-    v-model.trim='userForm.handle'
-    placeholder="handle"
-    required
-  )
-
   input.user-registration__password(
     v-model.trim='userForm.password'
     placeholder="password"
@@ -32,13 +26,12 @@ const user = useUserStore()
 
 const userForm = reactive({
   email: '',
-  handle: '',
   password: '',
 })
 
 const registerUser = async () => {
   try {
-    await user.register({ user: userForm })
+    await user.register(userForm)
     router.push({ path: '/' })
   } catch(error) {
     console.log(error)
@@ -56,10 +49,6 @@ const registerUser = async () => {
   flex-grow: 1
 
 .user-registration__email
-  box-sizing: border-box
-  width: 200px
-
-.user-registration__handle
   box-sizing: border-box
   width: 200px
 

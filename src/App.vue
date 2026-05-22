@@ -15,7 +15,8 @@ const fetchUser = async () => {
   try {
     await user.get()
   } catch(error) {
-    router.push({ path: '/login' })
+    // FIXME
+    // router.push({ path: '/login' })
   }
 }
 
