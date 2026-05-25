@@ -36,7 +36,7 @@ const task = reactive({
 
 const update = async () => {
   try {
-    await taskClient.update({ task })
+    await taskClient.update(task)
     router.push({ path: '/tasks/' })
   } catch(error) {
     console.log(error)

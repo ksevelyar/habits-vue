@@ -20,9 +20,9 @@ form.chain-new(@submit.prevent='update')
     required
   )
 
-  input.chain-order(
-    v-model.trim="chain.order"
-    placeholder="name"
+  input.chain-new__order(
+    v-model.number.trim="chain.order"
+    placeholder="order"
   )
 
   textarea.chain-new__description(
@@ -43,6 +43,7 @@ const route = useRoute()
 
 const chain = reactive({
   id: null,
+  aggregate: null,
   active: null,
   type: null,
   email: null,
@@ -52,7 +53,7 @@ const chain = reactive({
 
 const update = async () => {
   try {
-    await chainClient.update({ chain })
+    await chainClient.update(chain)
     router.push({ path: '/chains/' })
   } catch(error) {
     console.log(error)

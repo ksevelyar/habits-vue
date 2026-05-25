@@ -22,7 +22,7 @@ const debounceUpdate = () => {
 
 const update = async () => {
   try {
-    await metricClient.upsert({ metric: metric.value })
+    await metricClient.upsert(metric.value)
     emit('updated')
   } catch(error) {
     console.log(error)

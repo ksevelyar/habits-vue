@@ -1,17 +1,17 @@
 <template lang="pug">
 table.metrics-history(v-for="metricsHistory in sprints")
-    tr
-      td.metrics-history__head.metrics-history__cell
-      td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metric.chain }}
+  tr
+    td.metrics-history__head.metrics-history__cell
+    td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metric.chain }}
 
-    tr
-      td.metrics-history__head.metrics-history__cell total
-      td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metricsHistory.total[metric.chain_id] }}
+  tr
+    td.metrics-history__head.metrics-history__cell total
+    td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metricsHistory.total[metric.chain_id] }}
 
-    tr.metrics-history__report(v-for="(metrics, date) in metricsHistory.week" @click="getForm(date)")
-      td.metrics-history__cell {{ date }}
-      td.metrics-history__cell(v-for="chain in chains")
-        | {{ historyValue(metrics, chain) }}
+  tr.metrics-history__report(v-for="(metrics, date) in metricsHistory.week" @click="getForm(date)")
+    td.metrics-history__cell {{ date }}
+    td.metrics-history__cell(v-for="chain in chains")
+      | {{ historyValue(metrics, chain) }}
 
 table.metrics-form
   tr

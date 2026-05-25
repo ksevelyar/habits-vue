@@ -16,6 +16,10 @@ form.chain-new(@submit.prevent='create')
     required
   )
 
+  select.chain-new__aggregate(v-model="chain.aggregate")
+    option sum
+    option avg
+
   textarea.chain-new__description(
     v-model.trim="chain.description"
     placeholder="description"
@@ -33,6 +37,7 @@ const chainStore = useChainStore()
 
 const chain = reactive({
   active: true,
+  aggregate: 'sum',
   type: 'integer',
   email: 'ksevelyar@gmail.com',
   password: 'password@123456',
@@ -40,7 +45,7 @@ const chain = reactive({
 
 const create = async () => {
   try {
-    const createdChain = await chainStore.create({ chain: chain })
+    const createdChain = await chainStore.create(chain)
     router.push({ path: `/chains/${createdChain.id}/edit` })
   } catch(error) {
     console.log(error)

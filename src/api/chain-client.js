@@ -47,7 +47,7 @@ export default {
 
   async update(chain) {
     try {
-      const response = await fetch(`${back}/chains/${chain.chain.id}`, {
+      const response = await fetch(`${back}/chains/${chain.id}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
