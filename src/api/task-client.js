@@ -47,7 +47,7 @@ export default {
 
   async update(task) {
     try {
-      const response = await fetch(`${back}/tasks/${task.task.id}`, {
+      const response = await fetch(`${back}/tasks/${task.id}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
