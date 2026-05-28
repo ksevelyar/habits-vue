@@ -75,6 +75,9 @@ onUnmounted(() => {
 .user-dashboard
   display: flex
   flex-direction: column
+  height: calc(100vh - 90px)
+  align-items: center
+  justify-content: center
 
 .user-dashboard__event
   text-align: center
