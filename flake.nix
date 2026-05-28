@@ -14,10 +14,7 @@
         buildInputs = [
           pkgs.nodejs_24
         ];
-
-        shellHook = ''
-          export VITE_BACK=http://habits.lcl:3003
-        '';
+        VITE_BACK="http://habits.lcl:3003";
       };
 
       packages.default = pkgs.buildNpmPackage {
