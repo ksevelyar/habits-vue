@@ -14,6 +14,8 @@ const TaskNew = () => import('@/views/TaskNew.vue')
 const TaskEdit = () => import('@/views/TaskEdit.vue')
 const TaskList = () => import('@/views/TaskList.vue')
 
+const DeviceNew = () => import('@/views/DeviceNew.vue')
+
 const MetricsList = () => import('@/views/MetricsList.vue')
 
 const routes = [
@@ -66,6 +68,11 @@ const routes = [
     path: '/metrics',
     name: 'MetricsList',
     component: MetricsList
+  },
+  {
+    path: '/devices/new',
+    name: 'DeviceNew',
+    component: DeviceNew
   },
   {
     path: '/dev/palette',
