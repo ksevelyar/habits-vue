@@ -8,14 +8,15 @@
 import { onMounted, onUnmounted, ref } from 'vue'
 
 const events = ref([])
-
 let ws = null
 let reconnectTimer = null
 let manuallyClosed = false
-const wsDomain = (new URL(import.meta.env.VITE_BACK)).host
 
 function connect() {
-  ws = new WebSocket(`ws://${wsDomain}/websocket/notifications`)
+  const backUrl = new URL(import.meta.env.VITE_BACK)
+  const wsProtocol = backUrl.protocol === 'https:' ? 'wss:' : 'ws:'
+  const wsEndpoint = `${wsProtocol}//${backUrl.host}/websocket/notifications`
+  ws = new WebSocket(wsEndpoint)
 
   ws.onopen = handleOpen
   ws.onmessage = handleMessage
@@ -25,7 +26,7 @@ function connect() {
 
 function reconnect() {
   clearTimeout(reconnectTimer)
-  reconnectTimer = setTimeout(connect, 20000)
+  reconnectTimer = setTimeout(connect, 5000)
 }
 
 function handleOpen(event) {
