@@ -1,6 +1,6 @@
 {
   description = "habits-vue";
-  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
+  inputs.nixpkgs.url = "github:nixos/nixpkgs/nixos-26.05";
 
   outputs = {
     self,
@@ -21,7 +21,7 @@
         name = "habits-vue";
 
         buildInputs = with pkgs; [
-          nodejs_20
+          nodejs_24
         ];
 
         src = self;
