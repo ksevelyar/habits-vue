@@ -7,10 +7,22 @@ form.user-registration(@submit.prevent='registerUser')
     required
   )
 
+  input.user-registration__handle(
+    v-model.trim='userForm.handle'
+    placeholder="handle"
+    required
+  )
+
   input.user-registration__password(
     v-model.trim='userForm.password'
     placeholder="password"
     type="password"
+    required
+  )
+
+  input.user-registration__timezone(
+    v-model.trim='userForm.timezone'
+    placeholder="Europe/Barcelona"
     required
   )
 
@@ -26,7 +38,9 @@ const user = useUserStore()
 
 const userForm = reactive({
   email: '',
+  handle: '',
   password: '',
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
 })
 
 const registerUser = async () => {
