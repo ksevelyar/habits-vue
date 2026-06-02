@@ -19,6 +19,7 @@ table.metrics-form
     td.metrics-history__input.metrics-history__cell(v-for="(metric, ind) in metrics")
       MetricInput(v-model="metrics[ind]" :date="formDate" @updated="getHistory()")
 
+UserEvents
 </template>
 
 <script setup>
@@ -26,6 +27,7 @@ import { ref } from 'vue'
 import metricClient from '@/api/metric-client'
 import router from '@/router'
 import MetricInput from '@/components/MetricInput.vue'
+import UserEvents from '@/components/UserEvents.vue'
 
 const metrics = ref([])
 const sprints = ref([])
