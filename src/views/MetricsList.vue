@@ -6,7 +6,8 @@ table.metrics-history(v-for="metricsHistory in sprints")
 
   tr
     td.metrics-history__head.metrics-history__cell total
-    td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metricsHistory.total[metric.chain_id] }}
+    td.metrics-history__head.metrics-history__cell(v-for="metric in metrics")
+      | {{ chainTypeById(metric.chain_id) === 'time' ? formatMinutes(metricsHistory.total[metric.chain_id]) : metricsHistory.total[metric.chain_id] }}
 
   tr.metrics-history__report(v-for="(metrics, date) in metricsHistory.week" @click="getForm(date)")
     td.metrics-history__cell {{ date }}
@@ -46,7 +47,20 @@ const getHistory = async () => {
   chains.value = history.chains
 }
 
-const historyValue = (metrics, chain) => metrics[chain.id]?.value || '|'
+const formatMinutes = (minutes) => {
+  const hours = String(Math.floor(minutes / 60)).padStart(2, '0')
+  const mins = String(minutes % 60).padStart(2, '0')
+  return `${hours}:${mins}`
+}
+
+const historyValue = (metrics, chain) => {
+  const value = metrics[chain.id]?.value
+  if (!value) return '|'
+  if (chain.type === 'time') return formatMinutes(value)
+  return value
+}
+
+const chainTypeById = (chainId) => chains.value.find(c => c.id === chainId)?.type
 
 getForm(formDate.value)
 getHistory()

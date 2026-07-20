@@ -13,6 +13,7 @@ form.chain-new(@submit.prevent='update')
     option integer
     option float
     option boolean
+    option time
 
   input.chain-new__name(
     v-model.trim="chain.name"
