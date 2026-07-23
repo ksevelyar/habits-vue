@@ -5,9 +5,11 @@ table.metrics-history(v-for="metricsHistory in sprints")
     td.metrics-history__head.metrics-history__cell(v-for="metric in metrics") {{ metric.chain }}
 
   tr
-    td.metrics-history__head.metrics-history__cell total
+    td.metrics-history__head.metrics-history__cell.metrics-history__copy(
+      @click.stop="copyTotals(metricsHistory.total)"
+    ) total
     td.metrics-history__head.metrics-history__cell(v-for="metric in metrics")
-      | {{ chainTypeById(metric.chain_id) === 'time' ? formatMinutes(metricsHistory.total[metric.chain_id]) : metricsHistory.total[metric.chain_id] }}
+      | {{ formatValue(chains.find(chain => chain.id === metric.chain_id), metricsHistory.total[metric.chain_id]) }}
 
   tr.metrics-history__report(v-for="(metrics, date) in metricsHistory.week" @click="getForm(date)")
     td.metrics-history__cell {{ date }}
@@ -35,6 +37,37 @@ const sprints = ref([])
 const chains = ref([])
 const formDate = ref(new Date().toISOString().split('T')[0])
 
+const emojiMap = {
+  rest: '🏖️',
+  work: '💼',
+  pet: '🚀',
+  drill: '🥼',
+  activity: '🏃',
+  workout: '🏋️‍♂️'
+}
+
+const displayOrder = ['rest', 'work', 'pet', 'drill', 'activity', 'workout']
+
+const formatValue = (chain, value) => chain.type === 'time' ? formatMinutes(value) : value
+
+const copyTotals = (sprintTotal) => {
+  const { header, separator, values } = displayOrder.reduce((accumulator, word) => {
+    const chain = chains.value.find(chain => chain.name === emojiMap[word])
+
+    accumulator.header.push(word)
+    accumulator.separator.push('---')
+    accumulator.values.push(String(formatValue(chain, sprintTotal[chain.id])))
+
+    return accumulator
+  }, { header: [], separator: [], values: [] })
+
+  navigator.clipboard.writeText([
+    `| ${header.join(' | ')} |`,
+    `| ${separator.join(' | ')} |`,
+    `| ${values.join(' | ')} |`
+  ].join('\n'))
+}
+
 const getForm = async (date) => {
   formDate.value = date
   metrics.value = (await metricClient.index(date)).map(x => ({ ...x, date }))
@@ -60,7 +93,6 @@ const historyValue = (metrics, chain) => {
   return value
 }
 
-const chainTypeById = (chainId) => chains.value.find(c => c.id === chainId)?.type
 
 getForm(formDate.value)
 getHistory()
@@ -70,6 +102,9 @@ getHistory()
 .metrics-history__head
   text-align: left
   color: var(--color-1)
+
+.metrics-history__copy
+  cursor: pointer
 
 .metrics-history__input
   background: #e3e3e3
