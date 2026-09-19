@@ -57,7 +57,7 @@ const update = async () => {
     await chainClient.update(chain)
     router.push({ path: '/chains/' })
   } catch(error) {
-    console.log(error)
+    console.error(error)
   }
 }
 
@@ -67,7 +67,7 @@ const get = async () => {
 
     Object.assign(chain, savedChain)
   } catch(error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

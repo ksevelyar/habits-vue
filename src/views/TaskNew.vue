@@ -38,7 +38,7 @@ const create = async () => {
     const createdTask = await taskStore.create(task)
     router.push({ path: `/tasks/${createdTask.id}/edit` })
   } catch(error) {
-    console.log(error)
+    console.error(error)
   }
 }
 </script>

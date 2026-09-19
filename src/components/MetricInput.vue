@@ -25,7 +25,7 @@ const update = async () => {
     await metricClient.upsert(metric.value)
     emit('updated')
   } catch(error) {
-    console.log(error)
+    console.error(error)
   }
 }
 </script>

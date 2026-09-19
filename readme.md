@@ -8,3 +8,7 @@
 nix develop
 npm run dev
 ```
+
+## Docs
+
+* [Telegram notifications](doc/telegram-notifications.md)

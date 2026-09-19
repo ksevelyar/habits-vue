@@ -49,7 +49,7 @@ const create = async () => {
     const createdChain = await chainStore.create(chain)
     router.push({ path: `/chains/${createdChain.id}/edit` })
   } catch(error) {
-    console.log(error)
+    console.error(error)
   }
 }
 </script>
