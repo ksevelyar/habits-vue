@@ -9,7 +9,7 @@ export default defineConfig({
     port: 3000
   },
   resolve: {
-    alias: { '@': path.resolve(__dirname, './src') },
+    alias: { '@': path.resolve(import.meta.dirname, './src') },
   },
   test: {
     globals: true,

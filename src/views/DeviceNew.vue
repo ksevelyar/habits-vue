@@ -32,7 +32,7 @@ async function create() {
     console.log(b)
     Object.assign(device, b)
   } catch (error) {
-    console.log(error)
+    console.error(error)
   }
 }
 

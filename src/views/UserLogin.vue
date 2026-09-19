@@ -34,7 +34,7 @@ const loginUser = async () => {
     await user.login(userForm)
     router.push({ path: '/' })
   } catch(error) {
-    console.log(error)
+    console.error(error)
   }
 }
 </script>

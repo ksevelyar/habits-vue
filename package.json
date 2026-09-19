@@ -20,9 +20,9 @@
   },
   "devDependencies": {
     "@pinia/testing": "^0.1.5",
-    "@vitejs/plugin-vue": "^5.1.2",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "@vitest/coverage-v8": "^5.0.1",
     "@vue/test-utils": "^2.4.6",
-    "c8": "^7.11.0",
     "cross-fetch": "^3.1.5",
     "eslint": "^8.57.0",
     "eslint-plugin-vue": "^9.27.0",
@@ -34,8 +34,8 @@
     "pug": "^3.0.2",
     "stylelint": "^14.6.1",
     "stylelint-config-sugarss-recommended": "^3.0.0",
-    "sugarss": "^4.0.1",
-    "vite": "^5.4.0",
-    "vitest": "^0.18.0"
+    "sugarss": "^5.0.1",
+    "vite": "^8.3.0",
+    "vitest": "^5.0.1"
   }
 }
