@@ -43,7 +43,7 @@ const emojiMap = {
   workout: '🏋️‍♂️'
 }
 
-const displayOrder = ['rest', 'work', 'pet', 'drill', 'activity', 'workout']
+const displayOrder = ['rest', 'work', 'pet', 'workout', 'activity', 'drill']
 
 const formatValue = (chain, value) => chain.type === 'time' ? formatMinutes(value) : value
 
