@@ -5,6 +5,10 @@ form.chain-new(@submit.prevent='create')
     input(type="checkbox" v-model="chain.active")
     label(for="checkbox") {{ chain.active }}
 
+  label.chain-new__show-in-charts
+    input(type="checkbox" v-model="chain.show_in_charts")
+    | Show in charts
+
   select.chain-new__type(v-model="chain.type")
     option integer
     option float
@@ -38,17 +42,16 @@ const chainStore = useChainStore()
 
 const chain = reactive({
   active: true,
+  show_in_charts: false,
   aggregate: 'sum',
   type: 'integer',
-  email: 'ksevelyar@gmail.com',
-  password: 'password@123456',
 })
 
 const create = async () => {
   try {
     const createdChain = await chainStore.create(chain)
     router.push({ path: `/chains/${createdChain.id}/edit` })
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }
@@ -76,5 +79,8 @@ const create = async () => {
   width: 200px
 
 .chain-new__active
+  width: 200px
+
+.chain-new__show-in-charts
   width: 200px
 </style>

@@ -39,7 +39,7 @@ async function create() {
 const device = reactive({
   device_id: null,
   device_name: null,
-  token: null
+  token: null,
 })
 </script>
 

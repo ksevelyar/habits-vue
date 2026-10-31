@@ -5,7 +5,8 @@ import userClient from '@/api/user-client'
 export const useUserStore = defineStore('user', () => {
   const user = reactive({
     name: null,
-    email: null
+    email: null,
+    timezone: null,
   })
 
   async function get() {
@@ -36,6 +37,6 @@ export const useUserStore = defineStore('user', () => {
     user,
     get,
     register,
-    login
+    login,
   }
 })

@@ -22,6 +22,6 @@ export const useTaskStore = defineStore('task', () => {
 
   return {
     task,
-    create
+    create,
   }
 })

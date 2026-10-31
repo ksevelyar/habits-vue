@@ -30,14 +30,14 @@ const taskStore = useTaskStore()
 const task = reactive({
   active: false,
   name: null,
-  cron: null
+  cron: null,
 })
 
 const create = async () => {
   try {
     const createdTask = await taskStore.create(task)
     router.push({ path: `/tasks/${createdTask.id}/edit` })
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }

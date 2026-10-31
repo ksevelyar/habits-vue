@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .telegram-connect
   .telegram-connect__status {{ status }}
   a.telegram-connect__button(v-if='telegram_state === "linked"' @click='disconnect') Disconnect
@@ -14,9 +14,15 @@ const error_message = ref(null)
 let timer = null
 
 const status = computed(() => {
-  if (telegram_state.value === 'error') { return error_message.value }
-  if (telegram_state.value === 'checking') { return 'Checking telegram link...' }
-  if (telegram_state.value === 'unlinked') { return 'Telegram not connected' }
+  if (telegram_state.value === 'error') {
+    return error_message.value
+  }
+  if (telegram_state.value === 'checking') {
+    return 'Checking telegram link...'
+  }
+  if (telegram_state.value === 'unlinked') {
+    return 'Telegram not connected'
+  }
   return 'Telegram connected'
 })
 

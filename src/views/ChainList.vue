@@ -30,13 +30,14 @@ const getList = async () => {
 }
 
 let draggedID = null
-const dragStart = (order) => draggedID = order
+const dragStart = (order) => (draggedID = order)
 
-const swapOrder = (draggedChain, droppedChain) => [draggedChain.order, droppedChain.order] = [droppedChain.order, draggedChain.order]
+const swapOrder = (draggedChain, droppedChain) =>
+  ([draggedChain.order, droppedChain.order] = [droppedChain.order, draggedChain.order])
 
 const drop = (droppedID) => {
-  const draggedChain = chains.value.find(chain => chain.id === draggedID)
-  const droppedChain = chains.value.find(chain => chain.id === droppedID)
+  const draggedChain = chains.value.find((chain) => chain.id === draggedID)
+  const droppedChain = chains.value.find((chain) => chain.id === droppedID)
 
   swapOrder(draggedChain, droppedChain)
   chainClient.order(draggedChain.id, droppedChain.id)

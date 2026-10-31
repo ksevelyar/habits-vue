@@ -6,9 +6,13 @@ export default {
       const response = await fetch(`${back}/chains`, {
         method: 'GET',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       })
-      return response.json()
+      const data = await response.json()
+      if (response.status !== 200) {
+        throw data
+      }
+      return data
     } catch (error) {
       return Promise.reject(error)
     }
@@ -19,9 +23,13 @@ export default {
       const response = await fetch(`${back}/chains/${id}`, {
         method: 'GET',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       })
-      return response.json()
+      const data = await response.json()
+      if (response.status !== 200) {
+        throw data
+      }
+      return data
     } catch (error) {
       return Promise.reject(error)
     }
@@ -38,7 +46,9 @@ export default {
 
       const data = await response.json()
 
-      if (response.status != 201) { throw data }
+      if (response.status !== 201) {
+        throw data
+      }
       return data
     } catch (error) {
       return Promise.reject(error)
@@ -56,7 +66,9 @@ export default {
 
       const data = await response.json()
 
-      if (response.status != 200) { throw data }
+      if (response.status !== 200) {
+        throw data
+      }
       return data
     } catch (error) {
       return Promise.reject(error)
@@ -65,14 +77,18 @@ export default {
 
   async order(chainID1, chainID2) {
     try {
-      await fetch(`${back}/chains/order`, {
+      const response = await fetch(`${back}/chains/order`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ chain_id_1: chainID1, chain_id_2: chainID2 }),
       })
+
+      if (response.status !== 200) {
+        throw await response.json()
+      }
     } catch (error) {
       return Promise.reject(error)
     }
-  }
+  },
 }

@@ -22,68 +22,68 @@ const routes = [
   {
     path: '/login',
     name: 'UserLogin',
-    component: UserLogin
+    component: UserLogin,
   },
   {
     path: '/register',
     name: 'UserRegistration',
-    component: UserRegistration
+    component: UserRegistration,
   },
   {
     path: '/',
     name: 'UserDashboard',
-    component: UserDashboard
+    component: UserDashboard,
   },
   {
     path: '/chains/new',
     name: 'ChainNew',
-    component: ChainNew
+    component: ChainNew,
   },
   {
     path: '/chains/:id/edit',
     name: 'ChainEdit',
-    component: ChainEdit
+    component: ChainEdit,
   },
   {
     path: '/chains',
     name: 'ChainList',
-    component: ChainList
+    component: ChainList,
   },
   {
     path: '/tasks/new',
     name: 'TaskNew',
-    component: TaskNew
+    component: TaskNew,
   },
   {
     path: '/tasks/:id/edit',
     name: 'TaskEdit',
-    component: TaskEdit
+    component: TaskEdit,
   },
   {
     path: '/tasks',
     name: 'TaskList',
-    component: TaskList
+    component: TaskList,
   },
   {
     path: '/metrics',
     name: 'MetricsList',
-    component: MetricsList
+    component: MetricsList,
   },
   {
     path: '/devices/new',
     name: 'DeviceNew',
-    component: DeviceNew
+    component: DeviceNew,
   },
   {
     path: '/dev/palette',
     name: 'DevPalette',
-    component: DevPalette
-  }
+    component: DevPalette,
+  },
 ]
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
-  routes
+  routes,
 })
 
 export default router

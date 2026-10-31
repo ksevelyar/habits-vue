@@ -5,6 +5,10 @@ form.chain-new(@submit.prevent='update')
     input(type="checkbox" v-model="chain.active")
     label(for="checkbox") {{ chain.active }}
 
+  label.chain-new__show-in-charts
+    input(type="checkbox" v-model="chain.show_in_charts")
+    | Show in charts
+
   select.chain-new__aggregate(v-model="chain.aggregate")
     option sum
     option avg
@@ -46,6 +50,7 @@ const chain = reactive({
   id: null,
   aggregate: null,
   active: null,
+  show_in_charts: false,
   type: null,
   email: null,
   password: null,
@@ -56,7 +61,7 @@ const update = async () => {
   try {
     await chainClient.update(chain)
     router.push({ path: '/chains/' })
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }
@@ -66,7 +71,7 @@ const get = async () => {
     const savedChain = await chainClient.get(route.params.id)
 
     Object.assign(chain, savedChain)
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }
@@ -99,5 +104,8 @@ get()
   width: 200px
 
 .chain-new__active
+  width: 200px
+
+.chain-new__show-in-charts
   width: 200px
 </style>

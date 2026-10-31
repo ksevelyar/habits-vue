@@ -9,7 +9,7 @@ input.metric-input__value(
 import { reactive } from 'vue'
 import metricClient from '@/api/metric-client'
 
-const metric = defineModel({type: Object})
+const metric = defineModel({ type: Object })
 const emit = defineEmits(['updated'])
 
 let debounceTimer = null
@@ -24,7 +24,7 @@ const update = async () => {
   try {
     await metricClient.upsert(metric.value)
     emit('updated')
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }

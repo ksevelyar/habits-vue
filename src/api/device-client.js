@@ -10,9 +10,11 @@ export default {
         body: JSON.stringify(device),
       })
 
-      const data = (await response.json())
+      const data = await response.json()
 
-      if (response.status != 201) { throw data }
+      if (response.status != 201) {
+        throw data
+      }
       return data
     } catch (error) {
       return Promise.reject(error)
