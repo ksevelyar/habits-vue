@@ -1,7 +1,7 @@
-const back = import.meta.env.VITE_BACK
+const backendBaseUrl = import.meta.env.VITE_BACK
 
 export const get_status = async () => {
-  const response = await fetch(`${back}/telegram/link`, { credentials: 'include' })
+  const response = await fetch(`${backendBaseUrl}/telegram/link`, { credentials: 'include' })
 
   if (!response.ok) {
     return Promise.reject(await response.json())
@@ -10,7 +10,10 @@ export const get_status = async () => {
 }
 
 export const create_code = async () => {
-  const response = await fetch(`${back}/telegram/link`, { method: 'POST', credentials: 'include' })
+  const response = await fetch(`${backendBaseUrl}/telegram/link`, {
+    method: 'POST',
+    credentials: 'include',
+  })
 
   if (!response.ok) {
     return Promise.reject(await response.json())
@@ -19,7 +22,7 @@ export const create_code = async () => {
 }
 
 export const remove_bot = async () => {
-  const response = await fetch(`${back}/telegram/link`, {
+  const response = await fetch(`${backendBaseUrl}/telegram/link`, {
     method: 'DELETE',
     credentials: 'include',
   })

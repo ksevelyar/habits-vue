@@ -14,13 +14,13 @@ table.metrics-history(v-for="metricsHistory in sprints")
   tr.metrics-history__report(v-for="(metrics, date) in metricsHistory.week" @click="getForm(date)")
     td.metrics-history__cell {{ date }}
     td.metrics-history__cell(v-for="chain in chains")
-      | {{ historyValue(metrics, chain) }}
+      | {{ renderMetricValue(metrics, chain) }}
 
 table.metrics-form
   tr
     td.metrics-history__cell {{ formDate }}
-    td.metrics-history__input.metrics-history__cell(v-for="(metric, ind) in metrics")
-      MetricInput(v-model="metrics[ind]" :date="formDate" @updated="getHistory()")
+    td.metrics-history__input.metrics-history__cell(v-for="(metric, index) in metrics")
+      MetricInput(v-model="metrics[index]" :date="formDate" @updated="loadHistory()")
 </template>
 
 <script setup>
@@ -74,23 +74,23 @@ const copyTotals = (sprintTotal) => {
 
 const getForm = async (date) => {
   formDate.value = date
-  metrics.value = (await metricClient.index(date)).map((x) => ({ ...x, date }))
+  metrics.value = (await metricClient.index(date)).map((metric) => ({ ...metric, date }))
 }
 
-const getHistory = async () => {
+const loadHistory = async () => {
   const history = await metricClient.history()
 
   sprints.value = history.sprints
   chains.value = history.chains
 }
 
-const formatMinutes = (minutes) => {
-  const hours = String(Math.floor(minutes / 60)).padStart(2, '0')
-  const mins = String(minutes % 60).padStart(2, '0')
-  return `${hours}:${mins}`
+const formatMinutes = (totalMinutes) => {
+  const hours = String(Math.floor(totalMinutes / 60)).padStart(2, '0')
+  const minutes = String(totalMinutes % 60).padStart(2, '0')
+  return `${hours}:${minutes}`
 }
 
-const historyValue = (metrics, chain) => {
+const renderMetricValue = (metrics, chain) => {
   const value = metrics[chain.id]?.value
   if (!value) return '|'
   if (chain.type === 'time') return formatMinutes(value)
@@ -98,7 +98,7 @@ const historyValue = (metrics, chain) => {
 }
 
 getForm(formDate.value)
-getHistory()
+loadHistory()
 </script>
 
 <style lang="sss">

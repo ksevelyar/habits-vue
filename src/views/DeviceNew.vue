@@ -28,9 +28,9 @@ import deviceClient from '@/api/device-client'
 
 async function create() {
   try {
-    const b = await deviceClient.create(device)
-    console.log(b)
-    Object.assign(device, b)
+    const createdDevice = await deviceClient.create(device)
+    console.log(createdDevice)
+    Object.assign(device, createdDevice)
   } catch (error) {
     console.error(error)
   }

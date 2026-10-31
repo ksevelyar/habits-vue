@@ -1,9 +1,9 @@
-const back = import.meta.env.VITE_BACK
+const backendBaseUrl = import.meta.env.VITE_BACK
 
 export default {
   async list() {
     try {
-      const response = await fetch(`${back}/chains`, {
+      const response = await fetch(`${backendBaseUrl}/chains`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -20,7 +20,7 @@ export default {
 
   async get(id) {
     try {
-      const response = await fetch(`${back}/chains/${id}`, {
+      const response = await fetch(`${backendBaseUrl}/chains/${id}`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -37,7 +37,7 @@ export default {
 
   async create(chain) {
     try {
-      const response = await fetch(`${back}/chains`, {
+      const response = await fetch(`${backendBaseUrl}/chains`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -57,7 +57,7 @@ export default {
 
   async update(chain) {
     try {
-      const response = await fetch(`${back}/chains/${chain.id}`, {
+      const response = await fetch(`${backendBaseUrl}/chains/${chain.id}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -77,7 +77,7 @@ export default {
 
   async order(chainID1, chainID2) {
     try {
-      const response = await fetch(`${back}/chains/order`, {
+      const response = await fetch(`${backendBaseUrl}/chains/order`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

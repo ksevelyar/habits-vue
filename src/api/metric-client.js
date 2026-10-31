@@ -1,9 +1,9 @@
-const back = import.meta.env.VITE_BACK
+const backendBaseUrl = import.meta.env.VITE_BACK
 
 export default {
   async index(date) {
     try {
-      const response = await fetch(`${back}/metrics?date=${date}`, {
+      const response = await fetch(`${backendBaseUrl}/metrics?date=${date}`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -22,7 +22,7 @@ export default {
   async charts(startDate, endDate) {
     try {
       const searchParams = new URLSearchParams({ start_date: startDate, end_date: endDate })
-      const response = await fetch(`${back}/charts?${searchParams}`, {
+      const response = await fetch(`${backendBaseUrl}/charts?${searchParams}`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -42,7 +42,7 @@ export default {
 
   async history() {
     try {
-      const response = await fetch(`${back}/metrics_history`, {
+      const response = await fetch(`${backendBaseUrl}/metrics_history`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -59,7 +59,7 @@ export default {
 
   async upsert(metric) {
     try {
-      const response = await fetch(`${back}/metrics`, {
+      const response = await fetch(`${backendBaseUrl}/metrics`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -83,7 +83,7 @@ export default {
         date: metric.date,
         chain_id: String(metric.chain_id),
       })
-      const response = await fetch(`${back}/metrics?${metricQuery}`, {
+      const response = await fetch(`${backendBaseUrl}/metrics?${metricQuery}`, {
         method: 'DELETE',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

@@ -1,9 +1,9 @@
-const back = import.meta.env.VITE_BACK
+const backendBaseUrl = import.meta.env.VITE_BACK
 
 export default {
   async list() {
     try {
-      const response = await fetch(`${back}/tasks`, {
+      const response = await fetch(`${backendBaseUrl}/tasks`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -20,7 +20,7 @@ export default {
 
   async get(id) {
     try {
-      const response = await fetch(`${back}/tasks/${id}`, {
+      const response = await fetch(`${backendBaseUrl}/tasks/${id}`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -37,7 +37,7 @@ export default {
 
   async create(task) {
     try {
-      const response = await fetch(`${back}/tasks`, {
+      const response = await fetch(`${backendBaseUrl}/tasks`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -57,7 +57,7 @@ export default {
 
   async update(task) {
     try {
-      const response = await fetch(`${back}/tasks/${task.id}`, {
+      const response = await fetch(`${backendBaseUrl}/tasks/${task.id}`, {
         method: 'PATCH',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

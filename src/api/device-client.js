@@ -1,9 +1,9 @@
-const back = import.meta.env.VITE_BACK
+const backendBaseUrl = import.meta.env.VITE_BACK
 
 export default {
   async create(device) {
     try {
-      const response = await fetch(`${back}/devices`, {
+      const response = await fetch(`${backendBaseUrl}/devices`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },

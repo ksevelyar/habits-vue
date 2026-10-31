@@ -1,9 +1,9 @@
-const back = import.meta.env.VITE_BACK
+const backendBaseUrl = import.meta.env.VITE_BACK
 
 export default {
   async get() {
     try {
-      const response = await fetch(`${back}/sessions/current`, {
+      const response = await fetch(`${backendBaseUrl}/sessions/current`, {
         method: 'GET',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -20,7 +20,7 @@ export default {
 
   async login(user) {
     try {
-      const response = await fetch(`${back}/sessions`, {
+      const response = await fetch(`${backendBaseUrl}/sessions`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
@@ -39,7 +39,7 @@ export default {
 
   async register(user) {
     try {
-      const response = await fetch(`${back}/users`, {
+      const response = await fetch(`${backendBaseUrl}/users`, {
         method: 'POST',
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
