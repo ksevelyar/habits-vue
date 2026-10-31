@@ -1,5 +1,6 @@
 ## Style
 * don't use semicolons
+* don't use ternary operators, use guard clauses
 * prefer a functional style
 * write modern js: ES2026+, es modules
 

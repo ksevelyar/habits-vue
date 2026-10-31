@@ -45,7 +45,11 @@ const emojiMap = {
 
 const displayOrder = ['rest', 'work', 'pet', 'workout', 'activity', 'drill']
 
-const formatValue = (chain, value) => (chain.type === 'time' ? formatMinutes(value) : value)
+const formatValue = (chain, value) => {
+  if (chain.type !== 'time') return value
+
+  return formatMinutes(value)
+}
 
 const copyTotals = (sprintTotal) => {
   const { header, separator, values } = displayOrder.reduce(

@@ -1,6 +1,13 @@
 <template lang="pug">
 .metric-chart
-  span.metric-chart__title {{ chain.name }}
+  .metric-chart__header
+    span.metric-chart__title {{ chain.name }}
+    span.metric-chart__summary(v-if="periodAggregate !== null")
+      span.metric-chart__aggregate(:aria-label="aggregateLabel") {{ formatAggregate(periodAggregate) }}
+      span.metric-chart__difference(
+        v-if="aggregateDifference !== null"
+        aria-label="Change from previous period"
+      ) {{ formatDifference(aggregateDifference) }}
   svg.metric-chart__svg(
     viewBox="0 0 720 300"
     role="img"
@@ -54,6 +61,7 @@ import { curveMonotoneX, line, scaleLinear, scaleUtc } from 'd3'
 
 const properties = defineProps({
   chain: { type: Object, required: true },
+  previousPoints: { type: Array, default: () => [] },
   startDate: { type: String, required: true },
   endDate: { type: String, required: true },
 })
@@ -65,6 +73,22 @@ const chartMarginRight = 24
 const chartMarginBottom = 40
 const chartMarginLeft = 56
 const chartLabel = computed(() => `${properties.chain.name} daily metrics`)
+const periodAggregate = computed(() =>
+  getPeriodAggregate(properties.chain.points, properties.chain.aggregate),
+)
+const previousPeriodAggregate = computed(() =>
+  getPeriodAggregate(properties.previousPoints, properties.chain.aggregate),
+)
+const aggregateDifference = computed(() => {
+  if (periodAggregate.value === null || previousPeriodAggregate.value === null) return null
+
+  return periodAggregate.value - previousPeriodAggregate.value
+})
+const aggregateLabel = computed(() => {
+  if (properties.chain.aggregate === 'avg') return 'Average for this period'
+
+  return 'Total for this period'
+})
 const chartPoints = computed(() =>
   properties.chain.points
     .map((point) => ({
@@ -89,9 +113,14 @@ const verticalDomain = computed(() => {
 
   const minimumValue = Math.min(...values)
   const maximumValue = Math.max(...values)
-  const valuePadding = minimumValue === maximumValue ? Math.abs(minimumValue) * 0.1 || 1 : 0
+  const valueRange = maximumValue - minimumValue
+  if (valueRange === 0) {
+    const valuePadding = Math.abs(minimumValue) * 0.01 || 1
+    return [minimumValue - valuePadding, maximumValue + valuePadding]
+  }
 
-  return [Math.min(0, minimumValue - valuePadding), Math.max(0, maximumValue + valuePadding)]
+  const valuePadding = valueRange * 0.1
+  return [minimumValue - valuePadding, maximumValue + valuePadding]
 })
 const verticalScale = computed(() =>
   scaleLinear()
@@ -100,9 +129,11 @@ const verticalScale = computed(() =>
     .range([chartHeight - chartMarginBottom, chartMarginTop]),
 )
 const horizontalTicks = computed(() => horizontalScale.value.ticks(6))
-const verticalTicks = computed(() =>
-  properties.chain.type === 'boolean' ? [0, 1] : verticalScale.value.ticks(5),
-)
+const verticalTicks = computed(() => {
+  if (properties.chain.type === 'boolean') return [0, 1]
+
+  return verticalScale.value.ticks(5)
+})
 const linePath = computed(() => {
   const chartLine = line()
     .x((point) => horizontalScale.value(point.date))
@@ -112,8 +143,30 @@ const linePath = computed(() => {
   return chartLine(chartPoints.value)
 })
 
+function getPeriodAggregate(points, aggregate) {
+  if (points.length === 0) return null
+
+  const totalValue = points.reduce((accumulatedValue, point) => accumulatedValue + point.value, 0)
+
+  if (aggregate === 'avg') return totalValue / points.length
+
+  return totalValue
+}
+
 function formatValueTick(value) {
   return String(value)
+}
+
+function formatAggregate(value) {
+  return new Intl.NumberFormat(undefined, { maximumFractionDigits: 1 }).format(value)
+}
+
+function formatDifference(value) {
+  const formattedDifference = formatAggregate(value)
+
+  if (value > 0) return `+${formattedDifference}`
+
+  return formattedDifference
 }
 
 function formatDateTick(date) {
@@ -132,10 +185,26 @@ function formatDateTick(date) {
   background: var(--color-7)
   border-radius: 4px
 
+.metric-chart__header
+  display: flex
+  align-items: baseline
+  justify-content: space-between
+  gap: 12px
+  margin-bottom: 8px
+
 .metric-chart__title
-  margin: 0 0 8px
+  margin: 0
   font-size: 1.1em
   font-weight: normal
+
+.metric-chart__summary
+  display: flex
+  flex-shrink: 0
+  gap: 8px
+  font-variant-numeric: tabular-nums
+
+.metric-chart__difference
+  opacity: 0.75
 
 .metric-chart__svg
   display: block
