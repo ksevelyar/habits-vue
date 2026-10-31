@@ -14,7 +14,7 @@ import router from '@/router'
 const fetchUser = async () => {
   try {
     await user.get()
-  } catch(error) {
+  } catch (error) {
     // FIXME
     // router.push({ path: '/login' })
   }

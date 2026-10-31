@@ -40,14 +40,14 @@ const userForm = reactive({
   email: '',
   handle: '',
   password: '',
-  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
+  timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
 })
 
 const registerUser = async () => {
   try {
     await user.register(userForm)
     router.push({ path: '/' })
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }

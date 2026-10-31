@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [vue()],
   server: {
     allowedHosts: ['habits.lcl'],
-    port: 3000
+    port: 3000,
   },
   resolve: {
     alias: { '@': path.resolve(import.meta.dirname, './src') },

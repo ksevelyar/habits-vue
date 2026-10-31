@@ -8,7 +8,7 @@ export const useChainStore = defineStore('chain', () => {
     name: null,
     active: true,
     type: null,
-    description: null
+    description: null,
   })
 
   async function create(chainData) {
@@ -23,6 +23,6 @@ export const useChainStore = defineStore('chain', () => {
 
   return {
     chain,
-    create
+    create,
   }
 })

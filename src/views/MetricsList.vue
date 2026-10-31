@@ -40,38 +40,41 @@ const emojiMap = {
   pet: '🚀',
   drill: '🥼',
   activity: '🏃',
-  workout: '🏋️‍♂️'
+  workout: '🏋️‍♂️',
 }
 
 const displayOrder = ['rest', 'work', 'pet', 'workout', 'activity', 'drill']
 
-const formatValue = (chain, value) => chain.type === 'time' ? formatMinutes(value) : value
+const formatValue = (chain, value) => (chain.type === 'time' ? formatMinutes(value) : value)
 
 const copyTotals = (sprintTotal) => {
-  const { header, separator, values } = displayOrder.reduce((accumulator, word) => {
-    const chain = chains.value.find(chain => chain.name === emojiMap[word])
+  const { header, separator, values } = displayOrder.reduce(
+    (accumulator, word) => {
+      const chain = chains.value.find((chain) => chain.name === emojiMap[word])
 
-    accumulator.header.push(word)
-    accumulator.separator.push('---')
-    accumulator.values.push(String(formatValue(chain, sprintTotal[chain.id])))
+      accumulator.header.push(word)
+      accumulator.separator.push('---')
+      accumulator.values.push(String(formatValue(chain, sprintTotal[chain.id])))
 
-    return accumulator
-  }, { header: [], separator: [], values: [] })
+      return accumulator
+    },
+    { header: [], separator: [], values: [] },
+  )
 
-  navigator.clipboard.writeText([
-    `| ${header.join(' | ')} |`,
-    `| ${separator.join(' | ')} |`,
-    `| ${values.join(' | ')} |`
-  ].join('\n'))
+  navigator.clipboard.writeText(
+    [`| ${header.join(' | ')} |`, `| ${separator.join(' | ')} |`, `| ${values.join(' | ')} |`].join(
+      '\n',
+    ),
+  )
 }
 
 const getForm = async (date) => {
   formDate.value = date
-  metrics.value = (await metricClient.index(date)).map(x => ({ ...x, date }))
+  metrics.value = (await metricClient.index(date)).map((x) => ({ ...x, date }))
 }
 
 const getHistory = async () => {
-  const history = (await metricClient.history())
+  const history = await metricClient.history()
 
   sprints.value = history.sprints
   chains.value = history.chains
@@ -89,7 +92,6 @@ const historyValue = (metrics, chain) => {
   if (chain.type === 'time') return formatMinutes(value)
   return value
 }
-
 
 getForm(formDate.value)
 getHistory()

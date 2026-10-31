@@ -6,9 +6,13 @@ export default {
       const response = await fetch(`${back}/sessions/current`, {
         method: 'GET',
         credentials: 'include',
-        headers: { 'Content-Type': 'application/json' }
+        headers: { 'Content-Type': 'application/json' },
       })
-      return response.json()
+      const data = await response.json()
+      if (response.status !== 200) {
+        throw data
+      }
+      return data
     } catch (error) {
       return Promise.reject(error)
     }
@@ -23,9 +27,10 @@ export default {
         body: JSON.stringify(user),
       })
 
+      if (response.status !== 201) {
+        throw await response.json()
+      }
       const data = (await response.json()).data
-
-      if (response.status != 201) { throw data }
       return data
     } catch (error) {
       return Promise.reject(error)
@@ -41,12 +46,13 @@ export default {
         body: JSON.stringify(user),
       })
 
+      if (response.status !== 201) {
+        throw await response.json()
+      }
       const data = (await response.json()).data
-
-      if (response.status != 201) { throw data }
       return data
     } catch (error) {
       return Promise.reject(error)
     }
-  }
+  },
 }

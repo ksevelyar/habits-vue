@@ -1,4 +1,4 @@
-<template lang='pug'>
+<template lang="pug">
 .user-header
   router-link.user-header__item(:to="{ name: 'UserDashboard' }") Dashboard
   router-link.user-header__item(:to="{ name: 'ChainList' }") Chains

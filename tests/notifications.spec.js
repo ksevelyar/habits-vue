@@ -7,7 +7,7 @@ import { create_code, get_status, remove_bot } from '@/api/telegram-client'
 vi.mock('@/api/telegram-client', () => ({
   get_status: vi.fn(),
   create_code: vi.fn(),
-  remove_bot: vi.fn()
+  remove_bot: vi.fn(),
 }))
 
 const linkUrl = 'https://t.me/habits_test_bot?start=token'

@@ -38,7 +38,7 @@ const update = async () => {
   try {
     await taskClient.update(task)
     router.push({ path: '/tasks/' })
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }
@@ -48,7 +48,7 @@ const get = async () => {
     const savedtask = await taskClient.get(route.params.id)
 
     Object.assign(task, savedtask)
-  } catch(error) {
+  } catch (error) {
     console.error(error)
   }
 }
