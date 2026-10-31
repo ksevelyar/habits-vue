@@ -65,14 +65,33 @@ export default {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(metric),
       })
-
       const data = await response.json()
 
-      if (response.status !== 200) {
+      if (!response.ok) {
         throw data
       }
 
       return data
+    } catch (error) {
+      return Promise.reject(error)
+    }
+  },
+
+  async delete(metric) {
+    try {
+      const metricQuery = new URLSearchParams({
+        date: metric.date,
+        chain_id: String(metric.chain_id),
+      })
+      const response = await fetch(`${back}/metrics?${metricQuery}`, {
+        method: 'DELETE',
+        credentials: 'include',
+        headers: { 'Content-Type': 'application/json' },
+      })
+      if (!response.ok) {
+        const error = await response.json()
+        throw error
+      }
     } catch (error) {
       return Promise.reject(error)
     }

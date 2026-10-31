@@ -20,16 +20,15 @@ export function getCalendarPeriodDateRange(
     return createMonthDateRange(selectedYear, selectedMonth)
   }
 
-  if (period === 'fourMonths') {
-    const fourMonthBucketsPerYear = 3
-    const currentBucket = Math.floor((currentMonth - 1) / 4)
-    const absoluteBucket = currentYear * fourMonthBucketsPerYear + currentBucket + periodOffset
-    const selectedYear = Math.floor(absoluteBucket / fourMonthBucketsPerYear)
-    const selectedBucket =
-      ((absoluteBucket % fourMonthBucketsPerYear) + fourMonthBucketsPerYear) %
-      fourMonthBucketsPerYear
+  if (period === 'quarter') {
+    const quartersPerYear = 4
+    const currentQuarter = Math.floor((currentMonth - 1) / 3)
+    const absoluteQuarter = currentYear * quartersPerYear + currentQuarter + periodOffset
+    const selectedYear = Math.floor(absoluteQuarter / quartersPerYear)
+    const selectedQuarter =
+      ((absoluteQuarter % quartersPerYear) + quartersPerYear) % quartersPerYear
 
-    return createMonthDateRange(selectedYear, selectedBucket * 4, 4)
+    return createMonthDateRange(selectedYear, selectedQuarter * 3, 3)
   }
 
   if (period === 'year') {

@@ -64,8 +64,8 @@ describe('UserDashboard charts', () => {
 
       expect(wrapper.text()).toContain('Pull-ups')
       expect(requestedChartRanges).toContainEqual({
-        startDate: '2026-05-01',
-        endDate: '2026-08-31',
+        startDate: '2026-04-01',
+        endDate: '2026-06-30',
       })
     })
   })
@@ -86,22 +86,59 @@ describe('UserDashboard charts', () => {
     })
   })
 
-  it('renders_prev_period', async () => {
+  it('navigates_between_available_periods', async () => {
     await runDashboardFeatureAssertions(async ({ wrapper, requestedChartRanges }) => {
       await flushPromises()
-      await wrapper.find('.user-dashboard__previous-period').trigger('click')
+
+      expect(wrapper.find('.user-dashboard__periods').text()).toBe('1 monthquartal1 year')
+      expect(wrapper.find('[aria-label="Previous period"]').text()).toBe('←')
+      expect(wrapper.find('[aria-label="Next period"]').exists()).toBe(false)
+
+      await wrapper.find('[aria-label="Previous period"]').trigger('click')
       await flushPromises()
 
-      expect(wrapper.text()).toContain('Pull-ups')
+      expect(wrapper.find('[aria-label="Next period"]').exists()).toBe(true)
       expect(requestedChartRanges).toContainEqual({
         startDate: '2026-02-01',
         endDate: '2026-02-28',
       })
+
+      await wrapper.find('[aria-label="Next period"]').trigger('click')
+      await flushPromises()
+
+      expect(wrapper.find('[aria-label="Next period"]').exists()).toBe(false)
+      expect(requestedChartRanges).toContainEqual({
+        startDate: '2026-03-01',
+        endDate: '2026-03-31',
+      })
     })
+  })
+
+  it('shows_telegram_configuration_error_after_charts', async () => {
+    await runDashboardFeatureAssertions(
+      async ({ wrapper }) => {
+        await flushPromises()
+
+        const dashboardSections = Array.from(wrapper.find('.user-dashboard').element.children)
+
+        expect(dashboardSections.map((section) => section.className)).toEqual([
+          'user-dashboard__charts',
+          'user-dashboard__notifications',
+        ])
+        expect(wrapper.find('.user-dashboard__notifications').text()).toContain('Notifications')
+        expect(wrapper.find('.user-dashboard__notifications').text()).toContain(
+          'telegram is not configured',
+        )
+      },
+      () => HttpResponse.json({ error: 'telegram is not configured' }, { status: 500 }),
+    )
   })
 })
 
-async function runDashboardFeatureAssertions(runAssertions) {
+async function runDashboardFeatureAssertions(
+  runAssertions,
+  getTelegramStatus = () => HttpResponse.json({ linked: true }),
+) {
   const requestedChartRanges = []
   server.use(
     http.get(`${backendUrl}/charts`, ({ request }) => {
@@ -113,7 +150,7 @@ async function runDashboardFeatureAssertions(runAssertions) {
 
       return HttpResponse.json(chartHistoryResponse)
     }),
-    http.get(`${backendUrl}/telegram/link`, () => HttpResponse.json({ linked: true })),
+    http.get(`${backendUrl}/telegram/link`, getTelegramStatus),
   )
 
   const pinia = createPinia()
