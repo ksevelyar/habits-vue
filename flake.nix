@@ -26,7 +26,7 @@
 
         src = self;
 
-        npmDepsHash = "sha256-UCl4GJbpp3YQNKhr2eEhpX3SiZpKIVSR9CRxxWM8J4g=";
+        npmDepsHash = "sha256-Qgkx0eJO4ydImWDT5BGFNaT2lJJCDhuxNJGIMpvGw/U=";
 
         VITE_BACK = "https://api.habits.rusty-cluster.net";
         npmBuild = "npm run build";
