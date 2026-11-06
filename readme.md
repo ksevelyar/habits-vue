@@ -9,6 +9,7 @@ nix develop
 npm run dev
 ```
 
-## Docs
-
+## Documentation
+* [Charts](doc/charts.md)
+* [Sessions](doc/sessions.md)
 * [Telegram notifications](doc/telegram-notifications.md)
