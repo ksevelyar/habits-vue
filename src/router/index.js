@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
+import { useUserStore } from '@/stores/user'
 
 const DevPalette = () => import('@/views/DevPalette.vue')
 
@@ -85,5 +86,27 @@ const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes,
 })
+
+router.beforeEach(guardProtectedRoutes)
+
+async function guardProtectedRoutes(destinationRoute) {
+  if (destinationRoute.name === 'UserLogin' || destinationRoute.name === 'UserRegistration') {
+    return true
+  }
+
+  const userStore = useUserStore()
+
+  try {
+    await userStore.get()
+    return true
+  } catch (sessionError) {
+    if (sessionError?.status === 401) {
+      return { name: 'UserLogin' }
+    }
+
+    console.error(sessionError)
+    return false
+  }
+}
 
 export default router

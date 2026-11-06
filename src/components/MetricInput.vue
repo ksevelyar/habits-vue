@@ -6,13 +6,18 @@ input.metric-input__value(
 </template>
 
 <script setup>
-import { reactive } from 'vue'
+import { onBeforeUnmount } from 'vue'
 import metricClient from '@/api/metric-client'
 
 const metric = defineModel({ type: Object })
 const emit = defineEmits(['updated'])
 
 let debounceTimer = null
+
+onBeforeUnmount(() => {
+  clearTimeout(debounceTimer)
+})
+
 const debounceUpdate = () => {
   clearTimeout(debounceTimer)
 

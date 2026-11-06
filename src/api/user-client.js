@@ -8,11 +8,14 @@ export default {
         credentials: 'include',
         headers: { 'Content-Type': 'application/json' },
       })
-      const data = await response.json()
       if (response.status !== 200) {
-        throw data
+        const sessionError = new Error(
+          `Current session request failed with status ${response.status}`,
+        )
+        sessionError.status = response.status
+        throw sessionError
       }
-      return data
+      return await response.json()
     } catch (error) {
       return Promise.reject(error)
     }
