@@ -13,6 +13,7 @@
       devShell = pkgs.mkShell {
         buildInputs = [
           pkgs.nodejs_24
+          pkgs.vue-language-server
         ];
         VITE_BACK="http://habits.lcl:3003";
       };
@@ -26,7 +27,7 @@
 
         src = self;
 
-        npmDepsHash = "sha256-Qgkx0eJO4ydImWDT5BGFNaT2lJJCDhuxNJGIMpvGw/U=";
+        npmDepsHash = "sha256-QHNsk72n4sWjyKXKVoIK7c+7SovwL+AaNPa20jxyhQY=";
 
         VITE_BACK = "https://api.habits.rusty-cluster.net";
         npmBuild = "npm run build";
