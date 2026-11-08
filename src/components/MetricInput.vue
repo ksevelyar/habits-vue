@@ -39,21 +39,24 @@ const update = async () => {
 }
 </script>
 
-<style lang="sss">
-.metric-input
-  display: flex
-  align-items: center
-  margin: 10px
+<style>
+.metric-input {
+  display: flex;
+  align-items: center;
+  margin: 10px;
+}
 
-.metric-input__value
-  width: 100%
-  border-radius: 0
-  border: 0
-  outline: none
-  font-size: 1em
-  padding: 0
-  background: none
+.metric-input__value {
+  width: 100%;
+  border-radius: 0;
+  border: 0;
+  outline: none;
+  font-size: 1em;
+  padding: 0;
+  background: none;
+}
 
-.metric-input__label
-  min-width: 90px
+.metric-input__label {
+  min-width: 90px;
+}
 </style>

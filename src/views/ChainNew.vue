@@ -57,30 +57,37 @@ const create = async () => {
 }
 </script>
 
-<style lang="sss">
-.chain-new
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-  gap: 10px
-  flex-grow: 1
+<style>
+.chain-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
 
-.chain-new__name
-  width: 200px
+.chain-new__name {
+  width: 200px;
+}
 
-.chain-new__type
-  width: 200px
+.chain-new__type {
+  width: 200px;
+}
 
-.chain-new__description
-  width: 200px
+.chain-new__description {
+  width: 200px;
+}
 
-.chain-new__submit
-  width: 200px
+.chain-new__submit {
+  width: 200px;
+}
 
-.chain-new__active
-  width: 200px
+.chain-new__active {
+  width: 200px;
+}
 
-.chain-new__show-in-charts
-  width: 200px
+.chain-new__show-in-charts {
+  width: 200px;
+}
 </style>

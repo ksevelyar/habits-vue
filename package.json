@@ -9,8 +9,8 @@
     "preview": "vite preview",
     "lint-js": "oxlint src tests",
     "lint-css": "stylelint src",
-    "format": "oxfmt src tests package.json package-lock.json vite.config.js postcss.config.js .stylelintrc.json .postcssrc.json .oxlintrc.json .oxfmtrc.json",
-    "format-check": "oxfmt --check src tests package.json package-lock.json vite.config.js postcss.config.js .stylelintrc.json .postcssrc.json .oxlintrc.json .oxfmtrc.json",
+    "format": "oxfmt src tests package.json package-lock.json vite.config.js .stylelintrc.json .oxlintrc.json .oxfmtrc.json",
+    "format-check": "oxfmt --check src tests package.json package-lock.json vite.config.js .stylelintrc.json .oxlintrc.json .oxfmtrc.json",
     "lint": "npm run lint-js && npm run lint-css && npm run format-check",
     "test": "vitest run",
     "coverage": "vitest run --coverage"
@@ -31,13 +31,10 @@
     "msw": "^2.15.0",
     "oxfmt": "^0.75.0",
     "oxlint": "^1.90.0",
-    "postcss": "^8.4.12",
     "postcss-html": "^1.3.0",
-    "postcss-syntax": "^0.36.2",
     "pug": "^3.0.2",
     "stylelint": "^14.6.1",
-    "stylelint-config-sugarss-recommended": "^3.0.0",
-    "sugarss": "^5.0.1",
+    "stylelint-config-recommended": "^9.0.0",
     "vite": "^8.3.0",
     "vitest": "^5.0.1"
   }

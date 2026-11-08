@@ -53,23 +53,27 @@ const registerUser = async () => {
 }
 </script>
 
-<style lang="sss">
-.user-registration
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-  gap: 10px
-  flex-grow: 1
+<style>
+.user-registration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
 
-.user-registration__email
-  box-sizing: border-box
-  width: 200px
+.user-registration__email {
+  box-sizing: border-box;
+  width: 200px;
+}
 
-.user-registration__password
-  box-sizing: border-box
-  width: 200px
+.user-registration__password {
+  box-sizing: border-box;
+  width: 200px;
+}
 
-.user-registration__submit
-  width: 200px
+.user-registration__submit {
+  width: 200px;
+}
 </style>

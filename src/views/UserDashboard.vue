@@ -161,67 +161,86 @@ watch(
 )
 </script>
 
-<style lang="sss">
-.user-dashboard__charts
-  display: flex
-  flex-direction: column
-  gap: 12px
-  padding: 0 12px 24px
+<style>
+.user-dashboard__charts {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 12px 24px;
+}
 
-.user-dashboard__notifications
-  display: flex
-  flex-direction: column
-  gap: 12px
-  padding: 0 12px 24px
+.user-dashboard__notifications {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 12px 24px;
+}
 
-.user-dashboard__title
-  margin: 8px 0
-  font-size: 1.5em
+.user-dashboard__title {
+  margin: 8px 0;
+  font-size: 1.5em;
+}
 
-.user-dashboard__controls
-  display: flex
-  align-items: center
-  justify-content: space-between
-  flex-wrap: wrap
-  gap: 8px
+.user-dashboard__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
 
-.user-dashboard__periods, .user-dashboard__period-navigation
-  display: flex
-  align-items: center
-  gap: 8px
+.user-dashboard__periods,
+.user-dashboard__period-navigation {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 
-.user-dashboard__period-navigation
-  margin-left: auto
+.user-dashboard__period-navigation {
+  margin-left: auto;
+}
 
-.user-dashboard__previous-period, .user-dashboard__next-period, .user-dashboard__period
-  padding: 6px 10px
-  border: 1px solid var(--color-3)
-  border-radius: 4px
-  background: var(--color-7)
-  color: var(--color-4)
-  cursor: pointer
+.user-dashboard__previous-period,
+.user-dashboard__next-period,
+.user-dashboard__period {
+  padding: 6px 10px;
+  border: 1px solid var(--color-3);
+  border-radius: 4px;
+  background: var(--color-7);
+  color: var(--color-4);
+  cursor: pointer;
+}
 
-.user-dashboard__period[aria-pressed="true"]
-  background: var(--color-4)
-  color: var(--color-7)
+.user-dashboard__period[aria-pressed='true'] {
+  background: var(--color-4);
+  color: var(--color-7);
+}
 
-.user-dashboard__previous-period:focus-visible, .user-dashboard__next-period:focus-visible, .user-dashboard__period:focus-visible
-  outline: 2px solid var(--color-4)
+.user-dashboard__previous-period:focus-visible,
+.user-dashboard__next-period:focus-visible,
+.user-dashboard__period:focus-visible {
+  outline: 2px solid var(--color-4);
+}
 
-.user-dashboard__date-range
-  display: flex
-  gap: 6px
-  color: var(--color-4)
+.user-dashboard__date-range {
+  display: flex;
+  gap: 6px;
+  color: var(--color-4);
+}
 
-.user-dashboard__notifications-title
-  margin: 8px 0
-  font-size: 1.5em
+.user-dashboard__notifications-title {
+  margin: 8px 0;
+  font-size: 1.5em;
+}
 
-.user-dashboard__error, .user-dashboard__empty
-  margin: 0
+.user-dashboard__error,
+.user-dashboard__empty {
+  margin: 0;
+}
 
-.user-dashboard__chart-list
-  display: grid
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr))
-  gap: 12px
+.user-dashboard__chart-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 12px;
+}
 </style>

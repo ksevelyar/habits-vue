@@ -43,27 +43,33 @@ const device = reactive({
 })
 </script>
 
-<style lang="sss">
-.device-new
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-  gap: 10px
-  flex-grow: 1
+<style>
+.device-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
 
-.device-new__name
-  width: 200px
+.device-new__name {
+  width: 200px;
+}
 
-.device-new__type
-  width: 200px
+.device-new__type {
+  width: 200px;
+}
 
-.device-new__description
-  width: 200px
+.device-new__description {
+  width: 200px;
+}
 
-.device-new__submit
-  width: 200px
+.device-new__submit {
+  width: 200px;
+}
 
-.device-new__active
-  width: 200px
+.device-new__active {
+  width: 200px;
+}
 </style>

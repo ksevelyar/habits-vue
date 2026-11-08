@@ -1,4 +1,4 @@
 {
-  "extends": "stylelint-config-sugarss-recommended",
+  "extends": "stylelint-config-recommended",
   "customSyntax": "postcss-html"
 }

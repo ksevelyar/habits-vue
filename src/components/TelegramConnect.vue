@@ -69,7 +69,8 @@ onMounted(poll)
 onUnmounted(stop_polling)
 </script>
 
-<style lang="sss">
-.telegram-connect__button
-  cursor: pointer
+<style>
+.telegram-connect__button {
+  cursor: pointer;
+}
 </style>

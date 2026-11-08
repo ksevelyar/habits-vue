@@ -39,22 +39,26 @@ const loginUser = async () => {
 }
 </script>
 
-<style lang="sss">
-.user-login
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-  gap: 10px
+<style>
+.user-login {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+}
 
-.user-login__email
-  box-sizing: border-box
-  width: 200px
+.user-login__email {
+  box-sizing: border-box;
+  width: 200px;
+}
 
-.user-login__password
-  box-sizing: border-box
-  width: 200px
+.user-login__password {
+  box-sizing: border-box;
+  width: 200px;
+}
 
-.user-login__submit
-  width: 200px
+.user-login__submit {
+  width: 200px;
+}
 </style>

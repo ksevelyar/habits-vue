@@ -46,11 +46,12 @@ const drop = (droppedID) => {
 getList()
 </script>
 
-<style lang="sss">
-.chain-list__item
-  font-size: 2em
-  margin-bottom: 6px
-  display: block
-  padding: 0
-  cursor: grabbing
+<style>
+.chain-list__item {
+  font-size: 2em;
+  margin-bottom: 6px;
+  display: block;
+  padding: 0;
+  cursor: grabbing;
+}
 </style>

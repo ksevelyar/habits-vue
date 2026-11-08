@@ -101,27 +101,33 @@ getForm(formDate.value)
 loadHistory()
 </script>
 
-<style lang="sss">
-.metrics-history__head
-  text-align: left
-  color: var(--color-1)
+<style>
+.metrics-history__head {
+  text-align: left;
+  color: var(--color-1);
+}
 
-.metrics-history__copy
-  cursor: pointer
+.metrics-history__copy {
+  cursor: pointer;
+}
 
-.metrics-history__input
-  background: #e3e3e3
-  border-radius: 4px
-  border: 1px solid rgb(193, 193, 193)
+.metrics-history__input {
+  background: #e3e3e3;
+  border-radius: 4px;
+  border: 1px solid rgb(193, 193, 193);
+}
 
-.metrics-history__report
-  cursor: pointer
-  padding-bottom: 50px
+.metrics-history__report {
+  cursor: pointer;
+  padding-bottom: 50px;
+}
 
-.metrics-history
-  margin-bottom: 50px
+.metrics-history {
+  margin-bottom: 50px;
+}
 
-.metrics-history__cell
-  padding: 2px 4px
-  width: 50px
+.metrics-history__cell {
+  padding: 2px 4px;
+  width: 50px;
+}
 </style>

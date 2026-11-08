@@ -178,51 +178,63 @@ function formatDateTick(date) {
 }
 </script>
 
-<style lang="sss">
-.metric-chart
-  min-width: 0
-  padding: 12px
-  background: var(--color-7)
-  border-radius: 4px
+<style>
+.metric-chart {
+  min-width: 0;
+  padding: 12px;
+  background: var(--color-7);
+  border-radius: 4px;
+}
 
-.metric-chart__header
-  display: flex
-  align-items: baseline
-  justify-content: space-between
-  gap: 12px
-  margin-bottom: 8px
+.metric-chart__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 8px;
+}
 
-.metric-chart__title
-  margin: 0
-  font-size: 1.1em
-  font-weight: normal
+.metric-chart__title {
+  margin: 0;
+  font-size: 1.1em;
+  font-weight: normal;
+}
 
-.metric-chart__summary
-  display: flex
-  flex-shrink: 0
-  gap: 8px
-  font-variant-numeric: tabular-nums
+.metric-chart__summary {
+  display: flex;
+  flex-shrink: 0;
+  gap: 8px;
+  font-variant-numeric: tabular-nums;
+}
 
-.metric-chart__difference
-  opacity: 0.75
+.metric-chart__difference {
+  opacity: 0.75;
+}
 
-.metric-chart__svg
-  display: block
-  width: 100%
-  height: auto
-  overflow: visible
+.metric-chart__svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
 
-.metric-chart__value-tick line, .metric-chart__date-tick line
-  stroke: var(--color-5)
+.metric-chart__value-tick line,
+.metric-chart__date-tick line {
+  stroke: var(--color-5);
+}
 
-.metric-chart__value-tick text, .metric-chart__date-tick text
-  fill: var(--color-4)
-  font-size: 12px
+.metric-chart__value-tick text,
+.metric-chart__date-tick text {
+  fill: var(--color-4);
+  font-size: 12px;
+}
 
-.metric-chart__line
-  stroke: var(--color-4)
-  stroke-width: 2
+.metric-chart__line {
+  stroke: var(--color-4);
+  stroke-width: 2;
+}
 
-.metric-chart__point
-  fill: var(--color-4)
+.metric-chart__point {
+  fill: var(--color-4);
+}
 </style>

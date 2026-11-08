@@ -56,24 +56,29 @@ const get = async () => {
 get()
 </script>
 
-<style lang="sss">
-.task-new
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-  gap: 10px
-  flex-grow: 1
+<style>
+.task-new {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 10px;
+  flex-grow: 1;
+}
 
-.task-new__name
-  width: 200px
+.task-new__name {
+  width: 200px;
+}
 
-.task-new__cron
-  width: 200px
+.task-new__cron {
+  width: 200px;
+}
 
-.task-new__submit
-  width: 200px
+.task-new__submit {
+  width: 200px;
+}
 
-.task-new__active
-  width: 200px
+.task-new__active {
+  width: 200px;
+}
 </style>

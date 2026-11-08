@@ -24,11 +24,12 @@ const getList = async () => {
 getList()
 </script>
 
-<style lang="sss">
-.task-list__item
-  font-size: 2em
-  margin-bottom: 6px
-  display: block
-  padding: 0
-  cursor: grabbing
+<style>
+.task-list__item {
+  font-size: 2em;
+  margin-bottom: 6px;
+  display: block;
+  padding: 0;
+  cursor: grabbing;
+}
 </style>
