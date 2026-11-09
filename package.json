@@ -16,26 +16,26 @@
     "coverage": "vitest run --coverage"
   },
   "dependencies": {
-    "d3": "^7.9.0",
-    "pinia": "^2.0.13",
-    "vue": "^3.4.35",
-    "vue-router": "^4.4.3"
+    "d3": "^7.9.2",
+    "pinia": "^4.1.0",
+    "vue": "^3.5.45",
+    "vue-router": "^5.4.0"
   },
   "devDependencies": {
-    "@pinia/testing": "^0.1.5",
-    "@vitejs/plugin-vue": "^6.0.9",
-    "@vitest/coverage-v8": "^5.0.1",
-    "@vue/test-utils": "^2.4.6",
-    "cross-fetch": "^3.1.5",
-    "jsdom": "^24.1.1",
-    "msw": "^2.15.0",
-    "oxfmt": "^0.75.0",
-    "oxlint": "^1.90.0",
-    "postcss-html": "^1.3.0",
-    "pug": "^3.0.2",
-    "stylelint": "^14.6.1",
-    "stylelint-config-recommended": "^9.0.0",
-    "vite": "^8.3.0",
-    "vitest": "^5.0.1"
+    "@pinia/testing": "^2.0.2",
+    "@vitejs/plugin-vue": "^6.0.10",
+    "@vitest/coverage-v8": "^5.1.0",
+    "@vue/test-utils": "^2.5.1",
+    "cross-fetch": "^4.1.0",
+    "jsdom": "^31.0.0",
+    "msw": "^3.0.4",
+    "oxfmt": "^0.78.0",
+    "oxlint": "^1.93.0",
+    "postcss-html": "^2.0.0",
+    "pug": "^3.0.4",
+    "stylelint": "^18.0.0",
+    "stylelint-config-recommended": "^19.0.0",
+    "vite": "^8.3.7",
+    "vitest": "^5.1.0"
   }
 }
