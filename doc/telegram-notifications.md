@@ -1,10 +1,27 @@
 # Telegram notifications
 
-## Connect
-1. User opens the dashboard; the client fetches the link status via `GET /telegram/link`
-2. User clicks "Connect Telegram"; the client requests a one-time code from the backend via `POST /telegram/link` and opens the returned bot url in a new browser tab; the user clicks "Start Bot"
-3. The bot replies "Linked ✓" and saves the link. The client polls `GET /telegram/link` every 2 seconds until the link appears, so the status line changes to "Telegram connected" reactively.
+## Requirements
+* The dashboard checks the Telegram connection status when it loads.
+* While the account is not connected, the dashboard checks again every two seconds.
+* Connecting requests a one-time URL and opens it in a new tab.
+* Disconnecting removes the Telegram connection.
+* The dashboard shows backend errors as status messages.
+* Connection checks stop when the dashboard is closed.
 
-## Disconnect
-1. User opens the dashboard and clicks "Disconnect"; the client sends `DELETE /telegram/link`
-2. The block switches to "Telegram not connected"
+## User scenarios
+
+### 1. User can see Telegram connection status
+* The status shows a checking message while the connection status loads.
+* The status shows whether Telegram is connected.
+
+### 2. User can connect Telegram
+* When Telegram is not connected, the user can request a link and open it in a new tab.
+
+### 3. User can see the connection complete without reloading
+* The client checks until the connection is complete and then shows Telegram as connected.
+
+### 4. User can disconnect Telegram
+* Disconnecting removes the connection and shows Telegram as not connected.
+
+### 5. User can see a Telegram configuration error
+* If a Telegram request fails, the returned error message is shown and connection actions are hidden.
