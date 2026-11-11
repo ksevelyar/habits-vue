@@ -7,12 +7,20 @@
   .ledger-transactions__controls
     .ledger-transactions__periods
       button.ledger-transactions__period(
-        v-for="periodOption in periodOptions"
-        :key="periodOption.value"
         type="button"
-        :class="{ 'ledger-transactions__period--selected': period === periodOption.value }"
-        @click="$emit('select-period', periodOption.value)"
-      ) {{ periodOption.label }}
+        :class="{ 'ledger-transactions__period--selected': period === 'month' }"
+        @click="$emit('select-period', 'month')"
+      ) Month
+      button.ledger-transactions__period(
+        type="button"
+        :class="{ 'ledger-transactions__period--selected': period === 'quarter' }"
+        @click="$emit('select-period', 'quarter')"
+      ) Quarter
+      button.ledger-transactions__period(
+        type="button"
+        :class="{ 'ledger-transactions__period--selected': period === 'year' }"
+        @click="$emit('select-period', 'year')"
+      ) Year
 
     .ledger-transactions__navigation
       button.ledger-transactions__previous(
@@ -31,8 +39,7 @@
     span.ledger-transactions__balance Balance: {{ ledger.formatAmount(history.balance_kopecks) }}
 
   span.ledger-transactions__error(v-if="errorMessage") {{ errorMessage }}
-  span.ledger-transactions__loading(v-else-if="loading") Loading transactions…
-  span.ledger-transactions__empty(v-else-if="history && history.transactions.length === 0") No transactions in this period.
+  span.ledger-transactions__empty(v-else-if="isTransactionsEmpty") No transactions in this period.
 
   .ledger-transactions__list(v-else-if="history")
     .ledger-transactions__row(
@@ -49,23 +56,20 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import ledger from '@/ledger'
 import { formatDateInTimezone, formatTimestampInTimezone } from '@/time'
 
-const periodOptions = [
-  { value: 'month', label: 'Month' },
-  { value: 'quarter', label: 'Quarter' },
-  { value: 'year', label: 'Year' },
-]
-
-defineProps({
+const properties = defineProps({
   period: { type: String, required: true },
   periodOffset: { type: Number, required: true },
   history: { type: Object, default: null },
   timeZone: { type: String, required: true },
-  loading: { type: Boolean, default: false },
   errorMessage: { type: String, default: '' },
 })
+const isTransactionsEmpty = computed(
+  () => properties.history !== null && properties.history.transactions.length === 0,
+)
 
 defineEmits(['select-period', 'navigate', 'edit', 'delete'])
 

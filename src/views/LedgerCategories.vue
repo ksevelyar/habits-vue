@@ -5,7 +5,6 @@
     router-link.ledger-categories__transactions(:to="{ name: 'Ledger' }") Back to ledger
 
   span.ledger-categories__error(v-if="errorMessage") {{ errorMessage }}
-  span.ledger-categories__loading(v-if="loading") Loading categories…
 
   form.ledger-categories__form(@submit.prevent="saveCategory")
     input.ledger-categories__input(
@@ -15,9 +14,9 @@
     )
     button.ledger-categories__submit(type="submit" :disabled="submitting") {{ getSubmitLabel() }}
 
-  span.ledger-categories__empty(v-if="!loading && !errorMessage && categories.length === 0") No categories yet.
+  span.ledger-categories__empty(v-if="isCategoriesEmpty") No categories yet.
 
-  .ledger-categories__list(v-else)
+  .ledger-categories__list(v-else-if="categories !== null && categories.length > 0")
     .ledger-categories__item(v-for="category in categories" :key="category.id")
       span.ledger-categories__name {{ category.name }}
       .ledger-categories__actions
@@ -26,28 +25,27 @@
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { computed, ref } from 'vue'
 import ledger from '@/ledger'
 
-const categories = ref([])
+const categories = ref(null)
 const categoryName = ref('')
 const editingCategoryId = ref(null)
-const loading = ref(true)
 const submitting = ref(false)
 const errorMessage = ref('')
+const isCategoriesEmpty = computed(
+  () => categories.value !== null && !errorMessage.value && categories.value.length === 0,
+)
 
 loadCategories()
 
 async function loadCategories() {
-  loading.value = true
   errorMessage.value = ''
 
   try {
     categories.value = await ledger.listCategories()
   } catch (error) {
     errorMessage.value = getErrorMessage(error, 'Unable to load categories.')
-  } finally {
-    loading.value = false
   }
 }
 

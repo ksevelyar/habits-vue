@@ -5,7 +5,6 @@
     :period-offset="periodOffset"
     :history="history"
     :time-zone="timeZone"
-    :loading="historyLoading"
     :error-message="historyErrorMessage"
     @select-period="selectPeriod"
     @navigate="navigatePeriod"
@@ -15,16 +14,15 @@
 
   span.ledger__error(v-if="categoryErrorMessage") {{ categoryErrorMessage }}
   span.ledger__error(v-if="transactionErrorMessage") {{ transactionErrorMessage }}
-  span.ledger__loading(v-if="categoriesLoading") Loading categories…
-  span.ledger__empty(v-else-if="categories.length === 0 && !categoryErrorMessage")
+  span.ledger__empty(v-if="isCategoriesEmpty")
     | Create a category before recording transactions.
     router-link.ledger__category-link(:to="{ name: 'LedgerCategories' }") Manage categories
 
   LedgerTransactionForm(
-    v-else
+    v-if="categories !== null && categories.length > 0"
     :categories="categories"
     :time-zone="timeZone"
-    :transaction="editingTransaction"
+    v-model:transaction="transaction"
     :submitting="transactionSubmitting"
     :error-message="formErrorMessage"
     :field-errors="formFieldErrors"
@@ -35,26 +33,27 @@
 <script setup>
 import { computed, ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
-import ledger from '@/ledger'
-import { getCalendarPeriodAnchorDate } from '@/time'
+import ledger, { normalizeTransaction } from '@/ledger'
+import { getCalendarPeriodDateRange, getCurrentDateTime } from '@/time'
 import LedgerTransactions from '@/components/LedgerTransactions.vue'
 import LedgerTransactionForm from '@/components/LedgerTransactionForm.vue'
 
 const userStore = useUserStore()
-const timeZone = computed(() => userStore.user.timezone || 'UTC')
-const categories = ref([])
+const timeZone = computed(() => userStore.user.timezone)
+const categories = ref(null)
 const history = ref(null)
 const period = ref('month')
 const periodOffset = ref(0)
-const categoriesLoading = ref(true)
-const historyLoading = ref(false)
 const transactionSubmitting = ref(false)
 const categoryErrorMessage = ref('')
+const isCategoriesEmpty = computed(
+  () => categories.value !== null && categories.value.length === 0 && !categoryErrorMessage.value,
+)
 const historyErrorMessage = ref('')
 const transactionErrorMessage = ref('')
 const formErrorMessage = ref('')
 const formFieldErrors = ref({})
-const editingTransaction = ref(null)
+const transaction = ref(null)
 let historyRequestNumber = 0
 
 watch([period, periodOffset, timeZone], () => loadHistory(), { immediate: true })
@@ -62,22 +61,25 @@ watch([period, periodOffset, timeZone], () => loadHistory(), { immediate: true }
 loadCategories()
 
 async function loadCategories() {
-  categoriesLoading.value = true
   categoryErrorMessage.value = ''
 
   try {
     categories.value = await ledger.listCategories()
+    if (!transaction.value && categories.value.length > 0) {
+      resetTransaction()
+    }
   } catch (error) {
     categoryErrorMessage.value = getErrorMessage(error, 'Unable to load categories.')
-  } finally {
-    categoriesLoading.value = false
   }
 }
 
 async function loadHistory() {
   const currentRequestNumber = ++historyRequestNumber
-  const anchorDate = getCalendarPeriodAnchorDate(period.value, timeZone.value, periodOffset.value)
-  historyLoading.value = true
+  const { startDate: anchorDate } = getCalendarPeriodDateRange(
+    period.value,
+    timeZone.value,
+    periodOffset.value,
+  )
   historyErrorMessage.value = ''
 
   try {
@@ -89,10 +91,6 @@ async function loadHistory() {
     if (currentRequestNumber !== historyRequestNumber) return
 
     historyErrorMessage.value = getErrorMessage(error, 'Unable to load transactions.')
-  } finally {
-    if (currentRequestNumber === historyRequestNumber) {
-      historyLoading.value = false
-    }
   }
 }
 
@@ -109,28 +107,44 @@ function navigatePeriod(offset) {
   periodOffset.value = nextPeriodOffset
 }
 
-function editTransaction(transaction) {
-  editingTransaction.value = transaction
+function editTransaction(selectedTransaction) {
+  transaction.value = normalizeTransaction(selectedTransaction, timeZone.value)
   clearTransactionErrors()
 }
 
 function cancelTransactionEdit() {
-  editingTransaction.value = null
+  if (!transaction.value || transaction.value.id === null) {
+    clearTransactionErrors()
+    return
+  }
+
+  resetTransaction()
   clearTransactionErrors()
 }
 
-async function saveTransaction(transactionForm) {
+function resetTransaction() {
+  const defaultCategoryId = categories.value[0]?.id || ''
+
+  transaction.value = {
+    id: null,
+    categoryId: defaultCategoryId,
+    amountRubles: '',
+    occurredAtLocal: getCurrentDateTime(timeZone.value),
+  }
+}
+
+async function saveTransaction(submittedTransaction) {
   transactionSubmitting.value = true
   clearTransactionErrors()
 
   try {
-    if (editingTransaction.value) {
-      await ledger.updateTransaction(editingTransaction.value.id, transactionForm, timeZone.value)
+    if (transaction.value.id !== null) {
+      await ledger.updateTransaction(transaction.value.id, submittedTransaction, timeZone.value)
+      resetTransaction()
     } else {
-      await ledger.createTransaction(transactionForm, timeZone.value)
+      await ledger.createTransaction(submittedTransaction, timeZone.value)
     }
 
-    editingTransaction.value = null
     await loadHistory()
   } catch (error) {
     formErrorMessage.value = getErrorMessage(error, 'Unable to save transaction.')
@@ -140,12 +154,12 @@ async function saveTransaction(transactionForm) {
   }
 }
 
-async function deleteTransaction(transaction) {
+async function deleteTransaction(selectedTransaction) {
   transactionErrorMessage.value = ''
 
   try {
-    await ledger.deleteTransaction(transaction.id)
-    if (editingTransaction.value?.id === transaction.id) {
+    await ledger.deleteTransaction(selectedTransaction.id)
+    if (transaction.value.id === selectedTransaction.id) {
       cancelTransactionEdit()
     }
     await loadHistory()

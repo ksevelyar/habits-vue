@@ -55,7 +55,7 @@ function formatKopecksForInput(amountKopecks) {
   return `${formattedSign}${roundedRubles}`
 }
 
-function createTransactionPayload(transaction, timeZone) {
+function serializeTransaction(transaction, timeZone) {
   return {
     category_id: Number(transaction.categoryId),
     amount_kopecks: convertRublesToKopecks(transaction.amountRubles),
@@ -79,8 +79,9 @@ export function getTransactionFieldErrors(requestError) {
   )
 }
 
-export function getTransactionForm(transaction, timeZone) {
+export function normalizeTransaction(transaction, timeZone) {
   return {
+    id: transaction.id,
     categoryId: transaction.category_id,
     amountRubles: formatKopecksForInput(transaction.amount_kopecks),
     occurredAtLocal: convertTimestampToLocalDateTime(transaction.occurred_at, timeZone),
@@ -109,13 +110,13 @@ export default {
   },
 
   createTransaction(transaction, timeZone) {
-    return ledgerClient.createTransaction(createTransactionPayload(transaction, timeZone))
+    return ledgerClient.createTransaction(serializeTransaction(transaction, timeZone))
   },
 
   updateTransaction(transactionId, transaction, timeZone) {
     return ledgerClient.updateTransaction(
       transactionId,
-      createTransactionPayload(transaction, timeZone),
+      serializeTransaction(transaction, timeZone),
     )
   },
 
