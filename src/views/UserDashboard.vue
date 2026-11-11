@@ -67,9 +67,7 @@ const hasLoaded = ref(false)
 const errorMessage = ref(null)
 const requestNumber = ref(0)
 const chartHistoryCache = new Map()
-const timeZone = computed(
-  () => userStore.user.timezone || Intl.DateTimeFormat().resolvedOptions().timeZone || 'UTC',
-)
+const timeZone = computed(() => userStore.user.timezone)
 const periodDateRange = computed(() =>
   getCalendarPeriodDateRange(selectedPeriod.value, timeZone.value, previousPeriodOffset.value),
 )

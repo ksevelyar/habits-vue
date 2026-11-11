@@ -1,11 +1,7 @@
 # Telegram notifications
 ## Requirements
-* The dashboard checks the Telegram connection status when it loads.
-* When the status check reports the account is not connected, the dashboard checks again every two seconds until it connects or a request fails.
-* Connecting requests a one-time URL, opens it in a new tab, and immediately checks the connection status.
-* Disconnecting removes the Telegram connection and displays the disconnected status.
-* The dashboard shows backend errors as status messages and stops checking after a request fails.
-* The scheduled check is cleared when the dashboard closes.
+* A user can connect a Telegram bot to receive notifications.
+* A user can disconnect the Telegram bot.
 
 ## User scenarios
 ### 1. User can see Telegram connection status
@@ -19,8 +15,7 @@
 1. Sign in as `person@example.com` with Telegram disconnected.
 2. Open `/`.
 3. Click `Connect Telegram`.
-4. Return `https://t.me/habits_test_bot?start=token` from the connection request.
-5. Verify that URL opens in a new tab.
+4. Verify a Telegram deep link with a code opens in a new tab.
 
 ### 3. User can see the connection complete without reloading
 1. Sign in as `person@example.com` with Telegram disconnected.

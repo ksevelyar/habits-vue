@@ -15,10 +15,10 @@
 * [User can show or hide a chain in dashboard charts](chains.md#6-user-can-show-or-hide-a-chain-in-dashboard-charts)
 
 ## Tasks
-* [User can view tasks](tasks.md#1-user-can-view-tasks)
-* [User can create a scheduled task](tasks.md#2-user-can-create-a-scheduled-task)
-* [User can update a scheduled task](tasks.md#3-user-can-update-a-scheduled-task)
-* [User can activate or deactivate a scheduled task](tasks.md#4-user-can-activate-or-deactivate-a-scheduled-task)
+* [User can view tasks](calendar/tasks.md#1-user-can-view-tasks)
+* [User can create a scheduled task](calendar/tasks.md#2-user-can-create-a-scheduled-task)
+* [User can update a scheduled task](calendar/tasks.md#3-user-can-update-a-scheduled-task)
+* [User can activate or deactivate a scheduled task](calendar/tasks.md#4-user-can-activate-or-deactivate-a-scheduled-task)
 
 ## Metrics
 * [User can view current and previous sprint metric history](metrics.md#1-user-can-view-current-and-previous-sprint-metric-history)
@@ -55,8 +55,8 @@
 * [User sees an empty state when no chains are enabled for charts](charts.md#8-user-sees-an-empty-state-when-no-chains-are-enabled-for-charts)
 
 ## Telegram notifications
-* [User can see Telegram connection status](telegram-notifications.md#1-user-can-see-telegram-connection-status)
-* [User can connect Telegram](telegram-notifications.md#2-user-can-connect-telegram)
-* [User can see the connection complete without reloading](telegram-notifications.md#3-user-can-see-the-connection-complete-without-reloading)
-* [User can disconnect Telegram](telegram-notifications.md#4-user-can-disconnect-telegram)
-* [User can see a Telegram configuration error](telegram-notifications.md#5-user-can-see-a-telegram-configuration-error)
+* [User can see Telegram connection status](calendar/telegram-notifications.md#1-user-can-see-telegram-connection-status)
+* [User can connect Telegram](calendar/telegram-notifications.md#2-user-can-connect-telegram)
+* [User can see the connection complete without reloading](calendar/telegram-notifications.md#3-user-can-see-the-connection-complete-without-reloading)
+* [User can disconnect Telegram](calendar/telegram-notifications.md#4-user-can-disconnect-telegram)
+* [User can see a Telegram configuration error](calendar/telegram-notifications.md#5-user-can-see-a-telegram-configuration-error)

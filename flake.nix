@@ -12,7 +12,7 @@
     in {
       devShell = pkgs.mkShell {
         buildInputs = [
-          pkgs.nodejs_24
+          pkgs.nodejs_26
           pkgs.vue-language-server
         ];
         VITE_BACK="http://habits.localhost:3003";
@@ -22,7 +22,7 @@
         name = "habits-vue";
 
         buildInputs = with pkgs; [
-          nodejs_24
+          nodejs_26
         ];
 
         src = self;

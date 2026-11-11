@@ -3,7 +3,7 @@ form.ledger-transaction-form(@submit.prevent="submitTransaction")
   label.ledger-transaction-form__field
     span.ledger-transaction-form__label {{ timeZone }}
     input.ledger-transaction-form__input(
-      v-model="form.occurredAtLocal"
+      v-model="transaction.occurredAtLocal"
       type="datetime-local"
       required
     )
@@ -12,7 +12,7 @@ form.ledger-transaction-form(@submit.prevent="submitTransaction")
   label.ledger-transaction-form__field
     span.ledger-transaction-form__label Amount
     input.ledger-transaction-form__input(
-      v-model="form.amountRubles"
+      v-model="transaction.amountRubles"
       type="number"
       step="1"
       autocomplete="off"
@@ -24,7 +24,7 @@ form.ledger-transaction-form(@submit.prevent="submitTransaction")
   label.ledger-transaction-form__field
     span.ledger-transaction-form__label Category
     select.ledger-transaction-form__input(
-      v-model.number="form.categoryId"
+      v-model.number="transaction.categoryId"
       required
     )
       option(value="" disabled) Select a category
@@ -35,49 +35,30 @@ form.ledger-transaction-form(@submit.prevent="submitTransaction")
 
   .ledger-transaction-form__actions
     button.ledger-transaction-form__submit(type="submit" :disabled="submitting || categories.length === 0")
-      | {{ getSubmitLabel(transaction) }}
+      | {{ submitLabel }}
 </template>
 
 <script setup>
-import { reactive, watch } from 'vue'
-import { getTransactionForm } from '@/ledger'
-import { getCurrentDateTime } from '@/time'
+import { computed } from 'vue'
 
 const props = defineProps({
   categories: { type: Array, required: true },
   timeZone: { type: String, required: true },
-  transaction: { type: Object, default: null },
   submitting: { type: Boolean, default: false },
   errorMessage: { type: String, default: '' },
   fieldErrors: { type: Object, default: () => ({}) },
 })
 
+const transaction = defineModel('transaction', { type: Object, required: true })
 const emit = defineEmits(['save'])
-const form = reactive({ categoryId: '', amountRubles: '', occurredAtLocal: '' })
-
-watch(
-  () => [props.transaction, props.timeZone, props.categories],
-  ([transaction, timeZone, categories]) => {
-    if (transaction) {
-      Object.assign(form, getTransactionForm(transaction, timeZone))
-      return
-    }
-
-    form.categoryId = categories[0]?.id || ''
-    form.amountRubles = ''
-    form.occurredAtLocal = getCurrentDateTime(timeZone)
-  },
-  { immediate: true },
-)
-
-function submitTransaction() {
-  emit('save', { ...form })
-}
-
-function getSubmitLabel(transaction) {
-  if (transaction) return 'Update'
+const submitLabel = computed(() => {
+  if (transaction.value.id !== null) return 'Update'
 
   return 'Create'
+})
+
+function submitTransaction() {
+  emit('save', { ...transaction.value })
 }
 </script>
 

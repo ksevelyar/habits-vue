@@ -1,12 +1,12 @@
 # Boundaries
-
 ## Rules
-* views/ contains only top level components wired to router
-* root component block follows component name, like `.ledger-transactions` for `LedgerTransactions.vue`
-* all colors should come from defined palete, like `:root { --color-1: #808080; }`
+* `views/` contains only top-level components connected to the router
+* Predicate names should begin with `is`, such as `isCategoriesEmpty`
+* The root component's BEM block should be named after the component, such as `.ledger-transactions` for `LedgerTransactions.vue`
+* All colors should come from the defined palette, such as `:root { --color-1: #808080; }`
 
 ## Tests
-* only feature tests allowed
-* tests follow user scenarios
-* tests use outcome-based names
-* test should start from verb which ends with s
+* Only feature tests are allowed
+* Tests should follow user scenarios
+* Test names should describe outcomes
+* Test names should begin with a verb that ends in “s”
