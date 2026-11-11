@@ -25,8 +25,7 @@ table.metrics-form
 
 <script setup>
 import { ref } from 'vue'
-import metricClient from '@/api/metric-client'
-import router from '@/router'
+import metricClient from '@/requests/metric-client'
 import MetricInput from '@/components/MetricInput.vue'
 
 const metrics = ref([])

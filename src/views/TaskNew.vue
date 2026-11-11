@@ -1,9 +1,8 @@
 <template lang="pug">
 form.task-new(@submit.prevent='create')
-  .task-new__active
+  label.task-new__active
     | Active
     input(type="checkbox" v-model="task.active")
-    label(for="checkbox")
 
   input.task-new__name(
     v-model.trim="task.name"
@@ -54,14 +53,6 @@ const create = async () => {
 }
 
 .task-new__name {
-  width: 200px;
-}
-
-.task-new__type {
-  width: 200px;
-}
-
-.task-new__description {
   width: 200px;
 }
 

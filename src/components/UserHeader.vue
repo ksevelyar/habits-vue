@@ -4,6 +4,7 @@
   router-link.user-header__item(:to="{ name: 'ChainList' }") Chains
   router-link.user-header__item(:to="{ name: 'TaskList' }") Tasks
   router-link.user-header__item(:to="{ name: 'MetricsList' }") Metrics
+  router-link.user-header__item(:to="{ name: 'Ledger' }") Ledger
 </template>
 
 <style>

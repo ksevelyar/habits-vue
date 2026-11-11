@@ -28,6 +28,14 @@
 * [User can view time metrics as hours and minutes](metrics.md#5-user-can-view-time-metrics-as-hours-and-minutes)
 * [User can copy sprint totals as a Markdown table](metrics.md#6-user-can-copy-sprint-totals-as-a-markdown-table)
 
+## Ledger
+* [User records income or an expense](ledger/transactions.md#1-user-records-income-or-an-expense)
+* [User edits or deletes a transaction](ledger/transactions.md#2-user-edits-or-deletes-a-transaction)
+* [User views and navigates transaction periods](ledger/transactions.md#3-user-views-and-navigates-transaction-periods)
+* [User sees transaction errors](ledger/transactions.md#4-user-sees-transaction-errors)
+* [User views and manages categories](ledger/categories.md#1-user-views-and-manages-categories)
+* [User sees category errors](ledger/categories.md#2-user-sees-category-errors)
+
 ## Devices
 * [User can create a device token and view its device ID and
  token](devices.md#1-user-can-create-a-device-token)

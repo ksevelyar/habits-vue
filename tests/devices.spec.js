@@ -5,7 +5,7 @@ import { afterAll, afterEach, beforeAll, expect, it } from 'vitest'
 
 import DeviceNew from '@/views/DeviceNew.vue'
 
-const backendBaseUrl = import.meta.env.VITE_BACK || 'http://habits.lcl:3003'
+const backendBaseUrl = import.meta.env.VITE_BACK || 'http://habits.localhost:3003'
 const server = setupServer()
 let deviceFormWrapper = null
 
@@ -23,7 +23,7 @@ afterAll(() => {
   server.close()
 })
 
-it('creates_a_device_and_displays_its_id_and_token', async () => {
+it('creates a device and displays its id and token', async () => {
   const submittedDevices = []
   const createdDevice = {
     device_id: 'device-123',

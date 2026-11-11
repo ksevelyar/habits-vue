@@ -1,9 +1,8 @@
 <template lang="pug">
 form.chain-new(@submit.prevent='update')
-  .chain-new__active
+  label.chain-new__active
     | Active
     input(type="checkbox" v-model="chain.active")
-    label(for="checkbox") {{ chain.active }}
 
   label.chain-new__show-in-charts
     input(type="checkbox" v-model="chain.show_in_charts")
@@ -40,7 +39,7 @@ form.chain-new(@submit.prevent='update')
 
 <script setup>
 import { reactive } from 'vue'
-import chainClient from '@/api/chain-client'
+import chainClient from '@/requests/chain-client'
 import { useRoute } from 'vue-router'
 import router from '@/router'
 

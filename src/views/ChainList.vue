@@ -18,7 +18,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import chainClient from '@/api/chain-client'
+import chainClient from '@/requests/chain-client'
 
 const chains = ref([])
 const orderedChains = computed(() => {

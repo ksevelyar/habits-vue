@@ -7,7 +7,7 @@ import { afterAll, afterEach, beforeAll, expect, it } from 'vitest'
 import App from '@/App.vue'
 import router from '@/router'
 
-const backendBaseUrl = import.meta.env.VITE_BACK || 'http://habits.lcl:3003'
+const backendBaseUrl = import.meta.env.VITE_BACK || 'http://habits.localhost:3003'
 const server = setupServer()
 let applicationWrapper = null
 
@@ -25,7 +25,7 @@ afterAll(() => {
   server.close()
 })
 
-it('redirects_unauthenticated_protected_route_to_login', async () => {
+it('redirects unauthenticated protected route to login', async () => {
   const receivedCurrentSessionRequests = interceptUnauthenticatedCurrentSessionRequests()
   const wrapper = await mountApplicationAtPath('/chains')
 
@@ -34,7 +34,7 @@ it('redirects_unauthenticated_protected_route_to_login', async () => {
   expect(receivedCurrentSessionRequests).toHaveLength(1)
 })
 
-it('keeps_login_accessible_without_an_authenticated_session', async () => {
+it('keeps login accessible without an authenticated session', async () => {
   const receivedCurrentSessionRequests = interceptUnauthenticatedCurrentSessionRequests()
   const wrapper = await mountApplicationAtPath('/login')
 
@@ -43,7 +43,7 @@ it('keeps_login_accessible_without_an_authenticated_session', async () => {
   expect(receivedCurrentSessionRequests).toHaveLength(0)
 })
 
-it('keeps_registration_accessible_without_an_authenticated_session', async () => {
+it('keeps registration accessible without an authenticated session', async () => {
   const receivedCurrentSessionRequests = interceptUnauthenticatedCurrentSessionRequests()
   const wrapper = await mountApplicationAtPath('/register')
 

@@ -17,6 +17,8 @@ import UserHeader from '@/components/UserHeader.vue'
   --color-5: #cecece;
   --color-6: #d7d7d7;
   --color-7: #dfdfdf;
+  --color-red: #8b2043;
+  --color-green: #398e72;
 }
 
 @font-face {

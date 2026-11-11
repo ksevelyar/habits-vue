@@ -8,7 +8,7 @@ form.device-new(@submit.prevent='create')
 
   input.device-new__device-id(
     :value="device.device_id"
-    placeholder="cron"
+    placeholder="device ID"
     readonly
   )
 
@@ -23,8 +23,7 @@ form.device-new(@submit.prevent='create')
 
 <script setup>
 import { reactive } from 'vue'
-import router from '@/router'
-import deviceClient from '@/api/device-client'
+import deviceClient from '@/requests/device-client'
 
 async function create() {
   try {
@@ -57,19 +56,7 @@ const device = reactive({
   width: 200px;
 }
 
-.device-new__type {
-  width: 200px;
-}
-
-.device-new__description {
-  width: 200px;
-}
-
 .device-new__submit {
-  width: 200px;
-}
-
-.device-new__active {
   width: 200px;
 }
 </style>

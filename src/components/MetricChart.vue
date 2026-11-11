@@ -3,17 +3,9 @@
   .metric-chart__header
     span.metric-chart__title {{ chain.name }}
     span.metric-chart__summary(v-if="periodAggregate !== null")
-      span.metric-chart__aggregate(:aria-label="aggregateLabel") {{ formatAggregate(periodAggregate) }}
-      span.metric-chart__difference(
-        v-if="aggregateDifference !== null"
-        aria-label="Change from previous period"
-      ) {{ formatDifference(aggregateDifference) }}
-  svg.metric-chart__svg(
-    viewBox="0 0 720 300"
-    role="img"
-    :aria-label="chartLabel"
-  )
-    title {{ chartLabel }}
+      span.metric-chart__aggregate {{ formatAggregate(periodAggregate) }}
+      span.metric-chart__difference(v-if="aggregateDifference !== null") {{ formatDifference(aggregateDifference) }}
+  svg.metric-chart__svg(viewBox="0 0 720 300")
 
     g.metric-chart__value-tick(v-for="tick in verticalTicks" :key="`value-${tick}`")
       line(
@@ -72,7 +64,6 @@ const chartMarginTop = 20
 const chartMarginRight = 24
 const chartMarginBottom = 40
 const chartMarginLeft = 56
-const chartLabel = computed(() => `${properties.chain.name} daily metrics`)
 const periodAggregate = computed(() =>
   getPeriodAggregate(properties.chain.points, properties.chain.aggregate),
 )
@@ -83,11 +74,6 @@ const aggregateDifference = computed(() => {
   if (periodAggregate.value === null || previousPeriodAggregate.value === null) return null
 
   return periodAggregate.value - previousPeriodAggregate.value
-})
-const aggregateLabel = computed(() => {
-  if (properties.chain.aggregate === 'avg') return 'Average for this period'
-
-  return 'Total for this period'
 })
 const chartPoints = computed(() =>
   properties.chain.points

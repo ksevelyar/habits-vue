@@ -1,8 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import { useUserStore } from '@/stores/user'
 
-const DevPalette = () => import('@/views/DevPalette.vue')
-
 const UserLogin = () => import('@/views/UserLogin.vue')
 const UserRegistration = () => import('@/views/UserRegistration.vue')
 const UserDashboard = () => import('@/views/UserDashboard.vue')
@@ -18,6 +16,8 @@ const TaskList = () => import('@/views/TaskList.vue')
 const DeviceNew = () => import('@/views/DeviceNew.vue')
 
 const MetricsList = () => import('@/views/MetricsList.vue')
+const Ledger = () => import('@/views/Ledger.vue')
+const LedgerCategories = () => import('@/views/LedgerCategories.vue')
 
 const routes = [
   {
@@ -71,14 +71,19 @@ const routes = [
     component: MetricsList,
   },
   {
+    path: '/ledger',
+    name: 'Ledger',
+    component: Ledger,
+  },
+  {
+    path: '/ledger/categories',
+    name: 'LedgerCategories',
+    component: LedgerCategories,
+  },
+  {
     path: '/devices/new',
     name: 'DeviceNew',
     component: DeviceNew,
-  },
-  {
-    path: '/dev/palette',
-    name: 'DevPalette',
-    component: DevPalette,
   },
 ]
 

@@ -2,11 +2,11 @@
 
 ## Requirements
 * The dashboard checks the Telegram connection status when it loads.
-* While the account is not connected, the dashboard checks again every two seconds.
-* Connecting requests a one-time URL and opens it in a new tab.
-* Disconnecting removes the Telegram connection.
-* The dashboard shows backend errors as status messages.
-* Connection checks stop when the dashboard is closed.
+* When the status check reports the account is not connected, the dashboard checks again every two seconds until it connects or a request fails.
+* Connecting requests a one-time URL, opens it in a new tab, and immediately checks the connection status.
+* Disconnecting removes the Telegram connection and displays the disconnected status.
+* The dashboard shows backend errors as status messages and stops checking after a request fails.
+* The scheduled check is cleared when the dashboard closes.
 
 ## User scenarios
 
@@ -18,7 +18,8 @@
 * When Telegram is not connected, the user can request a link and open it in a new tab.
 
 ### 3. User can see the connection complete without reloading
-* The client checks until the connection is complete and then shows Telegram as connected.
+* After requesting a link, the client checks immediately and repeats every two seconds while Telegram remains disconnected.
+* When a check reports a connection, the dashboard shows Telegram as connected.
 
 ### 4. User can disconnect Telegram
 * Disconnecting removes the connection and shows Telegram as not connected.
