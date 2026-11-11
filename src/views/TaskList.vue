@@ -13,7 +13,7 @@
 <script setup>
 import { ref, computed } from 'vue'
 
-import taskClient from '@/api/task-client'
+import taskClient from '@/requests/task-client'
 
 const tasks = ref([])
 

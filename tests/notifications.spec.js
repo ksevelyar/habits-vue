@@ -1,10 +1,10 @@
-import { mount } from '@vue/test-utils'
+import { flushPromises, mount } from '@vue/test-utils'
 import { afterEach, describe, expect, it, vi } from 'vitest'
 
 import TelegramConnect from '@/components/TelegramConnect.vue'
-import { create_code, get_status, remove_bot } from '@/api/telegram-client'
+import { create_code, get_status, remove_bot } from '@/requests/telegram-client'
 
-vi.mock('@/api/telegram-client', () => ({
+vi.mock('@/requests/telegram-client', () => ({
   get_status: vi.fn(),
   create_code: vi.fn(),
   remove_bot: vi.fn(),
@@ -67,7 +67,3 @@ describe('TelegramConnect', () => {
     expect(wrapper.find('a').exists()).toBe(false)
   })
 })
-
-async function flushPromises() {
-  await new Promise((resolve) => setTimeout(resolve))
-}

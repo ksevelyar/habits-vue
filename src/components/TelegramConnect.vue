@@ -7,7 +7,7 @@
 
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from 'vue'
-import { create_code, get_status, remove_bot } from '@/api/telegram-client'
+import { create_code, get_status, remove_bot } from '@/requests/telegram-client'
 
 const telegram_state = ref('checking')
 const error_message = ref(null)

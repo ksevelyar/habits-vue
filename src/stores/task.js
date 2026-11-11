@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import taskClient from '@/api/task-client'
+import taskClient from '@/requests/task-client'
 
 export const useTaskStore = defineStore('task', () => {
   const task = reactive({

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import userClient from '@/api/user-client'
+import userClient from '@/requests/user-client'
 
 export const useUserStore = defineStore('user', () => {
   const user = reactive({

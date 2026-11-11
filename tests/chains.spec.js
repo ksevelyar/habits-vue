@@ -8,7 +8,7 @@ import ChainNew from '@/views/ChainNew.vue'
 
 vi.mock('@/router', () => ({ default: { push: vi.fn() } }))
 
-const backendUrl = import.meta.env.VITE_BACK || 'http://habits.lcl:3003'
+const backendUrl = import.meta.env.VITE_BACK || 'http://habits.localhost:3003'
 const createdChain = {
   id: 42,
   user_id: 7,
@@ -36,7 +36,7 @@ afterAll(() => {
   server.close()
 })
 
-it('chain_form_sends_show_in_charts', async () => {
+it('chain form sends show in charts', async () => {
   await runChainFormFeatureAssertions(async (submittedChains) => {
     expect(submittedChains[0]).toMatchObject({
       name: 'Pull-ups',

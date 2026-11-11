@@ -5,7 +5,7 @@ import path from 'path'
 export default defineConfig({
   plugins: [vue()],
   server: {
-    allowedHosts: ['habits.lcl'],
+    allowedHosts: ['habits.localhost'],
     port: 3000,
   },
   resolve: {

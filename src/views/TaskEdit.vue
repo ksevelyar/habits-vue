@@ -1,9 +1,8 @@
 <template lang="pug">
 form.task-new(@submit.prevent='update')
-  .task-new__active
+  label.task-new__active
     | Active
     input(type="checkbox" v-model="task.active")
-    label(for="checkbox") {{ task.active }}
 
   input.task-new__name(
     v-model.trim="task.name"
@@ -12,7 +11,7 @@ form.task-new(@submit.prevent='update')
   )
   input.task-new__cron(
     v-model.trim="task.cron"
-    placeholder="name"
+    placeholder="cron"
     required
   )
 
@@ -21,7 +20,7 @@ form.task-new(@submit.prevent='update')
 
 <script setup>
 import { reactive } from 'vue'
-import taskClient from '@/api/task-client'
+import taskClient from '@/requests/task-client'
 import { useRoute } from 'vue-router'
 import router from '@/router'
 

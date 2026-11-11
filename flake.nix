@@ -15,7 +15,7 @@
           pkgs.nodejs_24
           pkgs.vue-language-server
         ];
-        VITE_BACK="http://habits.lcl:3003";
+        VITE_BACK="http://habits.localhost:3003";
       };
 
       packages.default = pkgs.buildNpmPackage {

@@ -9,14 +9,13 @@
           v-for="period in chartPeriods"
           :key="period.value"
           type="button"
-          :aria-pressed="selectedPeriod === period.value"
+          :class="{ 'user-dashboard__period--selected': selectedPeriod === period.value }"
           @click="selectPeriod(period.value)"
         ) {{ period.label }}
 
       .user-dashboard__period-navigation
         button.user-dashboard__previous-period(
           type="button"
-          aria-label="Previous period"
           @click="navigateToPreviousPeriod"
         ) ←
         .user-dashboard__date-range
@@ -26,11 +25,10 @@
         button.user-dashboard__next-period(
           v-if="previousPeriodOffset < 0"
           type="button"
-          aria-label="Next period"
           @click="navigateToNextPeriod"
         ) →
 
-    span.user-dashboard__error(v-if="errorMessage" role="alert") {{ errorMessage }}
+    span.user-dashboard__error(v-if="errorMessage") {{ errorMessage }}
     span.user-dashboard__empty(v-else-if="hasLoaded && chartChains.length === 0") No chains are enabled for charts.
 
     .user-dashboard__chart-list(v-else-if="chartChains.length > 0")
@@ -52,9 +50,9 @@
 import { computed, ref, watch } from 'vue'
 import TelegramConnect from '@/components/TelegramConnect.vue'
 import MetricChart from '@/components/MetricChart.vue'
-import metricClient from '@/api/metric-client'
+import metricClient from '@/requests/metric-client'
 import { useUserStore } from '@/stores/user'
-import { getCalendarPeriodDateRange } from '@/utils/chart-period'
+import { getCalendarPeriodDateRange } from '@/time'
 
 const chartPeriods = [
   { value: 'month', label: '1 month' },
@@ -211,7 +209,7 @@ watch(
   cursor: pointer;
 }
 
-.user-dashboard__period[aria-pressed='true'] {
+.user-dashboard__period--selected {
   background: var(--color-4);
   color: var(--color-7);
 }

@@ -7,7 +7,7 @@ import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } 
 import UserDashboard from '@/views/UserDashboard.vue'
 import { useUserStore } from '@/stores/user'
 
-const backendUrl = import.meta.env.VITE_BACK || 'http://habits.lcl:3003'
+const backendUrl = import.meta.env.VITE_BACK || 'http://habits.localhost:3003'
 const chartHistoryResponse = {
   chains: [
     {
@@ -41,7 +41,7 @@ afterAll(() => {
 })
 
 describe('UserDashboard charts', () => {
-  it('renders_charts_for_current_month_by_default', async () => {
+  it('renders charts for current month by default', async () => {
     await runDashboardFeatureAssertions(async ({ wrapper, requestedChartRanges }) => {
       await flushPromises()
 
@@ -54,7 +54,7 @@ describe('UserDashboard charts', () => {
     })
   })
 
-  it('renders_charts_for_current_quartal', async () => {
+  it('renders charts for current quartal', async () => {
     vi.setSystemTime(new Date('2026-06-15T12:00:00.000Z'))
 
     await runDashboardFeatureAssertions(async ({ wrapper, requestedChartRanges }) => {
@@ -70,7 +70,7 @@ describe('UserDashboard charts', () => {
     })
   })
 
-  it('renders_charts_for_current_year', async () => {
+  it('renders charts for current year', async () => {
     vi.setSystemTime(new Date('2026-06-15T12:00:00.000Z'))
 
     await runDashboardFeatureAssertions(async ({ wrapper, requestedChartRanges }) => {
@@ -86,27 +86,27 @@ describe('UserDashboard charts', () => {
     })
   })
 
-  it('navigates_between_available_periods', async () => {
+  it('navigates between available periods', async () => {
     await runDashboardFeatureAssertions(async ({ wrapper, requestedChartRanges }) => {
       await flushPromises()
 
       expect(wrapper.find('.user-dashboard__periods').text()).toBe('1 monthquartal1 year')
-      expect(wrapper.find('[aria-label="Previous period"]').text()).toBe('←')
-      expect(wrapper.find('[aria-label="Next period"]').exists()).toBe(false)
+      expect(wrapper.find('.user-dashboard__previous-period').text()).toBe('←')
+      expect(wrapper.find('.user-dashboard__next-period').exists()).toBe(false)
 
-      await wrapper.find('[aria-label="Previous period"]').trigger('click')
+      await wrapper.find('.user-dashboard__previous-period').trigger('click')
       await flushPromises()
 
-      expect(wrapper.find('[aria-label="Next period"]').exists()).toBe(true)
+      expect(wrapper.find('.user-dashboard__next-period').exists()).toBe(true)
       expect(requestedChartRanges).toContainEqual({
         startDate: '2026-02-01',
         endDate: '2026-02-28',
       })
 
-      await wrapper.find('[aria-label="Next period"]').trigger('click')
+      await wrapper.find('.user-dashboard__next-period').trigger('click')
       await flushPromises()
 
-      expect(wrapper.find('[aria-label="Next period"]').exists()).toBe(false)
+      expect(wrapper.find('.user-dashboard__next-period').exists()).toBe(false)
       expect(requestedChartRanges).toContainEqual({
         startDate: '2026-03-01',
         endDate: '2026-03-31',
@@ -114,7 +114,7 @@ describe('UserDashboard charts', () => {
     })
   })
 
-  it('shows_telegram_configuration_error_after_charts', async () => {
+  it('shows telegram configuration error after charts', async () => {
     await runDashboardFeatureAssertions(
       async ({ wrapper }) => {
         await flushPromises()

@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { reactive } from 'vue'
-import chainClient from '@/api/chain-client'
+import chainClient from '@/requests/chain-client'
 
 export const useChainStore = defineStore('chain', () => {
   const chain = reactive({

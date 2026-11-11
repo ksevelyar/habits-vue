@@ -1,11 +1,11 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { http, HttpResponse } from 'msw'
 import { setupServer } from 'msw/node'
-import { afterAll, afterEach, beforeAll, expect, it } from 'vitest'
+import { afterAll, afterEach, beforeAll, expect, it, vi } from 'vitest'
 
 import MetricInput from '@/components/MetricInput.vue'
 
-const backendUrl = import.meta.env.VITE_BACK || 'http://habits.lcl:3003'
+const backendUrl = import.meta.env.VITE_BACK || 'http://habits.localhost:3003'
 const server = setupServer()
 
 beforeAll(() => {
@@ -14,14 +14,16 @@ beforeAll(() => {
 
 afterEach(() => {
   server.resetHandlers()
+  vi.useRealTimers()
 })
 
 afterAll(() => {
   server.close()
 })
 
-it('sends_delete_when_metric_input_is_empty', async () => {
+it('sends delete when metric input is empty', async () => {
   const receivedMetricRequests = []
+  vi.useFakeTimers()
   server.use(
     http.delete(`${backendUrl}/metrics`, ({ request }) => {
       receivedMetricRequests.push({
@@ -51,7 +53,7 @@ it('sends_delete_when_metric_input_is_empty', async () => {
 
   try {
     await metricInput.find('.metric-input__value').setValue('')
-    await waitForMetricUpdate()
+    await vi.advanceTimersByTimeAsync(300)
     await flushPromises()
 
     expect(receivedMetricRequests).toHaveLength(1)
@@ -62,8 +64,3 @@ it('sends_delete_when_metric_input_is_empty', async () => {
     metricInput.unmount()
   }
 })
-
-function waitForMetricUpdate() {
-  const metricUpdateDelayMilliseconds = 350
-  return new Promise((resolve) => setTimeout(resolve, metricUpdateDelayMilliseconds))
-}

@@ -11,10 +11,13 @@ npm run dev
 
 ## Documentation
 * [Contract](doc/contract.md)
+* [Boundaries](doc/boundaries.md)
 * [Users](doc/users.md)
 * [Chains](doc/chains.md)
 * [Tasks](doc/tasks.md)
 * [Metrics](doc/metrics.md)
+* [Ledger transactions](doc/ledger/transactions.md)
+* [Ledger categories](doc/ledger/categories.md)
 * [Devices](doc/devices.md)
 * [Charts](doc/charts.md)
 * [Telegram notifications](doc/telegram-notifications.md)

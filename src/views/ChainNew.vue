@@ -1,9 +1,8 @@
 <template lang="pug">
 form.chain-new(@submit.prevent='create')
-  .chain-new__active
+  label.chain-new__active
     | Active
     input(type="checkbox" v-model="chain.active")
-    label(for="checkbox") {{ chain.active }}
 
   label.chain-new__show-in-charts
     input(type="checkbox" v-model="chain.show_in_charts")
