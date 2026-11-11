@@ -33,8 +33,12 @@
 * [User edits or deletes a transaction](ledger/transactions.md#2-user-edits-or-deletes-a-transaction)
 * [User views and navigates transaction periods](ledger/transactions.md#3-user-views-and-navigates-transaction-periods)
 * [User sees transaction errors](ledger/transactions.md#4-user-sees-transaction-errors)
-* [User views and manages categories](ledger/categories.md#1-user-views-and-manages-categories)
-* [User sees category errors](ledger/categories.md#2-user-sees-category-errors)
+* [User lists categories](ledger/categories.md#1-user-lists-categories)
+* [User creates a category](ledger/categories.md#2-user-creates-a-category)
+* [User renames a category](ledger/categories.md#3-user-renames-a-category)
+* [User deletes an unused category](ledger/categories.md#4-user-deletes-an-unused-category)
+* [User cannot create a category with a duplicate name](ledger/categories.md#5-user-cannot-create-a-category-with-a-duplicate-name)
+* [User cannot delete a category in use](ledger/categories.md#6-user-cannot-delete-a-category-in-use)
 
 ## Devices
 * [User can create a device token and view its device ID and
