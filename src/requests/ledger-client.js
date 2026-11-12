@@ -23,8 +23,8 @@ export default {
     return requestJson(`/ledger/categories/${categoryId}`, { method: 'DELETE' })
   },
 
-  getHistory(period, anchorDate) {
-    const searchParams = new URLSearchParams({ period, anchor_date: anchorDate })
+  getHistory(startAt, endAt) {
+    const searchParams = new URLSearchParams({ start_at: startAt, end_at: endAt })
     return requestJson(`/ledger/transactions?${searchParams}`)
   },
 
