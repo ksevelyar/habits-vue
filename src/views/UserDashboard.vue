@@ -52,7 +52,7 @@ import TelegramConnect from '@/components/TelegramConnect.vue'
 import MetricChart from '@/components/MetricChart.vue'
 import metricClient from '@/requests/metric-client'
 import { useUserStore } from '@/stores/user'
-import { getCalendarPeriodDateRange } from '@/time'
+import { getCalendarPeriodBounds } from '@/time'
 
 const chartPeriods = [
   { value: 'month', label: '1 month' },
@@ -69,10 +69,10 @@ const requestNumber = ref(0)
 const chartHistoryCache = new Map()
 const timeZone = computed(() => userStore.user.timezone)
 const periodDateRange = computed(() =>
-  getCalendarPeriodDateRange(selectedPeriod.value, timeZone.value, previousPeriodOffset.value),
+  getCalendarPeriodBounds(selectedPeriod.value, timeZone.value, previousPeriodOffset.value),
 )
 const previousPeriodDateRange = computed(() =>
-  getCalendarPeriodDateRange(selectedPeriod.value, timeZone.value, previousPeriodOffset.value - 1),
+  getCalendarPeriodBounds(selectedPeriod.value, timeZone.value, previousPeriodOffset.value - 1),
 )
 
 function selectPeriod(period) {

@@ -14,8 +14,8 @@ const ledgerCategories = [
 ]
 
 describe('ledger transaction scenarios', () => {
-  it('loads the current period and converts signed rubles to utc kopecks', async () => {
-    const requestedPeriods = []
+  it('converts Moscow month bounds and signed rubles to utc kopecks', async () => {
+    const requestedBounds = []
     const submittedTransactions = []
     let createdTransaction = null
     let balanceKopecks = 80000
@@ -25,9 +25,9 @@ describe('ledger transaction scenarios', () => {
       ),
       http.get(`${import.meta.env.VITE_BACK}/ledger/transactions`, ({ request }) => {
         const requestUrl = new URL(request.url)
-        requestedPeriods.push({
-          period: requestUrl.searchParams.get('period'),
-          anchorDate: requestUrl.searchParams.get('anchor_date'),
+        requestedBounds.push({
+          startAt: requestUrl.searchParams.get('start_at'),
+          endAt: requestUrl.searchParams.get('end_at'),
         })
 
         return HttpResponse.json(
@@ -57,7 +57,10 @@ describe('ledger transaction scenarios', () => {
       try {
         await flushPromises()
 
-        expect(requestedPeriods[0]).toEqual({ period: 'month', anchorDate: '2026-03-01' })
+        expect(requestedBounds[0]).toEqual({
+          startAt: '2026-02-28T21:00:00.000Z',
+          endAt: '2026-03-31T21:00:00.000Z',
+        })
         expect(ledgerWrapper.find('.ledger-transactions__range').text()).toBe(
           `${formatDateInTimezone('2026-02-28T21:00:00Z', 'Europe/Moscow')} – ${formatDateInTimezone('2026-03-31T21:00:00Z', 'Europe/Moscow')}`,
         )
@@ -84,7 +87,7 @@ describe('ledger transaction scenarios', () => {
             occurred_at: '2026-03-09T12:30:00.000Z',
           },
         ])
-        expect(requestedPeriods).toHaveLength(2)
+        expect(requestedBounds).toHaveLength(2)
         expect(ledgerWrapper.text()).toContain('−1 500 ₽')
         expect(ledgerWrapper.text()).toContain('Balance: −1 500 ₽')
       } finally {
@@ -96,17 +99,53 @@ describe('ledger transaction scenarios', () => {
     }
   })
 
-  it('navigates month quarter and year history using profile timezone anchors', async () => {
-    const requestedPeriods = []
+  it('converts London month boundaries across daylight saving time to UTC', async () => {
+    const requestedBounds = []
     const mockedServer = mock(
       http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
         HttpResponse.json(ledgerCategories),
       ),
       http.get(`${import.meta.env.VITE_BACK}/ledger/transactions`, ({ request }) => {
         const requestUrl = new URL(request.url)
-        requestedPeriods.push({
-          period: requestUrl.searchParams.get('period'),
-          anchorDate: requestUrl.searchParams.get('anchor_date'),
+        requestedBounds.push({
+          startAt: requestUrl.searchParams.get('start_at'),
+          endAt: requestUrl.searchParams.get('end_at'),
+        })
+
+        return HttpResponse.json(createHistoryResponse([]))
+      }),
+    )
+
+    try {
+      vi.setSystemTime(new Date('2026-03-15T12:00:00.000Z'))
+      const ledgerWrapper = mountLedgerPage('Europe/London')
+
+      try {
+        await flushPromises()
+
+        expect(requestedBounds).toEqual([
+          { startAt: '2026-03-01T00:00:00.000Z', endAt: '2026-03-31T23:00:00.000Z' },
+        ])
+      } finally {
+        ledgerWrapper.unmount()
+      }
+    } finally {
+      mockedServer.close()
+      vi.useRealTimers()
+    }
+  })
+
+  it('navigates month quarter and year history using user timezone boundaries', async () => {
+    const requestedBounds = []
+    const mockedServer = mock(
+      http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
+        HttpResponse.json(ledgerCategories),
+      ),
+      http.get(`${import.meta.env.VITE_BACK}/ledger/transactions`, ({ request }) => {
+        const requestUrl = new URL(request.url)
+        requestedBounds.push({
+          startAt: requestUrl.searchParams.get('start_at'),
+          endAt: requestUrl.searchParams.get('end_at'),
         })
 
         return HttpResponse.json(createHistoryResponse([]))
@@ -133,12 +172,12 @@ describe('ledger transaction scenarios', () => {
         await periodButtons[2].trigger('click')
         await flushPromises()
 
-        expect(requestedPeriods).toEqual([
-          { period: 'month', anchorDate: '2026-04-01' },
-          { period: 'month', anchorDate: '2026-03-01' },
-          { period: 'month', anchorDate: '2026-04-01' },
-          { period: 'quarter', anchorDate: '2026-04-01' },
-          { period: 'year', anchorDate: '2026-01-01' },
+        expect(requestedBounds).toEqual([
+          { startAt: '2026-03-31T21:00:00.000Z', endAt: '2026-04-30T21:00:00.000Z' },
+          { startAt: '2026-02-28T21:00:00.000Z', endAt: '2026-03-31T21:00:00.000Z' },
+          { startAt: '2026-03-31T21:00:00.000Z', endAt: '2026-04-30T21:00:00.000Z' },
+          { startAt: '2026-03-31T21:00:00.000Z', endAt: '2026-06-30T21:00:00.000Z' },
+          { startAt: '2025-12-31T21:00:00.000Z', endAt: '2026-12-31T21:00:00.000Z' },
         ])
       } finally {
         ledgerWrapper.unmount()
@@ -157,7 +196,7 @@ describe('ledger transaction scenarios', () => {
       category_id: 8,
       category_name: 'Home',
       amount_kopecks: -900,
-      occurred_at: '2026-03-09T12:00:00.000000Z',
+      occurred_at: '2026-03-09T12:00:00Z',
     })
     const mockedServer = mock(
       http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
@@ -194,7 +233,7 @@ describe('ledger transaction scenarios', () => {
 
         const transactionRow = ledgerWrapper.find('.ledger-transactions__row')
         expect(transactionRow.find('.ledger-transactions__occurred-at').text()).toBe(
-          formatTimestampInTimezone('2026-03-09T12:00:00.000000Z', 'Europe/Moscow'),
+          formatTimestampInTimezone('2026-03-09T12:00:00Z', 'Europe/Moscow'),
         )
         expect(transactionRow.find('.ledger-transactions__amount').text()).toBe('−9 ₽')
         expect(transactionRow.find('.ledger-transactions__category').text()).toBe('Home')
@@ -321,8 +360,6 @@ function getTransactionList(transaction) {
 
 function createHistoryResponse(transactions, balanceKopecks = 0) {
   return {
-    period: 'month',
-    anchor_date: '2026-03-01',
     start_at: '2026-02-28T21:00:00Z',
     end_at: '2026-03-31T21:00:00Z',
     balance_kopecks: balanceKopecks,
@@ -332,8 +369,8 @@ function createHistoryResponse(transactions, balanceKopecks = 0) {
 
 function createTransaction(transactionAttributes) {
   return {
-    inserted_at: '2026-03-09T12:00:00.000000Z',
-    updated_at: '2026-03-09T12:00:00.000000Z',
+    inserted_at: '2026-03-09T12:00:00Z',
+    updated_at: '2026-03-09T12:00:00Z',
     ...transactionAttributes,
   }
 }

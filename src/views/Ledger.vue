@@ -34,7 +34,7 @@
 import { computed, ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 import ledger, { normalizeTransaction } from '@/ledger'
-import { getCalendarPeriodDateRange, getCurrentDateTime } from '@/time'
+import { getCalendarPeriodTimestampBounds, getCurrentDateTime } from '@/time'
 import LedgerTransactions from '@/components/LedgerTransactions.vue'
 import LedgerTransactionForm from '@/components/LedgerTransactionForm.vue'
 
@@ -75,7 +75,7 @@ async function loadCategories() {
 
 async function loadHistory() {
   const currentRequestNumber = ++historyRequestNumber
-  const { startDate: anchorDate } = getCalendarPeriodDateRange(
+  const { startAt, endAt } = getCalendarPeriodTimestampBounds(
     period.value,
     timeZone.value,
     periodOffset.value,
@@ -83,7 +83,7 @@ async function loadHistory() {
   historyErrorMessage.value = ''
 
   try {
-    const loadedHistory = await ledger.getHistory(period.value, anchorDate)
+    const loadedHistory = await ledger.getHistory(startAt, endAt)
     if (currentRequestNumber !== historyRequestNumber) return
 
     history.value = loadedHistory

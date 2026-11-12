@@ -105,8 +105,8 @@ export default {
     return ledgerClient.deleteCategory(categoryId)
   },
 
-  getHistory(period, anchorDate) {
-    return ledgerClient.getHistory(period, anchorDate)
+  getHistory(startAt, endAt) {
+    return ledgerClient.getHistory(startAt, endAt)
   },
 
   createTransaction(transaction, timeZone) {

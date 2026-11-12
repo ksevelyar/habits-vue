@@ -6,7 +6,10 @@ export default {
   },
 
   charts(startDate, endDate) {
-    const searchParams = new URLSearchParams({ start_date: startDate, end_date: endDate })
+    const searchParams = new URLSearchParams({
+      start_date: startDate,
+      end_date: endDate,
+    })
     return requestJson(`/charts?${searchParams}`)
   },
 

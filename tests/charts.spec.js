@@ -50,7 +50,7 @@ describe('UserDashboard charts', () => {
         expect(wrapper.find('.metric-chart__line').attributes('d')).toBeTruthy()
         expect(requestedChartRanges).toContainEqual({
           startDate: '2026-03-01',
-          endDate: '2026-03-31',
+          endDate: '2026-04-01',
         })
       } finally {
         wrapper.unmount()
@@ -90,7 +90,7 @@ describe('UserDashboard charts', () => {
         expect(wrapper.text()).toContain('Pull-ups')
         expect(requestedChartRanges).toContainEqual({
           startDate: '2026-04-01',
-          endDate: '2026-06-30',
+          endDate: '2026-07-01',
         })
       } finally {
         wrapper.unmount()
@@ -130,7 +130,7 @@ describe('UserDashboard charts', () => {
         expect(wrapper.text()).toContain('Pull-ups')
         expect(requestedChartRanges).toContainEqual({
           startDate: '2026-01-01',
-          endDate: '2026-12-31',
+          endDate: '2027-01-01',
         })
       } finally {
         wrapper.unmount()
@@ -175,7 +175,7 @@ describe('UserDashboard charts', () => {
         expect(wrapper.find('.user-dashboard__next-period').exists()).toBe(true)
         expect(requestedChartRanges).toContainEqual({
           startDate: '2026-02-01',
-          endDate: '2026-02-28',
+          endDate: '2026-03-01',
         })
 
         await wrapper.find('.user-dashboard__next-period').trigger('click')
@@ -184,8 +184,15 @@ describe('UserDashboard charts', () => {
         expect(wrapper.find('.user-dashboard__next-period').exists()).toBe(false)
         expect(requestedChartRanges).toContainEqual({
           startDate: '2026-03-01',
-          endDate: '2026-03-31',
+          endDate: '2026-04-01',
         })
+        const previousMonthRange = requestedChartRanges.find(
+          (dateRange) => dateRange.startDate === '2026-02-01',
+        )
+        const currentMonthRange = requestedChartRanges.find(
+          (dateRange) => dateRange.startDate === '2026-03-01',
+        )
+        expect(previousMonthRange.endDate).toBe(currentMonthRange.startDate)
       } finally {
         wrapper.unmount()
       }
