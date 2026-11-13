@@ -25,6 +25,7 @@
     "@pinia/testing": "^2.0.2",
     "@vitejs/plugin-vue": "^6.0.10",
     "@vitest/coverage-v8": "^5.1.0",
+    "@vue/language-plugin-pug": "^3.2.9",
     "@vue/test-utils": "^2.5.1",
     "cross-fetch": "^4.1.0",
     "jsdom": "^31.0.0",

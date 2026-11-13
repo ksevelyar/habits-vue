@@ -14,8 +14,10 @@
         buildInputs = [
           pkgs.nodejs_26
           pkgs.vue-language-server
+          pkgs.vtsls
         ];
         VITE_BACK="http://habits.localhost:3003";
+        VUE_LANGUAGE_SERVER_PATH = "${pkgs.vue-language-server}/lib/language-tools/packages/language-server";
       };
 
       packages.default = pkgs.buildNpmPackage {
@@ -27,7 +29,7 @@
 
         src = self;
 
-        npmDepsHash = "sha256-qM+M/h4XHSCVjK1hObhPTkuD7HFWltJYXN8cR+wo1YI=";
+        npmDepsHash = "sha256-7ZA9B3fXVN6d+IWduZEp3q3EUKmUHM7YtrzBaZn915g=";
 
         VITE_BACK = "https://api.habits.rusty-cluster.net";
         npmBuild = "npm run build";
