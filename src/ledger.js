@@ -39,7 +39,7 @@ function formatKopecks(amountKopecks) {
   let formattedSign = ''
   if (isNegative) formattedSign = '−'
 
-  return `${formattedSign}${formattedWholeRubles} ₽`
+  return `${formattedSign}${formattedWholeRubles}`
 }
 
 function formatKopecksForInput(amountKopecks) {

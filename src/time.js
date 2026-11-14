@@ -1,47 +1,37 @@
-export function getCalendarPeriodBounds(
-  period,
-  timeZone,
-  periodOffset = 0,
-  currentTime = new Date(),
-) {
+export function getCalendarRangeBounds(range, timeZone, rangeOffset = 0, currentTime = new Date()) {
   const currentDate = getDateInTimezone(currentTime, timeZone)
   let startDate
-  let nextPeriodStartDate
+  let nextRangeStartDate
 
-  if (period === 'month') {
-    startDate = currentDate.with({ day: 1 }).add({ months: periodOffset })
-    nextPeriodStartDate = startDate.add({ months: 1 })
-  } else if (period === 'quarter') {
+  if (range === 'month') {
+    startDate = currentDate.with({ day: 1 }).add({ months: rangeOffset })
+    nextRangeStartDate = startDate.add({ months: 1 })
+  } else if (range === 'quarter') {
     const firstMonthOfQuarter = Math.floor((currentDate.month - 1) / 3) * 3 + 1
     startDate = currentDate
       .with({ month: firstMonthOfQuarter, day: 1 })
-      .add({ months: periodOffset * 3 })
-    nextPeriodStartDate = startDate.add({ months: 3 })
-  } else if (period === 'year') {
-    startDate = currentDate.with({ month: 1, day: 1 }).add({ years: periodOffset })
-    nextPeriodStartDate = startDate.add({ years: 1 })
+      .add({ months: rangeOffset * 3 })
+    nextRangeStartDate = startDate.add({ months: 3 })
+  } else if (range === 'year') {
+    startDate = currentDate.with({ month: 1, day: 1 }).add({ years: rangeOffset })
+    nextRangeStartDate = startDate.add({ years: 1 })
   } else {
-    throw new Error(`Unsupported calendar period: ${period}`)
+    throw new Error(`Unsupported calendar range: ${range}`)
   }
 
   return {
     startDate: startDate.toString(),
-    endDate: nextPeriodStartDate.toString(),
+    endDate: nextRangeStartDate.toString(),
   }
 }
 
-export function getCalendarPeriodTimestampBounds(
-  period,
+export function getCalendarRangeTimestampBounds(
+  range,
   timeZone,
-  periodOffset = 0,
+  rangeOffset = 0,
   currentTime = new Date(),
 ) {
-  const { startDate, endDate } = getCalendarPeriodBounds(
-    period,
-    timeZone,
-    periodOffset,
-    currentTime,
-  )
+  const { startDate, endDate } = getCalendarRangeBounds(range, timeZone, rangeOffset, currentTime)
 
   return {
     startAt: convertLocalDateToTimestamp(startDate, timeZone),
@@ -75,9 +65,8 @@ export function formatDateInTimezone(timestamp, timeZone = 'UTC') {
   }).format(new Date(timestamp))
 }
 
-export function formatTimestampInTimezone(timestamp, timeZone = 'UTC') {
+export function formatTimeInTimezone(timestamp, timeZone = 'UTC') {
   return new Intl.DateTimeFormat(undefined, {
-    dateStyle: 'medium',
     timeStyle: 'short',
     timeZone,
   }).format(new Date(timestamp))
