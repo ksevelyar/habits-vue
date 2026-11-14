@@ -56,7 +56,7 @@ import { getCalendarRangeBounds } from '@/time'
 
 const chartPeriods = [
   { value: 'month', label: '1 month' },
-  { value: 'quarter', label: 'quartal' },
+  { value: 'quarter', label: 'quarter' },
   { value: 'year', label: '1 year' },
 ]
 const userStore = useUserStore()

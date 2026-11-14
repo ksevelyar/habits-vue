@@ -1,12 +1,8 @@
-import { flushPromises, mount } from '@vue/test-utils'
-import { createPinia } from 'pinia'
+import { flushPromises } from '@vue/test-utils'
 import { http, HttpResponse } from 'msw'
-import { expect, it, vi } from 'vitest'
+import { expect, test, vi } from 'vitest'
 
-import ChainNew from '@/views/ChainNew.vue'
-import { mock } from './support.js'
-
-vi.mock('@/router', () => ({ default: { push: vi.fn() } }))
+import { mock, mountApplicationAtPath } from './support.js'
 
 const createdChain = {
   id: 42,
@@ -22,32 +18,43 @@ const createdChain = {
   updated_at: '2026-03-15T12:00:00Z',
 }
 
-it('chain form sends show in charts', async () => {
+const signedInUser = {
+  name: 'person',
+  email: 'person@example.com',
+  timezone: 'UTC',
+}
+
+test('User creates a chain', async () => {
   const submittedChains = []
   const mockedServer = mock(
+    http.get(`${import.meta.env.VITE_BACK}/sessions/current`, () =>
+      HttpResponse.json(signedInUser),
+    ),
     http.post(`${import.meta.env.VITE_BACK}/chains`, async ({ request }) => {
       submittedChains.push(await request.json())
 
       return HttpResponse.json(createdChain, { status: 201 })
     }),
+    http.get(`${import.meta.env.VITE_BACK}/chains/42`, () => HttpResponse.json(createdChain)),
   )
   try {
-    const wrapper = mount(ChainNew, {
-      global: { plugins: [createPinia()] },
-    })
+    const { applicationRouter, applicationWrapper } = await mountApplicationAtPath('/chains/new')
 
     try {
-      await wrapper.find('.chain-new__name').setValue('Pull-ups')
-      await wrapper.find('.chain-new__show-in-charts input').setValue(true)
-      await wrapper.find('form').trigger('submit')
+      await applicationWrapper.find('.chain-new__name').setValue('Pull-ups')
+      await applicationWrapper.find('.chain-new__show-in-charts input').setValue(true)
+      await applicationWrapper.find('form').trigger('submit')
       await flushPromises()
 
       expect(submittedChains[0]).toMatchObject({
         name: 'Pull-ups',
         show_in_charts: true,
       })
+      await vi.waitFor(() => {
+        expect(applicationRouter.currentRoute.value.path).toBe('/chains/42/edit')
+      })
     } finally {
-      wrapper.unmount()
+      applicationWrapper.unmount()
     }
   } finally {
     mockedServer.close()

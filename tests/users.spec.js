@@ -1,13 +1,13 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { http, HttpResponse } from 'msw'
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 
 import App from '@/App.vue'
 import router from '@/router'
 import { mock } from './support.js'
 
-it('redirects unauthenticated protected route to login', async () => {
+test('An unauthenticated user is redirected to sign in from protected pages', async () => {
   const receivedCurrentSessionRequests = []
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/sessions/current`, () => {
@@ -32,7 +32,7 @@ it('redirects unauthenticated protected route to login', async () => {
   }
 })
 
-it('keeps login accessible without an authenticated session', async () => {
+test('User accesses the sign-in page without a session', async () => {
   const receivedCurrentSessionRequests = []
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/sessions/current`, () => {
@@ -57,7 +57,7 @@ it('keeps login accessible without an authenticated session', async () => {
   }
 })
 
-it('keeps registration accessible without an authenticated session', async () => {
+test('User accesses the registration page without a session', async () => {
   const receivedCurrentSessionRequests = []
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/sessions/current`, () => {

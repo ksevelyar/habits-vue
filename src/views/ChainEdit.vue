@@ -41,9 +41,10 @@ form.chain-new(@submit.prevent='update')
 import { reactive } from 'vue'
 import chainClient from '@/requests/chain-client'
 import { useRoute } from 'vue-router'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 
 const chain = reactive({
   id: null,

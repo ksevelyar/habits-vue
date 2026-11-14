@@ -32,8 +32,9 @@ form.user-registration(@submit.prevent='registerUser')
 <script setup>
 import { reactive } from 'vue'
 import { useUserStore } from '@/stores/user'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const user = useUserStore()
 
 const userForm = reactive({

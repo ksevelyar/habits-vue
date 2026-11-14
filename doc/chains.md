@@ -8,12 +8,12 @@
 * Chains are listed by sort order, from lowest to highest.
 
 ## User scenarios
-### 1. User can view chains
+### 1. User views chains
 1. Sign in as `person@example.com` with `Reading` at order `1` and `Running` at order `2`.
 2. Open `/chains`.
 3. Verify `Reading` appears before `Running`.
 
-### 2. User can create a chain
+### 2. User creates a chain
 1. Sign in as `person@example.com`.
 2. Open `/chains/new`.
 3. Enter `Reading` as the name and `Read pages each day` as the description.
@@ -21,7 +21,7 @@
 5. Click `Add`.
 6. Verify `/chains/42/edit` opens and shows the saved `Reading` values.
 
-### 3. User can update a chain
+### 3. User updates a chain
 1. Sign in with chain `42`, named `Reading`, with description `Read pages each day`.
 2. Open `/chains/42/edit`.
 3. Verify `Reading` and `Read pages each day` are displayed.
@@ -29,7 +29,7 @@
 5. Click `Save`.
 6. Verify `/chains` opens and lists `Reading`.
 
-### 4. User can order chains by dragging them
+### 4. User reorders chains by dragging them
 1. Sign in with `Reading` at order `1` and `Running` at order `2`.
 2. Open `/chains`.
 3. Drag `Running` onto `Reading`.
@@ -37,7 +37,7 @@
 5. Reload `/chains`.
 6. Verify `Running` still appears before `Reading`.
 
-### 5. User can activate or deactivate a chain
+### 5. User activates or deactivates a chain
 1. Sign in with active chain `42`, named `Reading`.
 2. Open `/chains/42/edit`.
 3. Clear `Active`.
@@ -45,7 +45,7 @@
 5. Reopen `/chains/42/edit`.
 6. Verify `Active` is cleared.
 
-### 6. User can show or hide a chain in dashboard charts
+### 6. User shows or hides a chain on the dashboard
 1. Sign in with active chain `42`, named `Reading`, with `Show in charts` cleared.
 2. Open `/chains/42/edit`.
 3. Check `Show in charts`.

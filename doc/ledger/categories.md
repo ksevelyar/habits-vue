@@ -5,7 +5,7 @@
 * A category with transactions cannot be deleted.
 
 ## User scenarios
-### 1. User lists categories
+### 1. User views categories
 1. Sign in as `person@example.com` with categories `Home` and `Work`.
 2. Open `/ledger/categories`.
 3. Verify `Home` and `Work` are displayed.

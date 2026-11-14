@@ -1,2 +1,2 @@
-* pick rules from doc/boundaries.md
-* backend located in ../habits-axum
+* Follow the rules in `doc/boundaries.md`.
+* The backend is in `../habits-axum`.

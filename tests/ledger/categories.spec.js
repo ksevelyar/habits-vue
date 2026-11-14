@@ -1,11 +1,11 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { http, HttpResponse } from 'msw'
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 
 import LedgerCategories from '@/views/LedgerCategories.vue'
 import { mock } from '../support.js'
 
-it('lists categories', async () => {
+test('User views categories', async () => {
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
       HttpResponse.json([
@@ -32,7 +32,7 @@ it('lists categories', async () => {
   }
 })
 
-it('creates a category', async () => {
+test('User creates a category', async () => {
   let categories = []
   const createdCategoryPayloads = []
   const mockedServer = mock(
@@ -67,7 +67,7 @@ it('creates a category', async () => {
   }
 })
 
-it('renames a category', async () => {
+test('User renames a category', async () => {
   let categories = [{ id: 18, name: 'Work' }]
   const renamedCategoryPayloads = []
   const mockedServer = mock(
@@ -104,7 +104,7 @@ it('renames a category', async () => {
   }
 })
 
-it('deletes an unused category', async () => {
+test('User deletes an unused category', async () => {
   const deletedCategoryIds = []
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
@@ -136,7 +136,7 @@ it('deletes an unused category', async () => {
   }
 })
 
-it('rejects a duplicate category name', async () => {
+test('User cannot create a category with a duplicate name', async () => {
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
       HttpResponse.json([{ id: 23, name: 'Rent' }]),
@@ -166,7 +166,7 @@ it('rejects a duplicate category name', async () => {
   }
 })
 
-it('rejects deletion of a category in use', async () => {
+test('User cannot delete a category in use', async () => {
   const mockedServer = mock(
     http.get(`${import.meta.env.VITE_BACK}/ledger/categories`, () =>
       HttpResponse.json([{ id: 23, name: 'Rent' }]),

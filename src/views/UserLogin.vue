@@ -14,14 +14,15 @@ form.user-login(@submit.prevent='loginUser')
     required
   )
 
-  button.user-login__submit(type="submit") Authenticate
+  button.user-login__submit(type="submit") Sign in
 </template>
 
 <script setup>
 import { reactive } from 'vue'
 import { useUserStore } from '@/stores/user'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const user = useUserStore()
 
 const userForm = reactive({

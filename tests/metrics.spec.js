@@ -1,11 +1,11 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { http, HttpResponse } from 'msw'
-import { expect, it, vi } from 'vitest'
+import { expect, test, vi } from 'vitest'
 
 import MetricInput from '@/components/MetricInput.vue'
 import { mock } from './support.js'
 
-it('sends delete when metric input is empty', async () => {
+test('User deletes a metric by clearing its value', async () => {
   const receivedMetricRequests = []
   const mockedServer = mock(
     http.delete(`${import.meta.env.VITE_BACK}/metrics`, ({ request }) => {

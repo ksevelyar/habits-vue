@@ -35,8 +35,9 @@ form.chain-new(@submit.prevent='create')
 <script setup>
 import { reactive } from 'vue'
 import { useChainStore } from '@/stores/chain'
-import router from '@/router'
+import { useRouter } from 'vue-router'
 
+const router = useRouter()
 const chainStore = useChainStore()
 
 const chain = reactive({

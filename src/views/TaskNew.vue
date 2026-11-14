@@ -21,9 +21,10 @@ form.task-new(@submit.prevent='create')
 
 <script setup>
 import { reactive } from 'vue'
+import { useRouter } from 'vue-router'
 import { useTaskStore } from '@/stores/task'
-import router from '@/router'
 
+const router = useRouter()
 const taskStore = useTaskStore()
 
 const task = reactive({
@@ -35,7 +36,7 @@ const task = reactive({
 const create = async () => {
   try {
     const createdTask = await taskStore.create(task)
-    router.push({ path: `/tasks/${createdTask.id}/edit` })
+    await router.push({ path: `/tasks/${createdTask.id}/edit` })
   } catch (error) {
     console.error(error)
   }

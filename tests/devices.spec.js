@@ -1,11 +1,11 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { http, HttpResponse } from 'msw'
-import { expect, it } from 'vitest'
+import { expect, test } from 'vitest'
 
 import DeviceNew from '@/views/DeviceNew.vue'
 import { mock } from './support.js'
 
-it('creates a device and displays its id and token', async () => {
+test('User creates a device and views its ID and token', async () => {
   const submittedDevices = []
   const createdDevice = {
     device_id: 'device-123',
