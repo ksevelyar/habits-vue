@@ -16,7 +16,7 @@
           pkgs.vue-language-server
           pkgs.vtsls
         ];
-        VITE_BACK="http://habits.localhost:3003";
+        VITE_BACK="http://api.habits.localhost:3003";
         VUE_LANGUAGE_SERVER_PATH = "${pkgs.vue-language-server}/lib/language-tools/packages/language-server";
       };
 

@@ -30,9 +30,11 @@
 
 ## Ledger
 * [User records income or an expense](ledger/transactions.md#1-user-records-income-or-an-expense)
-* [User edits or deletes a transaction](ledger/transactions.md#2-user-edits-or-deletes-a-transaction)
-* [User views and navigates transaction periods](ledger/transactions.md#3-user-views-and-navigates-transaction-periods)
-* [User sees transaction errors](ledger/transactions.md#4-user-sees-transaction-errors)
+* [User views period statistics](ledger/transactions.md#2-user-views-period-statistics)
+* [User views transactions grouped by day](ledger/transactions.md#3-user-views-transactions-grouped-by-day)
+* [User edits or deletes a transaction](ledger/transactions.md#4-user-edits-or-deletes-a-transaction)
+* [User views and navigates transaction periods](ledger/transactions.md#5-user-views-and-navigates-transaction-periods)
+* [User sees transaction errors](ledger/transactions.md#6-user-sees-transaction-errors)
 * [User lists categories](ledger/categories.md#1-user-lists-categories)
 * [User creates a category](ledger/categories.md#2-user-creates-a-category)
 * [User renames a category](ledger/categories.md#3-user-renames-a-category)

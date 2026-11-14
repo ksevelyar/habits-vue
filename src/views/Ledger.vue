@@ -1,13 +1,13 @@
 <template lang="pug">
 .ledger
   LedgerTransactions(
-    :period="period"
-    :period-offset="periodOffset"
+    :range="range"
+    :range-offset="rangeOffset"
     :history="history"
     :time-zone="timeZone"
     :error-message="historyErrorMessage"
-    @select-period="selectPeriod"
-    @navigate="navigatePeriod"
+    @select-range="selectRange"
+    @navigate="navigateRange"
     @edit="editTransaction"
     @delete="deleteTransaction"
   )
@@ -34,7 +34,7 @@
 import { computed, ref, watch } from 'vue'
 import { useUserStore } from '@/stores/user'
 import ledger, { normalizeTransaction } from '@/ledger'
-import { getCalendarPeriodTimestampBounds, getCurrentDateTime } from '@/time'
+import { getCalendarRangeTimestampBounds, getCurrentDateTime } from '@/time'
 import LedgerTransactions from '@/components/LedgerTransactions.vue'
 import LedgerTransactionForm from '@/components/LedgerTransactionForm.vue'
 
@@ -42,8 +42,8 @@ const userStore = useUserStore()
 const timeZone = computed(() => userStore.user.timezone)
 const categories = ref(null)
 const history = ref(null)
-const period = ref('month')
-const periodOffset = ref(0)
+const range = ref('month')
+const rangeOffset = ref(0)
 const transactionSubmitting = ref(false)
 const categoryErrorMessage = ref('')
 const isCategoriesEmpty = computed(
@@ -56,7 +56,7 @@ const formFieldErrors = ref({})
 const transaction = ref(null)
 let historyRequestNumber = 0
 
-watch([period, periodOffset, timeZone], () => loadHistory(), { immediate: true })
+watch([range, rangeOffset, timeZone], () => loadHistory(), { immediate: true })
 
 loadCategories()
 
@@ -75,10 +75,10 @@ async function loadCategories() {
 
 async function loadHistory() {
   const currentRequestNumber = ++historyRequestNumber
-  const { startAt, endAt } = getCalendarPeriodTimestampBounds(
-    period.value,
+  const { startAt, endAt } = getCalendarRangeTimestampBounds(
+    range.value,
     timeZone.value,
-    periodOffset.value,
+    rangeOffset.value,
   )
   historyErrorMessage.value = ''
 
@@ -94,17 +94,17 @@ async function loadHistory() {
   }
 }
 
-function selectPeriod(selectedPeriod) {
-  period.value = selectedPeriod
-  periodOffset.value = 0
+function selectRange(selectedRange) {
+  range.value = selectedRange
+  rangeOffset.value = 0
   cancelTransactionEdit()
 }
 
-function navigatePeriod(offset) {
-  const nextPeriodOffset = periodOffset.value + offset
-  if (nextPeriodOffset > 0) return
+function navigateRange(offset) {
+  const nextRangeOffset = rangeOffset.value + offset
+  if (nextRangeOffset > 0) return
 
-  periodOffset.value = nextPeriodOffset
+  rangeOffset.value = nextRangeOffset
 }
 
 function editTransaction(selectedTransaction) {
@@ -143,6 +143,7 @@ async function saveTransaction(submittedTransaction) {
       resetTransaction()
     } else {
       await ledger.createTransaction(submittedTransaction, timeZone.value)
+      resetTransaction()
     }
 
     await loadHistory()

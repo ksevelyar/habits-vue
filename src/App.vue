@@ -10,6 +10,7 @@ import UserHeader from '@/components/UserHeader.vue'
 
 <style>
 :root {
+  --color-black: #000;
   --color-1: #808080;
   --color-2: #999;
   --color-3: #afb1b3;
@@ -59,6 +60,6 @@ a {
 }
 
 a:hover {
-  color: var(--color-4);
+  color: var(--color-black);
 }
 </style>
