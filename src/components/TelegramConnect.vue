@@ -18,7 +18,7 @@ const status = computed(() => {
     return error_message.value
   }
   if (telegram_state.value === 'checking') {
-    return 'Checking telegram link...'
+    return 'Checking Telegram connection...'
   }
   if (telegram_state.value === 'unlinked') {
     return 'Telegram not connected'

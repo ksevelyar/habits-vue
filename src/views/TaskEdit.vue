@@ -21,10 +21,10 @@ form.task-new(@submit.prevent='update')
 <script setup>
 import { reactive } from 'vue'
 import taskClient from '@/requests/task-client'
-import { useRoute } from 'vue-router'
-import router from '@/router'
+import { useRoute, useRouter } from 'vue-router'
 
 const route = useRoute()
+const router = useRouter()
 
 const task = reactive({
   id: null,
@@ -36,7 +36,7 @@ const task = reactive({
 const update = async () => {
   try {
     await taskClient.update(task)
-    router.push({ path: '/tasks/' })
+    await router.push({ path: '/tasks/' })
   } catch (error) {
     console.error(error)
   }

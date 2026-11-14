@@ -66,8 +66,12 @@ export function formatDateInTimezone(timestamp, timeZone = 'UTC') {
 }
 
 export function formatTimeInTimezone(timestamp, timeZone = 'UTC') {
-  return new Intl.DateTimeFormat(undefined, {
-    timeStyle: 'short',
+  const twentyFourHourLocale = 'en-GB'
+
+  return new Intl.DateTimeFormat(twentyFourHourLocale, {
+    hour: '2-digit',
+    minute: '2-digit',
+    hourCycle: 'h23',
     timeZone,
   }).format(new Date(timestamp))
 }

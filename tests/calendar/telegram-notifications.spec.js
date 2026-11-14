@@ -1,5 +1,5 @@
 import { flushPromises, mount } from '@vue/test-utils'
-import { afterEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, describe, expect, test, vi } from 'vitest'
 
 import TelegramConnect from '@/components/TelegramConnect.vue'
 import { create_code, get_status, remove_bot } from '@/requests/telegram-client'
@@ -21,7 +21,7 @@ afterEach(() => {
 })
 
 describe('TelegramConnect', () => {
-  it('offers to connect when not linked', async () => {
+  test('User sees Telegram connection status', async () => {
     get_status.mockResolvedValue({ linked: false })
 
     const wrapper = mount(TelegramConnect)
@@ -31,17 +31,24 @@ describe('TelegramConnect', () => {
     expect(wrapper.text()).not.toContain('Disconnect')
   })
 
-  it('offers to disconnect when linked', async () => {
+  test('User disconnects Telegram', async () => {
     get_status.mockResolvedValue({ linked: true })
+    remove_bot.mockResolvedValue()
 
     const wrapper = mount(TelegramConnect)
     await flushPromises()
+    await wrapper.find('a').trigger('click')
+    await flushPromises()
 
-    expect(wrapper.text()).toContain('Disconnect')
-    expect(wrapper.text()).not.toContain('Connect Telegram')
+    expect(remove_bot).toHaveBeenCalledOnce()
+    expect(wrapper.text()).toContain('Telegram not connected')
+    expect(wrapper.text()).toContain('Connect Telegram')
+    expect(wrapper.text()).not.toContain('Disconnect')
+
+    wrapper.unmount()
   })
 
-  it('requests a link and opens it on connect', async () => {
+  test('User connects Telegram', async () => {
     get_status.mockResolvedValue({ linked: false })
     create_code.mockResolvedValue({ url: linkUrl })
 
@@ -57,7 +64,7 @@ describe('TelegramConnect', () => {
     wrapper.unmount()
   })
 
-  it('shows the backend error message', async () => {
+  test('User sees a Telegram configuration error', async () => {
     get_status.mockRejectedValue(backend_error)
 
     const wrapper = mount(TelegramConnect)

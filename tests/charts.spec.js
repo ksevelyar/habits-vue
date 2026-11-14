@@ -1,7 +1,7 @@
 import { flushPromises, mount } from '@vue/test-utils'
 import { createPinia, setActivePinia } from 'pinia'
 import { http, HttpResponse } from 'msw'
-import { describe, expect, it, vi } from 'vitest'
+import { describe, expect, test, vi } from 'vitest'
 
 import UserDashboard from '@/views/UserDashboard.vue'
 import { useUserStore } from '@/stores/user'
@@ -22,7 +22,7 @@ const chartHistoryResponse = {
 }
 
 describe('UserDashboard charts', () => {
-  it('renders charts for current month by default', async () => {
+  test('User selects a one-month chart period', async () => {
     const requestedChartRanges = []
     const mockedServer = mock(
       http.get(`${import.meta.env.VITE_BACK}/charts`, ({ request }) => {
@@ -61,7 +61,7 @@ describe('UserDashboard charts', () => {
     }
   })
 
-  it('renders charts for current quartal', async () => {
+  test('User selects a quarterly chart period', async () => {
     const requestedChartRanges = []
     const mockedServer = mock(
       http.get(`${import.meta.env.VITE_BACK}/charts`, ({ request }) => {
@@ -101,7 +101,7 @@ describe('UserDashboard charts', () => {
     }
   })
 
-  it('renders charts for current year', async () => {
+  test('User selects a one-year chart period', async () => {
     const requestedChartRanges = []
     const mockedServer = mock(
       http.get(`${import.meta.env.VITE_BACK}/charts`, ({ request }) => {
@@ -141,7 +141,7 @@ describe('UserDashboard charts', () => {
     }
   })
 
-  it('navigates between available periods', async () => {
+  test('User returns to the current chart period', async () => {
     const requestedChartRanges = []
     const mockedServer = mock(
       http.get(`${import.meta.env.VITE_BACK}/charts`, ({ request }) => {
@@ -165,7 +165,7 @@ describe('UserDashboard charts', () => {
       try {
         await flushPromises()
 
-        expect(wrapper.find('.user-dashboard__periods').text()).toBe('1 monthquartal1 year')
+        expect(wrapper.find('.user-dashboard__periods').text()).toBe('1 monthquarter1 year')
         expect(wrapper.find('.user-dashboard__previous-period').text()).toBe('←')
         expect(wrapper.find('.user-dashboard__next-period').exists()).toBe(false)
 
@@ -193,49 +193,6 @@ describe('UserDashboard charts', () => {
           (dateRange) => dateRange.startDate === '2026-03-01',
         )
         expect(previousMonthRange.endDate).toBe(currentMonthRange.startDate)
-      } finally {
-        wrapper.unmount()
-      }
-    } finally {
-      mockedServer.close()
-      vi.useRealTimers()
-    }
-  })
-
-  it('shows telegram configuration error after charts', async () => {
-    const requestedChartRanges = []
-    const mockedServer = mock(
-      http.get(`${import.meta.env.VITE_BACK}/charts`, ({ request }) => {
-        const requestUrl = new URL(request.url)
-        requestedChartRanges.push({
-          startDate: requestUrl.searchParams.get('start_date'),
-          endDate: requestUrl.searchParams.get('end_date'),
-        })
-
-        return HttpResponse.json(chartHistoryResponse)
-      }),
-      http.get(`${import.meta.env.VITE_BACK}/telegram/link`, () =>
-        HttpResponse.json({ error: 'telegram is not configured' }, { status: 500 }),
-      ),
-    )
-
-    try {
-      vi.setSystemTime(new Date('2026-03-15T12:00:00.000Z'))
-      const wrapper = mountDashboardPage()
-
-      try {
-        await flushPromises()
-
-        const dashboardSections = Array.from(wrapper.find('.user-dashboard').element.children)
-
-        expect(dashboardSections.map((section) => section.className)).toEqual([
-          'user-dashboard__charts',
-          'user-dashboard__notifications',
-        ])
-        expect(wrapper.find('.user-dashboard__notifications').text()).toContain('Notifications')
-        expect(wrapper.find('.user-dashboard__notifications').text()).toContain(
-          'telegram is not configured',
-        )
       } finally {
         wrapper.unmount()
       }

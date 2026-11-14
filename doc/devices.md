@@ -5,7 +5,7 @@
 * The device ID and token are shown in read-only fields.
 
 ## User scenarios
-### 1. User can create a device token
+### 1. User creates a device and views its ID and token
 1. Sign in as `person@example.com`.
 2. Open `/devices/new`.
 3. Enter `Kitchen timer` as the device name.
