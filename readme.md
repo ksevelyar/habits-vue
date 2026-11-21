@@ -10,7 +10,6 @@ npm run dev
 ```
 
 ## Documentation
-* [Contract](doc/contract.md)
 * [Boundaries](doc/boundaries.md)
 * [Users](doc/users.md)
 * [Chains](doc/chains.md)
